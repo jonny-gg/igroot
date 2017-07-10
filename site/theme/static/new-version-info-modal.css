@@ -1,0 +1,21 @@
+.new-version-info-modal img {
+  width: 100px;
+  position: absolute;
+  left: 34px;
+  top: 36px;
+}
+.new-version-info-modal p {
+  margin-top: 1em;
+}
+.new-version-info-modal .anticon {
+  display: none;
+}
+.new-version-info-modal .ant-confirm-body {
+  margin-left: 120px;
+}
+.new-version-info-modal .ant-confirm-body .ant-confirm-title {
+  font-size: 18px;
+}
+.new-version-info-modal .ant-confirm-body .ant-confirm-content {
+  margin-left: 0;
+}
