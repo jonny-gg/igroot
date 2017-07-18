@@ -1,9 +1,9 @@
 {
   "name": "igroot",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "title": "iGroot",
   "description": "An React-based implementation",
-  "homepage": "http://groot.i.qingcdn.com:8001/",
+  "homepage": "http://igroot.i.qingcdn.com:8001/",
   "keywords": [
     "igroot",
     "design",
