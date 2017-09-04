@@ -18,7 +18,12 @@ export interface AvatarProps {
   children?: any;
 }
 
-export default class Avatar extends React.Component<AvatarProps, any> {
+export interface AvatarState {
+  scale: number;
+  isImgExist: boolean;
+}
+
+export default class Avatar extends React.Component<AvatarProps, AvatarState> {
   static defaultProps = {
     prefixCls: 'ant-avatar',
     shape: 'circle',
@@ -27,10 +32,11 @@ export default class Avatar extends React.Component<AvatarProps, any> {
 
   private avatarChildren: any;
 
-  constructor(props) {
+  constructor(props: AvatarProps) {
     super(props);
     this.state = {
       scale: 1,
+      isImgExist: true,
     };
   }
 
@@ -38,7 +44,7 @@ export default class Avatar extends React.Component<AvatarProps, any> {
     this.setScale();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: AvatarProps, prevState: AvatarState) {
     if (prevProps.children !== this.props.children
         || (prevState.scale !== this.state.scale && this.state.scale === 1)) {
       this.setScale();
@@ -63,6 +69,8 @@ export default class Avatar extends React.Component<AvatarProps, any> {
     }
   }
 
+  handleImgLoadError = () => this.setState({ isImgExist: false });
+
   render() {
     const {
       prefixCls, shape, size, src, icon, className, ...others,
@@ -80,8 +88,13 @@ export default class Avatar extends React.Component<AvatarProps, any> {
     });
 
     let children = this.props.children;
-    if (src) {
-      children = <img src={src} />;
+    if (src && this.state.isImgExist) {
+      children = (
+        <img
+          src={src}
+          onError={this.handleImgLoadError}
+        />
+      );
     } else if (icon) {
       children = <Icon type={icon} />;
     } else {

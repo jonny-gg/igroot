@@ -14,7 +14,7 @@ title:
 Render extra footer in panel for customized requirements.
 
 ````jsx
-import { DatePicker } from 'antd';
+import { DatePicker } from 'igroot';
 const { RangePicker } = DatePicker;
 
 ReactDOM.render(

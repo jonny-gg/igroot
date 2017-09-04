@@ -5,15 +5,20 @@
 @btn-prefix-cls: ~"@{ant-prefix}-btn";
 
 // for compatibile
-@btn-ghost-color        : @text-color;
-@btn-ghost-bg           : transparent;
-@btn-ghost-border       : @border-color-base;
+@btn-ghost-color: @text-color;
+@btn-ghost-bg: transparent;
+@btn-ghost-border: @border-color-base;
 
 // Button styles
 // -----------------------------
 .@{btn-prefix-cls} {
   .btn;
   .btn-default;
+
+  > i,
+  > span {
+    pointer-events: none;
+  }
 
   &-primary {
     .btn-primary;
@@ -147,7 +152,7 @@
   }
 
   &-background-ghost {
-    background: transparent!important;
+    background: transparent !important;
     border-color: #fff;
     color: #fff;
   }

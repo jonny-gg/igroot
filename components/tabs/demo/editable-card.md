@@ -19,7 +19,6 @@ Only card type Tabs support adding & closable.
 import { Tabs } from 'igroot';
 const TabPane = Tabs.TabPane;
 
-
 class Demo extends React.Component {
   constructor(props) {
     super(props);

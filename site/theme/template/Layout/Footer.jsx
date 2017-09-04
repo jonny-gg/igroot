@@ -1,9 +1,19 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Modal, Icon } from 'igroot';
+import { Modal, Icon, message } from 'igroot';
+import reqwest from 'reqwest';
 import { isLocalStorageNameSupported } from '../utils';
+import ColorPicker from '../Color/ColorPicker';
 
 class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      color: '#108ee9',
+    };
+  }
+
   componentDidMount() {
     // for some iOS
     // http://stackoverflow.com/a/14555361
@@ -19,6 +29,26 @@ class Footer extends React.Component {
     ) {
       // this.infoNewVersion();
     }
+  }
+
+  handleColorChange = (color) => {
+    const { messages } = this.props.intl;
+    reqwest({
+      url: 'https://ant-design-theme.now.sh/compile',
+      method: 'post',
+      data: {
+        variables: {
+          '@primary-color': color,
+        },
+      },
+    }).then((data) => {
+      message.success(messages['app.footer.primary-color-changed']);
+      this.setState({ color });
+      const head = document.querySelector('head');
+      const style = document.createElement('style');
+      style.innerText = data;
+      head.appendChild(style);
+    });
   }
 
   infoNewVersion() {

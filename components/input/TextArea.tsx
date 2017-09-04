@@ -29,7 +29,7 @@ export interface TextAreaProps extends AbstractInputProps {
   onPressEnter?: React.FormEventHandler<any>;
 }
 
-export type HTMLTextareaProps = React.HTMLProps<HTMLTextAreaElement>;
+export type HTMLTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export default class TextArea extends React.Component<TextAreaProps & HTMLTextareaProps, any> {
   static defaultProps = {
@@ -75,6 +75,13 @@ export default class TextArea extends React.Component<TextAreaProps & HTMLTextar
     this.setState({ textareaStyles });
   }
 
+  getTextAreaClassName() {
+    const { prefixCls, className, disabled } = this.props;
+    return classNames(prefixCls, className, {
+      [`${prefixCls}-disabled`]: disabled,
+    });
+  }
+
   handleTextareaChange = (e) => {
     if (!('value' in this.props)) {
       this.resizeTextarea();
@@ -110,10 +117,15 @@ export default class TextArea extends React.Component<TextAreaProps & HTMLTextar
       ...props.style,
       ...this.state.textareaStyles,
     };
+    // Fix https://github.com/ant-design/ant-design/issues/6776
+    // Make sure it could be reset when using form.getFieldDecorator
+    if ('value' in otherProps) {
+      otherProps.value = otherProps.value || '';
+    }
     return (
       <textarea
         {...otherProps}
-        className={classNames(props.prefixCls, props.className)}
+        className={this.getTextAreaClassName()}
         style={style}
         onKeyDown={this.handleKeyDown}
         onChange={this.handleTextareaChange}

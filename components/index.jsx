@@ -5,7 +5,7 @@ if (ENV !== 'production' &&
     typeof console !== 'undefined' &&
     console.warn &&
     typeof window !== 'undefined') {
-    console.warn('You are using a whole package of antd, ' +
+    console.warn('You are using a whole package of igroot, ' +
         'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.');
 }
 export { default as Affix } from './affix';

@@ -43,7 +43,7 @@
       margin-left: 4px;
       font-size: @font-size-base;
       cursor: pointer;
-      color: #aaa;
+      color: #999;
       transition: all .3s;
       width: 14px;
 
@@ -69,6 +69,11 @@
   &-tbody > tr > td {
     border-bottom: @border-width-base @border-style-base @border-color-split;
     transition: all .3s;
+    // height placeholder for empty cell
+    &:empty:after {
+      content: '.';
+      visibility: hidden;
+    }
   }
 
   &-thead > tr,
@@ -254,7 +259,7 @@
 
     .@{table-prefix-cls}-title,
     .@{table-prefix-cls}-footer,
-    .@{table-prefix-cls}-thead > tr > th:not(.@{table-prefix-cls}-selection-column) {
+    .@{table-prefix-cls}-thead > tr > th {
       padding: 10px 8px;
     }
 
@@ -265,9 +270,6 @@
 
     .@{table-prefix-cls}-header {
       background: @component-background;
-      table {
-        border-bottom: @border-width-base @border-style-base @border-color-split;
-      }
     }
 
     .@{table-prefix-cls}-placeholder,
@@ -301,7 +303,7 @@
     margin-left: 4px;
     display: inline-block;
     width: 14px;
-    height: 14px;
+    height: 1em;
     vertical-align: middle;
     text-align: center;
 
@@ -341,12 +343,10 @@
     .@{iconfont-css-prefix}-caret-up,
     .@{iconfont-css-prefix}-caret-down {
       .iconfont-size-under-12px(8px);
-      line-height: 6px;
-      height: 6px;
-      color: #aaa;
-      &:before {
-        -moz-transform-origin: 53% 50%; /* fix firefox position */
-      }
+      line-height: 4px;
+      height: 4px;
+      color: #999;
+      transition: all .3s;
     }
   }
 
@@ -440,6 +440,14 @@
     .@{iconfont-css-prefix} {
       margin-right: 4px;
     }
+
+    &-fixed-columns {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: @component-background;
+      pointer-events: none;
+    }
   }
 
   &-pagination {
@@ -521,7 +529,7 @@
     }
 
     .@{iconfont-css-prefix}-down {
-      color: #aaa;
+      color: #999;
       transition: all .3s;
     }
 
@@ -534,7 +542,7 @@
       box-shadow: @box-shadow-base;
 
       .@{ant-prefix}-action-down {
-        color: #aaa;
+        color: #999;
       }
     }
 

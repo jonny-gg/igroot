@@ -11,7 +11,7 @@ Modal dialogs.
 When requiring users to interact with application, but without jumping to a new page to interrupt
 the user's workflow, you can use `Modal` to create a new floating layer over the current page for user
 getting feedback or information purposes.
-Additionally, if you need show a simple confirmation dialog, you can use `igroot.Modal.confirm()`,
+Additionally, if you need show a simple confirmation dialog, you can use `antd.Modal.confirm()`,
 and so on.
 
 ## API
@@ -27,21 +27,19 @@ and so on.
 | width      | Width of a modal dialog           | string\|number | 520           |
 | footer     | Footer content, set as `footer={null}` when you don't need default buttons | string\|ReactNode | OK and cancel button |
 | okText     | Text of the OK button    | string           | OK       |
+| okType    | type of the confirmation button                              | string        | primary   |
 | cancelText | Text of the Cancel button    | string           | Cancel       |
 | maskClosable | Determine whether to close the modal dialog when clicked mask of it. | boolean   | true       |
 | style | Style of floating layer, typically used at least for adjusting the position. | object   | - |
 | wrapClassName | The class name of the container of the modal dialog | string   | - |
 | afterClose | Specify a function that will be called when modal is closed completely. | function | - |
 | getContainer | Return the mount node for Modal | (instance): HTMLElement | () => document.body |
+| zIndex | To set the `z-index` of Modal | Number | 1000 |
 
 #### Destroy on close
 
 > The state of Modal will be preserved at it's component lifecircle.
-> If you wish to open it with brand new state everytime, you need to reset state manually. Or simply [give a new key](https://github.com/ant-design/ant-design/issues/4165) to Modal when visible is changed to `true`, React will treat it as a new component.
-
-> ```jsx
-> <Modal key={this.state.newKey} visible={this.state.visible} />
-> ```
+> If you wish to open it with brand new state everytime, you need to reset state manually.
 
 ### Modal.method()
 
@@ -65,8 +63,10 @@ The properties of the object are follows:
 | width      | Width of dialog           | string\|number | 416           |
 | iconType   | Type of Icon component    | string | question-circle |
 | okText     | Text of OK button    | string           | OK       |
+| okType    | type of the confirmation button                              | string        | primary   |
 | cancelText | Text of cancel button    | string           | Cancel       |
 | maskClosable | Determine whether to close the modal dialog when clicked mask of it. | Boolean   | `false`       |
+| zIndex | To set the `z-index` of Modal | Number | 1000 |
 
 All the `Modal.method`s will return a reference, and then we can close the popup by the reference.
 

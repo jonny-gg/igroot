@@ -95,6 +95,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
         data-show={!hidden}
         className={scrollNumberCls}
         count={displayCount}
+        title={count}
         style={style}
       />
     );
@@ -104,7 +105,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
     );
 
     return (
-      <span {...restProps} className={badgeCls} title={count as string}>
+      <span {...restProps} className={badgeCls}>
         {children}
         <Animate
           component=""

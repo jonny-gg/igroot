@@ -13,6 +13,7 @@ title: 快速上手
 ```bash
 $ mkdir groot-demo && cd groot-demo
 $ sl init
+$ npm install 
 ```
 
 sl-core 会自动安装 npm 依赖，若有问题则可自行安装。
@@ -51,14 +52,14 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
 > 你可以在左侧菜单选用更多组件。
 
 ### 3. 开发调试
 
-一键启动调试，访问 http://127.0.0.1:8000 查看效果。
+一键启动调试，访问 http://127.0.0.1:8080 查看效果。
 
 ```bash
 $ sl dev

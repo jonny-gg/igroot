@@ -1,5 +1,6 @@
 ---
 order: 3
+iframe: 360
 title:
   zh-CN: 侧边布局
   en-US: Sider
@@ -34,7 +35,7 @@ class SiderDemo extends React.Component {
   }
   render() {
     return (
-      <Layout>
+      <Layout style={{ minHeight: '100vh' }}>
         <Sider
           collapsible
           collapsed={this.state.collapsed}
@@ -65,7 +66,7 @@ class SiderDemo extends React.Component {
               <Menu.Item key="6">Team 1</Menu.Item>
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu>
-            <Menu.Item key="8">
+            <Menu.Item key="9">
               <Icon type="file" />
               <span>File</span>
             </Menu.Item>
@@ -83,7 +84,7 @@ class SiderDemo extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            iGroot ©2016 Created by iGroot FED
+            iGroot ©2017 Created by iGroot FED
           </Footer>
         </Layout>
       </Layout>

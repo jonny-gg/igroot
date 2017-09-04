@@ -88,6 +88,7 @@ Property | Description | Type | Default
 -----|-----|-----|------
 collapsible | whether can be collapsed | boolean | false
 defaultCollapsed | to set the initial status | boolean | false  |
+reverseArrow | reverse direction of arrow, for a sider that expands from the right | boolean | false  |
 collapsed | to set the current status | boolean | -
 onCollapse | the callback function, can be executed by clicking the trigger or activating the responsive layout | (collapsed, type) => {}  | -
 trigger | specify the customized trigger, set to null to hide the trigger | string\|ReactNode| - |
@@ -96,6 +97,18 @@ collapsedWidth | width of the collapsed sidebar, by setting to `0` a special tri
 breakpoint | breakpoint of the responsive layout | Enum { 'xs', 'sm', 'md', 'lg', 'xl' } | - |
 style | to custom the styles | object | -
 className | container className | string | -
+
+#### breakpoint width
+
+```js
+{
+  xs: '480px',
+  sm: '768px',
+  md: '992px',
+  lg: '1200px',
+  xl: '1600px',
+}
+```
 
 > Note: If you want to wrap the `Sider`, do not forget to add this setting to the customized component: `__ANT_LAYOUT_SIDER = true`. e.g.
 

@@ -53,7 +53,7 @@ export default function wrapPicker(Picker, defaultFormat?: string): any {
         warning(
           false,
           '`toggleOpen` is deprecated and will be removed in the future, ' +
-          'please use `onOpenChange` instead, see: http://u.ant.design/date-picker-on-open-change',
+          'please use `onOpenChange` instead, see: https://u.ant.design/date-picker-on-open-change',
         );
         toggleOpen({ open });
       }
@@ -65,11 +65,10 @@ export default function wrapPicker(Picker, defaultFormat?: string): any {
       const pickerClass = classNames({
         [`${prefixCls}-picker`]: true,
       });
-      const pickerInputClass = classNames({
-        [`${prefixCls}-picker-input`]: true,
-        [inputPrefixCls]: true,
+      const pickerInputClass = classNames(`${prefixCls}-picker-input`, inputPrefixCls, {
         [`${inputPrefixCls}-lg`]: props.size === 'large',
         [`${inputPrefixCls}-sm`]: props.size === 'small',
+        [`${inputPrefixCls}-disabled`]: props.disabled,
       });
 
       const locale = getComponentLocale(

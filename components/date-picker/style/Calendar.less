@@ -110,6 +110,7 @@
     height: 22px;
     color: @input-color;
     background: @input-bg;
+    .placeholder;
   }
 
   &-week-number {
@@ -172,9 +173,9 @@
     margin: 0 auto;
     color: @text-color;
     border-radius: @border-radius-sm;
-    width: 24px;
-    height: 24px;
-    line-height: 22px;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
     border: @border-width-base @border-style-base transparent;
     padding: 0;
     background: transparent;
@@ -320,6 +321,7 @@
     .btn;
     .btn-primary;
     .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; @border-radius-base);
+    line-height: @btn-height-sm - 2px;
 
     &-disabled {
       .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);

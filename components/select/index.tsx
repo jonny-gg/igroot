@@ -41,6 +41,8 @@ export interface SelectProps extends AbstractSelectProps {
   onChange?: (value: SelectValue) => void;
   onSelect?: (value: SelectValue, option: Object) => any;
   onDeselect?: (value: SelectValue) => any;
+  onBlur?: () => any;
+  onFocus?: () => any;
   dropdownMatchSelectWidth?: boolean;
   optionFilterProp?: string;
   defaultActiveFirstOption?: boolean;
@@ -53,6 +55,7 @@ export interface SelectProps extends AbstractSelectProps {
 export interface OptionProps {
   disabled?: boolean;
   value?: any;
+  title?: string;
 }
 
 export interface OptGroupProps {
@@ -64,6 +67,18 @@ export interface SelectContext {
     Select?: any,
   };
 }
+
+const SelectPropTypes = {
+  prefixCls: PropTypes.string,
+  className: PropTypes.string,
+  size: PropTypes.oneOf(['default', 'large', 'small']),
+  combobox: PropTypes.bool,
+  notFoundContent: PropTypes.any,
+  showSearch: PropTypes.bool,
+  optionLabelProp: PropTypes.string,
+  transitionName: PropTypes.string,
+  choiceTransitionName: PropTypes.string,
+};
 
 // => It is needless to export the declaration of below two inner components.
 // export { Option, OptGroup };
@@ -79,17 +94,7 @@ export default class Select extends React.Component<SelectProps, any> {
     choiceTransitionName: 'zoom',
   };
 
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,
-    size: PropTypes.oneOf(['default', 'large', 'small']),
-    combobox: PropTypes.bool,
-    notFoundContent: PropTypes.any,
-    showSearch: PropTypes.bool,
-    optionLabelProp: PropTypes.string,
-    transitionName: PropTypes.string,
-    choiceTransitionName: PropTypes.string,
-  };
+  static propTypes = SelectPropTypes;
 
   static contextTypes = {
     antLocale: PropTypes.object,
