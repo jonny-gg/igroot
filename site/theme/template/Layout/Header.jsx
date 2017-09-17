@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'bisheng/router';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Select, Menu, Row, Col, Icon, Button, Popover } from 'igroot';
+import { Select, Menu, Row, Col, Icon, Button, Popover, AutoComplete, Input } from 'igroot';
 import * as utils from '../utils';
 import { version as igrootVersion } from '../../../../package.json';
 
-const Option = Select.Option;
+const Option = AutoComplete.Option;
 const searchEngine = 'Google';
 const searchLink = 'https://www.google.com/#q=site:ant.design+';
 
@@ -25,7 +25,7 @@ export default class Header extends React.Component {
 
   componentDidMount() {
     this.context.router.listen(this.handleHideMenu);
-
+    const searchInput = this.searchInput;
     /* eslint-disable global-require */
     require('enquire.js')
       .register('only screen and (min-width: 0) and (max-width: 992px)', {
@@ -36,6 +36,11 @@ export default class Header extends React.Component {
           this.setState({ menuMode: 'horizontal' });
         },
       });
+    document.addEventListener('keyup', (event) => {
+      if (event.keyCode === 83 && event.target === document.body) {
+        searchInput.focus();
+      }
+    });
     /* eslint-enable global-require */
   }
 
@@ -50,7 +55,7 @@ export default class Header extends React.Component {
       inputValue: '',
     }, () => {
       router.push({ pathname: utils.getLocalizedPathname(`${value}/`, intl.locale === 'zh-CN') });
-      document.querySelector('#search-box .ant-select-search__field').blur();
+      this.searchInput.blur();
     });
   }
 
@@ -135,6 +140,12 @@ export default class Header extends React.Component {
           </Option>
         );
       });
+
+    options.push(
+      <Option key="searchEngine" value={searchEngine} data-label={searchEngine}>
+        <FormattedMessage id="app.header.search" />
+      </Option>
+    );
 
     const headerClassName = classNames({
       clearfix: true,

@@ -18,43 +18,28 @@ import { Menu, Icon } from 'igroot';
 const SubMenu = Menu.SubMenu;
 
 class Sider extends React.Component {
+  // submenu keys of first level
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
   state = {
-    current: '1',
-    openKeys: [],
-  }
-  handleClick = (e) => {
-    console.log('Clicked: ', e);
-    this.setState({ current: e.key });
-  }
+    openKeys: ['sub1'],
+  };
   onOpenChange = (openKeys) => {
-    const state = this.state;
-    const latestOpenKey = openKeys.find(key => !(state.openKeys.indexOf(key) > -1));
-    const latestCloseKey = state.openKeys.find(key => !(openKeys.indexOf(key) > -1));
-
-    let nextOpenKeys = [];
-    if (latestOpenKey) {
-      nextOpenKeys = this.getAncestorKeys(latestOpenKey).concat(latestOpenKey);
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      });
     }
-    if (latestCloseKey) {
-      nextOpenKeys = this.getAncestorKeys(latestCloseKey);
-    }
-    this.setState({ openKeys: nextOpenKeys });
-  }
-  getAncestorKeys = (key) => {
-    const map = {
-      sub3: ['sub2'],
-    };
-    return map[key] || [];
   }
   render() {
     return (
       <Menu
         mode="inline"
         openKeys={this.state.openKeys}
-        selectedKeys={[this.state.current]}
-        style={{ width: 240 }}
         onOpenChange={this.onOpenChange}
-        onClick={this.handleClick}
+        style={{ width: 240 }}
       >
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
           <Menu.Item key="1">Option 1</Menu.Item>

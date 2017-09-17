@@ -18,11 +18,11 @@ function getActiveMenuItem(props) {
 function getModuleData(props) {
   const pathname = props.location.pathname;
   const moduleName = /^\/?components/.test(pathname) ?
-    'components' : pathname.split('/').filter(item => item).slice(0, 2).join('/');
+          'components' : pathname.split('/').filter(item => item).slice(0, 2).join('/');
   const moduleData = moduleName === 'components' || moduleName === 'docs/react' ||
-    moduleName === 'changelog' || moduleName === 'changelog-cn' ?
-    [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
-    props.picked[moduleName];
+          moduleName === 'changelog' || moduleName === 'changelog-cn' ?
+          [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
+          props.picked[moduleName];
   const excludedSuffix = utils.isZhCN(props.location.pathname) ? 'en-US.md' : 'zh-CN.md';
   return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
 }
@@ -61,14 +61,14 @@ export default class MainContent extends React.Component {
     if (!location.hash) {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-    } else {
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      this.timer = setTimeout(() => {
-        document.getElementById(decodeURI(location.hash.replace('#', ''))).scrollIntoView();
-      }, 10);
+      return;
     }
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      location.hash = location.hash;
+    }, 10);
   }
 
   componentWillUnmount() {
@@ -98,10 +98,10 @@ export default class MainContent extends React.Component {
     const locale = this.context.intl.locale;
     const key = fileNameToPath(item.filename);
     const text = isTop ?
-      item.title[locale] || item.title : [
-        <span key="english">{item.title}</span>,
-        <span className="chinese" key="chinese">{item.subtitle}</span>,
-      ];
+            item.title[locale] || item.title : [
+              <span key="english">{item.title}</span>,
+              <span className="chinese" key="chinese">{item.subtitle}</span>,
+            ];
     const disabled = item.disabled;
     const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').toLowerCase();
     const child = !item.link ? (
@@ -112,10 +112,10 @@ export default class MainContent extends React.Component {
         {text}
       </Link>
     ) : (
-        <a href={item.link} target="_blank" rel="noopener noreferrer" disabled={disabled} className="menu-item-link-outside">
-          {text} <Icon type="export" />
-        </a>
-      );
+      <a href={item.link} target="_blank" rel="noopener noreferrer" disabled={disabled} className="menu-item-link-outside">
+        {text} <Icon type="export" />
+      </a>
+    );
 
     return (
       <Menu.Item key={key.toLowerCase()} disabled={disabled}>
@@ -132,7 +132,7 @@ export default class MainContent extends React.Component {
       .map((type) => {
         const groupItems = obj[type].sort((a, b) => {
           return a.title.charCodeAt(0) -
-            b.title.charCodeAt(0);
+          b.title.charCodeAt(0);
         }).map(this.generateMenuItem.bind(this, false));
         return (
           <Menu.ItemGroup title={type} key={type}>

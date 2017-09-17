@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { Icon, Tooltip } from 'igroot';
 import EditButton from './EditButton';
 import BrowserFrame from '../BrowserFrame';
+import { ping } from '../utils';
 
 export default class Demo extends React.Component {
   static contextTypes = {
@@ -21,6 +22,7 @@ export default class Demo extends React.Component {
       sourceCode: '',
       copied: false,
       copyTooltipVisible: false,
+      showRiddleButton: false,
     };
   }
 
@@ -33,8 +35,8 @@ export default class Demo extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (this.state.codeExpand || this.props.expand) !== (nextState.codeExpand || nextProps.expand)
-     || this.state.copied !== nextState.copied
-     || this.state.copyTooltipVisible !== nextState.copyTooltipVisible;
+      || this.state.copied !== nextState.copied
+      || this.state.copyTooltipVisible !== nextState.copyTooltipVisible;
   }
 
   componentDidMount() {
@@ -43,9 +45,17 @@ export default class Demo extends React.Component {
       this.anchor.click();
     }
     this.componentWillReceiveProps(this.props);
+
+    this.pingTimer = ping((status) => {
+      if (status !== 'timeout' && status !== 'error') {
+        this.setState({
+          showRiddleButton: true,
+        });
+      }
+    });
   }
 
-  handleCodeExapnd = () => {
+  handleCodeExpand = () => {
     this.setState({ codeExpand: !this.state.codeExpand });
   }
 
@@ -121,31 +131,58 @@ export default class Demo extends React.Component {
             </a>
           </div>
           {introChildren}
-          <Icon type="down-circle-o" title="Show Code" className="collapse" onClick={this.handleCodeExapnd} />
+          <Tooltip title={codeExpand ? 'Hide Code' : 'Show Code'}>
+            <span className="code-expand-icon">
+              <img
+                alt="expand code"
+                src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
+                className={codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'}
+                onClick={this.handleCodeExpand}
+              />
+              <img
+                alt="expand code"
+                src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
+                className={codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'}
+                onClick={this.handleCodeExpand}
+              />
+            </span>
+          </Tooltip>
         </section>
-        <section className={highlightClass}
+        <section
+          className={highlightClass}
           key="code"
         >
           <div className="highlight">
-            <CopyToClipboard
-              text={state.sourceCode}
-              onCopy={this.handleCodeCopied}
-            >
-              <Tooltip
-                visible={state.copyTooltipVisible}
-                onVisibleChange={this.onCopyTooltipVisibleChange}
-                title={
-                  <FormattedMessage
-                    id={`app.demo.${state.copied ? 'copied' : 'copy'}`}
-                  />
-                }
+            <div className="code-box-actions">
+              {this.state.showRiddleButton ? (
+                <form action="//riddle.alibaba-inc.com/riddles/define" method="POST" target="_blank">
+                  <input type="hidden" name="data" value={JSON.stringify(riddlePrefillConfig)} />
+                  <Tooltip title={<FormattedMessage id="app.demo.riddle" />}>
+                    <input type="submit" value="Create New Riddle with Prefilled Data" className="code-box-riddle" />
+                  </Tooltip>
+                </form>
+              ) : null}
+              
+              <CopyToClipboard
+                text={state.sourceCode}
+                onCopy={this.handleCodeCopied}
               >
-                <Icon
-                  type={(state.copied && state.copyTooltipVisible) ? 'check' : 'copy'}
-                  className="code-box-code-copy"
-                />
-              </Tooltip>
-            </CopyToClipboard>
+                <Tooltip
+                  visible={state.copyTooltipVisible}
+                  onVisibleChange={this.onCopyTooltipVisibleChange}
+                  title={
+                    <FormattedMessage
+                      id={`app.demo.${state.copied ? 'copied' : 'copy'}`}
+                    />
+                  }
+                >
+                  <Icon
+                    type={(state.copied && state.copyTooltipVisible) ? 'check' : 'copy'}
+                    className="code-box-code-copy"
+                  />
+                </Tooltip>
+              </CopyToClipboard>
+            </div>
             {props.utils.toReactComponent(highlightedCode)}
           </div>
           {
