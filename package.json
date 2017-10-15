@@ -30,6 +30,10 @@
   ],
   "typings": "lib/index.d.ts",
   "license": "MIT",
+  "peerDependencies": {
+    "react": "~0.14.0 || >=15.0.0",
+    "react-dom": "~0.14.0 || >=15.0.0"
+  },
   "dependencies": {
     "array-tree-filter": "~1.0.0",
     "babel-runtime": "6.x",
@@ -42,7 +46,7 @@
     "omit.js": "^1.0.0",
     "prop-types": "^15.5.7",
     "rc-animate": "^2.4.1",
-    "rc-calendar": "~9.0.0",
+    "rc-calendar": "^9.1.9",
     "rc-cascader": "~0.11.3",
     "rc-checkbox": "~2.0.3",
     "rc-collapse": "~1.7.5",
@@ -53,7 +57,7 @@
     "rc-input-number": "~3.6.0",
     "rc-menu": "~5.0.10",
     "rc-notification": "~2.0.0",
-    "rc-pagination": "~1.12.4",
+    "rc-pagination": "^1.12.10",
     "rc-progress": "~2.2.2",
     "rc-rate": "~2.1.1",
     "rc-select": "~6.9.0",
@@ -154,7 +158,8 @@
     "dist": "antd-tools run dist",
     "compile": "antd-tools run compile",
     "tsc": "tsc",
-    "start": "bisheng start -c ./site/bisheng.config.js --no-livereload",
+    "start": "node ./scripts/generateColorLess.js && cross-env NODE_ENV=development bisheng start -c ./site/bisheng.config.js --no-livereload",
+    "start:preact": "node ./scripts/generateColorLess.js && cross-env NODE_ENV=development REACT_ENV=preact bisheng start -c ./site/bisheng.config.js --no-livereload",
     "site": "bisheng build --ssr -c ./site/bisheng.config.js",
     "deploy": "antd-tools run clean && npm run site && bisheng gh-pages --push-only",
     "pub": "antd-tools run pub",
@@ -178,7 +183,5 @@
       "lint-staged:demo"
     ]
   },
-  "pre-commit": [
-  
-  ]
+  "pre-commit": []
 }
