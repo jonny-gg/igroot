@@ -10,6 +10,7 @@ if (ENV !== 'production' &&
     'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.',
   );
 }
+/* @remove-on-es-build-end */
 
 export { default as Affix } from './affix';
 

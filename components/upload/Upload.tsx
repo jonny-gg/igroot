@@ -218,6 +218,23 @@ export default class Upload extends React.Component<UploadProps, any> {
     });
   }
 
+  beforeUpload = (file, fileList) => {
+    if (!this.props.beforeUpload) {
+      return true;
+    }
+    const result = this.props.beforeUpload(file, fileList);
+    if (result === false) {
+      this.onChange({
+        file,
+        fileList,
+      });
+      return false;
+    } else if (result && (result as PromiseLike<any>).then) {
+      return result;
+    }
+    return true;
+  }
+
   clearProgressTimer() {
     clearInterval(this.progressTimer);
   }
@@ -234,6 +251,7 @@ export default class Upload extends React.Component<UploadProps, any> {
       onProgress: this.onProgress,
       onSuccess: this.onSuccess,
       ...this.props,
+      beforeUpload: this.beforeUpload,
     };
 
     delete rcUploadProps.className;

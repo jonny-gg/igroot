@@ -30,6 +30,7 @@
   }
 
   &-footer {
+    background: @layout-footer-background;
     padding: @layout-footer-padding;
     color: @text-color;
     font-size: @font-size-base;
@@ -46,6 +47,10 @@
 
     /* fix firefox can't set width smaller than content on flex item */
     min-width: 0;
+
+    &-children {
+      height: 100%;
+    }
 
     &-has-trigger {
       padding-bottom: @layout-trigger-height;

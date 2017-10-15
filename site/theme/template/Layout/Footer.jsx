@@ -1,13 +1,14 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Modal, Icon, message } from 'igroot';
-import reqwest from 'reqwest';
-import { isLocalStorageNameSupported } from '../utils';
+import { isLocalStorageNameSupported, loadScript } from '../utils';
 import ColorPicker from '../Color/ColorPicker';
 
 class Footer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.lessLoaded = false;
 
     this.state = {
       color: '#108ee9',
@@ -32,32 +33,38 @@ class Footer extends React.Component {
   }
 
   handleColorChange = (color) => {
-    const { messages } = this.props.intl;
-    reqwest({
-      url: 'https://ant-design-theme.now.sh/compile',
-      method: 'post',
-      data: {
-        variables: {
-          '@primary-color': color,
-        },
-      },
-    }).then((data) => {
-      message.success(messages['app.footer.primary-color-changed']);
-      this.setState({ color });
-      const head = document.querySelector('head');
-      const style = document.createElement('style');
-      style.innerText = data;
-      head.appendChild(style);
-    });
+    const changeColor = () => {
+      const { messages } = this.props.intl;
+      window.less.modifyVars({
+        '@primary-color': color,
+      }).then(() => {
+        message.success(messages['app.footer.primary-color-changed']);
+        this.setState({ color });
+      });
+    };
+
+    const lessUrl = 'https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js';
+
+    if (this.lessLoaded) {
+      changeColor();
+    } else {
+      window.less = {
+        async: true,
+      };
+      loadScript(lessUrl).then(() => {
+        this.lessLoaded = true;
+        changeColor();
+      });
+    }
   }
 
   infoNewVersion() {
-    const messages = this.props.intl.messages;
+    const { messages } = this.props.intl;
     Modal.info({
       title: messages['app.publish.title'],
       content: (
         <div>
-          <img src="https://os.alipayobjects.com/rmsportal/nyqBompsynAQCpJ.svg" alt="Groot" />
+          <img src="https://os.alipayobjects.com/rmsportal/nyqBompsynAQCpJ.svg" alt="iGroot" />
           <p>
             {messages['app.publish.greeting']}
             <a target="_blank" rel="noopener noreferrer" href="/changelog">antd@2.0.0</a>
@@ -95,6 +102,25 @@ class Footer extends React.Component {
               <a target="_blank " href="https://github.com/websemantics/awesome-ant-design">
                 <FormattedMessage id="app.footer.awesome" />
               </a>
+            </div>
+            <div style={{ marginTop: 12 }}>
+              <ColorPicker
+                type="sketch"
+                small
+                color={this.state.color}
+                position="top"
+                presetColors={[
+                  '#f04134',
+                  '#00a854',
+                  '#108ee9',
+                  '#f5317f',
+                  '#f56a00',
+                  '#7265e6',
+                  '#ffbf00',
+                  '#00a2ae',
+                ]}
+                onChangeComplete={this.handleColorChange}
+              />
             </div>
           </li>
           <li>

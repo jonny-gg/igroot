@@ -170,6 +170,13 @@ form {
       }
     }
 
+    // Fix issue: https://github.com/ant-design/ant-design/issues/7854
+    .@{ant-prefix}-input-search {
+      .@{ant-prefix}-input-suffix {
+        right: 28px;
+      }
+    }
+
     // Fix issue: https://github.com/ant-design/ant-design/issues/4783
     .@{ant-prefix}-calendar-picker,
     .@{ant-prefix}-time-picker {
@@ -435,6 +442,10 @@ form {
       border-color: @warning-color;
     }
   }
+
+  .@{ant-prefix}-cascader-picker:focus .@{ant-prefix}-cascader-input {
+    .active(@warning-color);
+  }
 }
 
 .has-error {
@@ -491,10 +502,14 @@ form {
         border-color: @error-color;
       }
     }
-    &.@{ant-prefix}-mention-active .@{ant-prefix}-mention-editor,
+    &.@{ant-prefix}-mention-active:not([disabled]) .@{ant-prefix}-mention-editor,
     .@{ant-prefix}-mention-editor:not([disabled]):focus {
       .active(@error-color);
     }
+  }
+
+  .@{ant-prefix}-cascader-picker:focus .@{ant-prefix}-cascader-input {
+    .active(@error-color);
   }
 }
 

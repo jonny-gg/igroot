@@ -7,7 +7,7 @@ const compsContentTmpl = './template/compContent/index';
 function pickerGenerator(module) {
   const tester = new RegExp(`^docs/${module}`);
   return (markdownData) => {
-    const filename = markdownData.meta.filename;
+    const { filename } = markdownData.meta;
     if (tester.test(filename) &&
         !/\/demo$/.test(path.dirname(filename))) {
       return {
@@ -26,7 +26,7 @@ module.exports = {
   },
   pick: {
     components(markdownData) {
-      const filename = markdownData.meta.filename;
+      const { filename } = markdownData.meta;
       if (!/^components/.test(filename) ||
           /[/\\]demo$/.test(path.dirname(filename))) return;
 

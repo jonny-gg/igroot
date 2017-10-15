@@ -81,6 +81,3 @@ export default class Alert extends React.Component {
       </Animate>);
     }
 }
-Alert.defaultProps = {
-    type: 'info',
-};

@@ -19,13 +19,13 @@ title: Dropdown
 |-------------|------------------|--------------------|--------------|
 | trigger     | 触发下拉的行为   | Array<'click'\|'hover'> | ['hover']        |
 | overlay     | 菜单         | [Menu](/components/menu) | -     |
-| getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。[示例](http://codepen.io/anon/pen/xVBOVQ?editors=001) | Function(triggerNode) | () => document.body |
+| getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。[示例](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | () => document.body |
 | visible     | 菜单是否显示 | boolean   | -           |
 | disabled    | 菜单是否禁用 | boolean   | -           |
 | onVisibleChange  | 菜单显示状态改变时调用，参数为 visible | Function(visible) | - |
 | placement | 菜单弹出位置：`bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
 
-菜单可由 `igroot.Menu` 取得，可设置 `onSelect` 回调，菜单还包括菜单项 `Menu.Item`，分割线 `Menu.Divider`。
+`overlay` 菜单使用 [Menu](/components/menu/)，还包括菜单项 `Menu.Item`，分割线 `Menu.Divider`。
 
 > 注意： Menu.Item 必须设置唯一的 key 属性。
 

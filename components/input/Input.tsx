@@ -27,6 +27,7 @@ export interface InputProps extends AbstractInputProps {
   id?: number | string;
   name?: string;
   size?: 'large' | 'default' | 'small';
+  maxLength?: string;
   disabled?: boolean;
   readOnly?: boolean;
   addonBefore?: React.ReactNode;
@@ -37,7 +38,7 @@ export interface InputProps extends AbstractInputProps {
   onClick?: React.FormEventHandler<any>;
   onFocus?: React.FormEventHandler<any>;
   onBlur?: React.FormEventHandler<any>;
-  autoComplete?: 'on' | 'off';
+  autoComplete?: string;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   spellCheck?: boolean;
@@ -62,6 +63,7 @@ export default class Input extends Component<InputProps, any> {
       PropTypes.number,
     ]),
     size: PropTypes.oneOf(['small', 'default', 'large']),
+    maxLength: PropTypes.string,
     disabled: PropTypes.bool,
     value: PropTypes.any,
     defaultValue: PropTypes.any,

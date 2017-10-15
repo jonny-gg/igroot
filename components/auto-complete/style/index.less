@@ -22,7 +22,17 @@
           margin-left: (@input-padding-horizontal + 1px);
           margin-right: (@input-padding-horizontal + 1px);
         }
+
+        &--single {
+          height: auto;
+        }
       }
+    }
+
+    // Fix https://github.com/ant-design/ant-design/issues/7800
+    .@{select-prefix-cls}-search--inline {
+      position: static;
+      float: left;
     }
 
     &-allow-clear {
@@ -33,6 +43,12 @@
 
     .@{input-prefix-cls} {
       background: transparent;
+      border-width: @border-width-base;
+      line-height: @line-height-base;
+      &:focus,
+      &:hover {
+        .hover;
+      }
     }
 
     &-lg {
@@ -50,14 +66,6 @@
       }
       .@{input-prefix-cls} {
         .input-sm();
-      }
-    }
-
-    .@{input-prefix-cls} {
-      border-width: @border-width-base;
-      &:focus,
-      &:hover {
-        .hover;
       }
     }
   }
