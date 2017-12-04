@@ -223,7 +223,7 @@ export default class Header extends React.Component {
         <Row>
           <Col lg={4} md={5} sm={24} xs={24}>
             <Link to={utils.getLocalizedPathname('/', isZhCN)} id="logo">
-              <img alt="logo" src="http://groot.i.qingcdn.com/image/groot/igroot_logo.png" />
+              <img alt="logo" src="http://fe.baishancloud.com/images/logo.png" />
               <span><strong>iGroot</strong></span>
             </Link>
           </Col>

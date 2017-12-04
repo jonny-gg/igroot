@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://groot.i.qingcdn.com:8001">
-    <img width="320" src="http://groot.i.qingcdn.com/image/groot/page_logo.png">
+    <img width="320" src="http://fe.baishancloud.com/images/page-logo.png">
   </a>
 </p>
 
