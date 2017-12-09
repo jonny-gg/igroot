@@ -24,7 +24,7 @@ function getStyle() {
       min-height: 600px;
     }
     #header {
-      position: fixed;
+      // position: fixed;
       z-index: 999;
       background: rgba(255, 255, 255, 0.8);
       border-bottom: 1px solid transparent;
