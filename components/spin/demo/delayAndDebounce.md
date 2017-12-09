@@ -32,7 +32,9 @@ class Card extends React.Component {
     return (
       <div>
         <Spin spinning={this.state.loading} delay={500} >{container}</Spin>
-        Loading state：<Switch checked={this.state.loading} onChange={this.toggle} />
+        <div style={{ marginTop: 16 }}>
+          Loading state：<Switch checked={this.state.loading} onChange={this.toggle} />
+        </div>
       </div>
     );
   }

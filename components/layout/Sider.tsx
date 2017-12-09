@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
   window.matchMedia = window.matchMedia || matchMediaPolyfill;
 }
 
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import omit from 'omit.js';
 import PropTypes from 'prop-types';
@@ -28,6 +28,8 @@ const dimensionMap = {
   xl: '1600px',
 };
 
+export type CollapseType = 'clickTrigger' | 'responsive';
+
 export interface SiderProps {
   style?: React.CSSProperties;
   prefixCls?: string;
@@ -36,14 +38,32 @@ export interface SiderProps {
   collapsed?: boolean;
   defaultCollapsed?: boolean;
   reverseArrow?: boolean;
-  onCollapse?: (collapsed: boolean, type: 'clickTrigger' | 'responsive') => void;
+  onCollapse?: (collapsed: boolean, type: CollapseType) => void;
   trigger?: React.ReactNode;
   width?: number | string;
   collapsedWidth?: number | string;
   breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export default class Sider extends React.Component<SiderProps, any> {
+export interface SliderState {
+  collapsed?: boolean;
+  below: boolean;
+  belowShow?: boolean;
+}
+
+export interface SliderContext {
+  siderCollapsed: boolean;
+}
+
+const generateId = (() => {
+  let i = 0;
+  return (prefix: string = '') => {
+    i += 1;
+    return `${prefix}${i}`;
+  };
+})();
+
+export default class Sider extends React.Component<SiderProps, SliderState> {
   static __ANT_LAYOUT_SIDER: any = true;
 
   static defaultProps = {
@@ -52,7 +72,7 @@ export default class Sider extends React.Component<SiderProps, any> {
     defaultCollapsed: false,
     reverseArrow: false,
     width: 200,
-    collapsedWidth: 64,
+    collapsedWidth: 80,
     style: {},
   };
 
@@ -60,10 +80,16 @@ export default class Sider extends React.Component<SiderProps, any> {
     siderCollapsed: PropTypes.bool,
   };
 
-  private mql: any;
+  static contextTypes = {
+    siderHook: PropTypes.object,
+  };
 
-  constructor(props) {
+  private mql: MediaQueryList;
+  private uniqueId: string;
+
+  constructor(props: SiderProps) {
     super(props);
+    this.uniqueId = generateId('ant-sider-');
     let matchMedia;
     if (typeof window !== 'undefined') {
       matchMedia = window.matchMedia;
@@ -89,7 +115,7 @@ export default class Sider extends React.Component<SiderProps, any> {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: SiderProps) {
     if ('collapsed' in nextProps) {
       this.setState({
         collapsed: nextProps.collapsed,
@@ -102,22 +128,30 @@ export default class Sider extends React.Component<SiderProps, any> {
       this.mql.addListener(this.responsiveHandler);
       this.responsiveHandler(this.mql);
     }
+
+    if (this.context.siderHook) {
+      this.context.siderHook.addSider(this.uniqueId);
+    }
   }
 
   componentWillUnmount() {
     if (this.mql) {
       this.mql.removeListener(this.responsiveHandler);
     }
+
+    if (this.context.siderHook) {
+      this.context.siderHook.removeSider(this.uniqueId);
+    }
   }
 
-  responsiveHandler = (mql) => {
+  responsiveHandler = (mql: MediaQueryList) => {
     this.setState({ below: mql.matches });
     if (this.state.collapsed !== mql.matches) {
       this.setCollapsed(mql.matches, 'responsive');
     }
   }
 
-  setCollapsed = (collapsed, type) => {
+  setCollapsed = (collapsed: boolean, type: CollapseType) => {
     if (!('collapsed' in this.props)) {
       this.setState({
         collapsed,

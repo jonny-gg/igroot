@@ -90,7 +90,7 @@ Form.create = function (options) {
         },
         deprecatedGetFieldProps(name, option) {
             warning(false, '`getFieldProps` is not recommended, please use `getFieldDecorator` instead, ' +
-                'see: http://u.ant.design/get-field-decorator');
+                'see: http://igroot.i.qingcdn.com:8001/components-form-demo-horizontal-login');
             return this.__getFieldProps(name, option);
         },
         render() {

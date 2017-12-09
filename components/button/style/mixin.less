@@ -40,7 +40,7 @@
 
   &:hover,
   &:focus {
-    .button-color(@primary-color; @background; @primary-color);
+    .button-color(@primary-5; @background; @primary-5);
   }
 
   &:active,
@@ -56,12 +56,12 @@
 
   &:hover,
   &:focus {
-    .button-color(@btn-primary-color; @color; @color;);
+    .button-color(@btn-primary-color; ~`colorPalette("@{color}", 5)`; ~`colorPalette("@{color}", 5)`);
   }
 
   &:active,
   &.active {
-    .button-color(@btn-primary-color; ~`colorPalette("@{color}", 7)`; ~`colorPalette("@{color}", 7)`;);
+    .button-color(@btn-primary-color; ~`colorPalette("@{color}", 7)`; ~`colorPalette("@{color}", 7)`);
   }
 
   .button-disabled();
@@ -133,12 +133,6 @@
       font-size: @font-size-base;
     }
   }
-  &-md > .@{btnClassName} {
-    .button-size(@btn-height-md; @btn-padding-md; @font-size-base; @btn-border-radius-md);
-    > .@{iconfont-css-prefix} {
-      font-size: @font-size-base;
-    }
-  }
 }
 
 // Base styles of buttons
@@ -191,11 +185,7 @@
   }
 
   &-sm {
-    .button-size(@btn-height-sm; @btn-padding-sm; @font-size-sm; @btn-border-radius-sm);
-  }
-
-  &-md {
-    .button-size(@btn-height-md; @btn-padding-md; @font-size-md; @btn-border-radius-base);
+    .button-size(@btn-height-sm; @btn-padding-sm; @btn-font-size-sm; @btn-border-radius-sm);
   }
 }
 
@@ -234,20 +224,16 @@
 // circle button: the content only contains icon
 .btn-circle(@btnClassName: btn) {
   .square(@btn-circle-size);
-  .button-size(@btn-circle-size; 0; @font-size-base + 2; 50%);
+  .button-size(@btn-circle-size; 0; @font-size-base + 2px; 50%);
 
   &.@{btnClassName}-lg {
     .square(@btn-circle-size-lg);
-    .button-size(@btn-circle-size-lg; 0; @btn-font-size-lg + 2; 50%);
+    .button-size(@btn-circle-size-lg; 0; @btn-font-size-lg + 2px; 50%);
   }
 
   &.@{btnClassName}-sm {
     .square(@btn-circle-size-sm);
     .button-size(@btn-circle-size-sm; 0; @font-size-base; 50%);
-  }
-  &.@{btnClassName}-md {
-    .square(@btn-circle-size-md);
-    .button-size(@btn-circle-size-md; 0; @font-size-base; 50%);
   }
 }
 
@@ -265,8 +251,6 @@
 
   .@{btnClassName}:not(:first-child):not(:last-child) {
     border-radius: 0;
-    padding-left: 8px;
-    padding-right: 8px;
   }
 
   > .@{btnClassName}:first-child {
@@ -274,14 +258,12 @@
     &:not(:last-child) {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
-      padding-right: 8px;
     }
   }
 
   > .@{btnClassName}:last-child:not(:first-child) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    padding-left: 8px;
   }
 
   & > & {

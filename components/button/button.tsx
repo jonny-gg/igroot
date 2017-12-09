@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'omit.js';
@@ -35,7 +35,7 @@ function insertSpace(child: React.ReactChild, needInserted: boolean) {
 
 export type ButtonType = 'primary' | 'ghost' | 'dashed' | 'danger';
 export type ButtonShape = 'circle' | 'circle-outline';
-export type ButtonSize = 'small' | 'large' | 'modal';
+export type ButtonSize = 'small' | 'default' | 'large';
 
 export interface ButtonProps {
   type?: ButtonType;
@@ -52,6 +52,9 @@ export interface ButtonProps {
   prefixCls?: string;
   className?: string;
   ghost?: boolean;
+  target?: string;
+  href?: string;
+  download?: string;
 }
 
 export default class Button extends React.Component<ButtonProps, any> {
@@ -61,14 +64,13 @@ export default class Button extends React.Component<ButtonProps, any> {
   static defaultProps = {
     prefixCls: 'ant-btn',
     loading: false,
-    clicked: false,
     ghost: false,
   };
 
   static propTypes = {
     type: PropTypes.string,
     shape: PropTypes.oneOf(['circle', 'circle-outline']),
-    size: PropTypes.oneOf(['large', 'default', 'small','modal']),
+    size: PropTypes.oneOf(['large', 'default', 'small']),
     htmlType: PropTypes.oneOf(['submit', 'button', 'reset']),
     onClick: PropTypes.func,
     loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
@@ -83,6 +85,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     super(props);
     this.state = {
       loading: props.loading,
+      clicked: false,
     };
   }
 
@@ -95,7 +98,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     }
 
     if (typeof loading !== 'boolean' && loading && loading.delay) {
-      this.delayTimeout = setTimeout(() => this.setState({ loading }), loading.delay);
+      this.delayTimeout = window.setTimeout(() => this.setState({ loading }), loading.delay);
     } else {
       this.setState({ loading });
     }
@@ -114,7 +117,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     // Add click effect
     this.setState({ clicked: true });
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.setState({ clicked: false }), 500);
+    this.timeout = window.setTimeout(() => this.setState({ clicked: false }), 500);
 
     const onClick = this.props.onClick;
     if (onClick) {
@@ -124,7 +127,7 @@ export default class Button extends React.Component<ButtonProps, any> {
 
   render() {
     const {
-      type, shape, size = '', className, htmlType, children, icon, prefixCls, ghost, ...others,
+      type, shape, size, className, htmlType, children, icon, prefixCls, ghost, ...others,
     } = this.props;
 
     const { loading, clicked } = this.state;
@@ -138,13 +141,11 @@ export default class Button extends React.Component<ButtonProps, any> {
         break;
       case 'small':
         sizeCls = 'sm';
-        break;
-      case 'modal':
-        sizeCls = 'md';
-        break;
       default:
         break;
     }
+
+    const ComponentProp = others.href ? 'a' : 'button';
 
     const classes = classNames(prefixCls, className, {
       [`${prefixCls}-${type}`]: type,
@@ -159,17 +160,17 @@ export default class Button extends React.Component<ButtonProps, any> {
     const iconType = loading ? 'loading' : icon;
     const iconNode = iconType ? <Icon type={iconType} /> : null;
     const needInserted = React.Children.count(children) === 1 && (!iconType || iconType === 'loading');
-    const kids = React.Children.map(children, child => insertSpace(child, needInserted));
+    const kids = children ? React.Children.map(children, child => insertSpace(child, needInserted)) : null;
 
     return (
-      <button
-        {...omit(others, ['loading', 'clicked'])}
-        type={htmlType || 'button'}
+      <ComponentProp
+        {...omit(others, ['loading'])}
+        type={others.href ? undefined : (htmlType || 'button')}
         className={classes}
         onClick={this.handleClick}
       >
         {iconNode}{kids}
-      </button>
+      </ComponentProp>
     );
   }
 }

@@ -9,9 +9,12 @@ function isChangelog(pathname) {
 export default collect(async (nextProps) => {
   const pathname = nextProps.location.pathname;
   const pageDataPath = pathname.replace('-cn', '').split('/');
+  console.log(nextProps.data, "data")
+  console.log(pageDataPath, "path")
   const pageData = isChangelog(pathname) ?
           nextProps.data.changelog.CHANGELOG :
           nextProps.utils.get(nextProps.data, pageDataPath);
+  
   if (!pageData) {
     throw 404; // eslint-disable-line no-throw-literal
   }

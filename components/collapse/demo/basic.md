@@ -41,3 +41,9 @@ ReactDOM.render(
   </Collapse>
 , mountNode);
 ````
+
+<style>
+p {
+  margin: 0;
+}
+</style>

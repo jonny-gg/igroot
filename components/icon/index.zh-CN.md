@@ -29,7 +29,7 @@ toc: false
 
 ## 本地部署
 
-图标默认托管在 [iconfont.cn](http://iconfont.cn)，默认公网可访问。如需本地部署，可参考 [示例](https://github.com/ant-design/igroot-init/tree/master/examples/local-iconfont)。
+图标默认托管在 [iconfont.cn](http://iconfont.cn)，默认公网可访问。如需本地部署，可参考 [示例](https://github.com/ant-design/antd-init/tree/master/examples/local-iconfont)。
 
 ## 图标列表
 
@@ -39,7 +39,7 @@ toc: false
 
 ```__react
 import IconSet from 'site/theme/template/IconSet';
-ReactDOM.render(<IconSet className="icons" catigory="direction"/>, mountNode);
+ReactDOM.render(<IconSet className="icons" catigory="direction" />, mountNode);
 ```
 
 ### 提示建议性图标
@@ -71,8 +71,8 @@ ReactDOM.render(<IconSet className="icons" catigory="logo" />, mountNode);
 <Icon type="question" style={{ fontSize: 16, color: '#08c' }} />
 ```
 
-| 参数      | 说明             | 类型      | 默认值  |
-|----------|------------------|----------|--------|
-| type | 图标类型 | string | - |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
 | spin | 是否有旋转动画 | boolean | false |
 | style | 设置图标的样式，例如 fontSize 和 color | object | - |
+| type | 图标类型 | string | - |

@@ -75,7 +75,7 @@ class SiderDemo extends React.Component {
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '12px 0' }}>
+            <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
@@ -84,7 +84,7 @@ class SiderDemo extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            iGroot ©2017 Created by iGroot FED
+            iGroot ©2017 Created by GOTC
           </Footer>
         </Layout>
       </Layout>
@@ -98,8 +98,7 @@ ReactDOM.render(<SiderDemo />, mountNode);
 ````css
 #components-layout-demo-side .logo {
   height: 32px;
-  background: #333;
-  border-radius: 6px;
+  background: rgba(255,255,255,.2);  
   margin: 16px;
 }
 ````
