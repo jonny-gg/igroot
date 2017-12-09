@@ -142,8 +142,8 @@ const columns = [{
 ## 在 TypeScript 中使用
 
 ```jsx
-import { Table } from 'antd';
-import { ColumnProps } from 'antd/lib/table';
+import { Table } from 'igroot';
+import { ColumnProps } from 'igroot/lib/table';
 
 interface IUser {
   key: number;
