@@ -7,16 +7,16 @@ import Article from './Article';
 import ComponentDoc from './ComponentDoc';
 import * as utils from '../utils';
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 
 function getActiveMenuItem(props) {
-  const children = props.params.children;
+  const { children } = props.params;
   return (children && children.replace('-cn', '')) ||
     props.location.pathname.replace(/(^\/|-cn$)/g, '');
 }
 
 function getModuleData(props) {
-  const pathname = props.location.pathname;
+  const { pathname } = props.location;
   const moduleName = /^\/?components/.test(pathname) ?
           'components' : pathname.split('/').filter(item => item).slice(0, 2).join('/');
   const moduleData = moduleName === 'components' || moduleName === 'docs/react' ||
@@ -80,7 +80,7 @@ export default class MainContent extends React.Component {
   }
 
   getSideBarOpenKeys(nextProps) {
-    const pathname = nextProps.location.pathname;
+    const { pathname } = nextProps.location;
     const prevModule = this.currentModule;
     this.currentModule = pathname.replace(/^\//).split('/')[1] || 'components';
     if (this.currentModule === 'react') {
@@ -95,14 +95,14 @@ export default class MainContent extends React.Component {
   }
 
   generateMenuItem(isTop, item) {
-    const locale = this.context.intl.locale;
+    const { locale } = this.context.intl;
     const key = fileNameToPath(item.filename);
     const text = isTop ?
-            item.title[locale] || item.title : [
-              <span key="english">{item.title}</span>,
-              <span className="chinese" key="chinese">{item.subtitle}</span>,
-            ];
-    const disabled = item.disabled;
+      item.title[locale] || item.title : [
+        <span key="english">{item.title}</span>,
+        <span className="chinese" key="chinese">{item.subtitle}</span>,
+      ];
+    const { disabled } = item;
     const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').toLowerCase();
     const child = !item.link ? (
       <Link
@@ -185,7 +185,7 @@ export default class MainContent extends React.Component {
     const menuItemsList = this.flattenMenu(menuItems);
     let activeMenuItemIndex = -1;
     menuItemsList.forEach((menuItem, i) => {
-      if (menuItem.key === activeMenuItem) {
+      if (menuItem && menuItem.key === activeMenuItem) {
         activeMenuItemIndex = i;
       }
     });
@@ -195,11 +195,11 @@ export default class MainContent extends React.Component {
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const activeMenuItem = getActiveMenuItem(props);
     const menuItems = this.getMenuItems();
     const { prev, next } = this.getFooterNav(menuItems, activeMenuItem);
-    const localizedPageData = props.localizedPageData;
+    const { localizedPageData } = props;
     const mainContainerClass = classNames('main-container', {
       'main-container-component': !!props.demos,
     });
@@ -228,8 +228,10 @@ export default class MainContent extends React.Component {
 
         <Row>
           <Col
-            lg={{ span: 20, offset: 4 }}
-            md={{ span: 18, offset: 6 }}
+            xxl={{ span: 20, offset: 4 }}
+            xl={{ span: 19, offset: 5 }}
+            lg={{ span: 18, offset: 6 }}
+            md={24}
             sm={24}
             xs={24}
           >
