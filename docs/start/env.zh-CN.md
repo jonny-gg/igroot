@@ -36,9 +36,4 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 $ npm install -g sl-core
 ```
 
-## 安装 iGroot 套件
-```bash
-$ sl install sl-igroot-kit
-```
-
 到这里，你的环境算是准备好了，赶紧进入开发吧~
