@@ -1,20 +1,30 @@
-import React from 'react';
+import * as React from 'react';
 import Notification from 'rc-notification';
 import Icon from '../icon';
-let defaultDuration = 1.5;
+let defaultDuration = 3;
 let defaultTop;
 let messageInstance;
 let key = 1;
 let prefixCls = 'ant-message';
 let getContainer;
-function getMessageInstance() {
-    messageInstance = messageInstance || Notification.newInstance({
+function getMessageInstance(callback) {
+    if (messageInstance) {
+        callback(messageInstance);
+        return;
+    }
+    Notification.newInstance({
         prefixCls,
         transitionName: 'move-up',
         style: { top: defaultTop },
         getContainer,
+    }, (instance) => {
+        if (messageInstance) {
+            callback(messageInstance);
+            return;
+        }
+        messageInstance = instance;
+        callback(instance);
     });
-    return messageInstance;
 }
 function notice(content, duration = defaultDuration, type, onClose) {
     let iconType = ({
@@ -24,23 +34,28 @@ function notice(content, duration = defaultDuration, type, onClose) {
         warning: 'exclamation-circle',
         loading: 'loading',
     })[type];
-    let instance = getMessageInstance();
-    instance.notice({
-        key,
-        duration,
-        style: {},
-        content: (<div className={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
-        <Icon type={iconType}/>
-        <span>{content}</span>
-      </div>),
-        onClose,
+    if (typeof duration === 'function') {
+        onClose = duration;
+        duration = defaultDuration;
+    }
+    const target = key++;
+    getMessageInstance((instance) => {
+        instance.notice({
+            key: target,
+            duration,
+            style: {},
+            content: (<div className={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
+          <Icon type={iconType}/>
+          <span>{content}</span>
+        </div>),
+            onClose,
+        });
     });
-    return (function () {
-        let target = key++;
-        return function () {
-            instance.removeNotice(target);
-        };
-    }());
+    return () => {
+        if (messageInstance) {
+            messageInstance.removeNotice(target);
+        }
+    };
 }
 export default {
     info(content, duration, onClose) {

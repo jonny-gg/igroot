@@ -7,15 +7,14 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import Animate from 'rc-animate';
 import ScrollNumber from './ScrollNumber';
 import classNames from 'classnames';
-import warning from '../_util/warning';
 export default class Badge extends React.Component {
     render() {
-        const _a = this.props, { count, showZero, prefixCls, overflowCount, className, style, children, dot, status, text } = _a, restProps = __rest(_a, ["count", "showZero", "prefixCls", "overflowCount", "className", "style", "children", "dot", "status", "text"]);
+        const _a = this.props, { count, showZero, prefixCls, scrollNumberPrefixCls, overflowCount, className, style, children, dot, status, text, offset } = _a, restProps = __rest(_a, ["count", "showZero", "prefixCls", "scrollNumberPrefixCls", "overflowCount", "className", "style", "children", "dot", "status", "text", "offset"]);
         const isDot = dot || status;
         let displayCount = count > overflowCount ? `${overflowCount}+` : count;
         // dot mode don't need count
@@ -25,31 +24,33 @@ export default class Badge extends React.Component {
         const isZero = displayCount === '0' || displayCount === 0;
         const isEmpty = displayCount === null || displayCount === undefined || displayCount === '';
         const hidden = (isEmpty || (isZero && !showZero)) && !isDot;
+        const statusCls = classNames({
+            [`${prefixCls}-status-dot`]: !!status,
+            [`${prefixCls}-status-${status}`]: !!status,
+        });
         const scrollNumberCls = classNames({
             [`${prefixCls}-dot`]: isDot,
             [`${prefixCls}-count`]: !isDot,
+            [`${prefixCls}-multiple-words`]: count && count.toString && count.toString().length > 1,
+            [`${prefixCls}-status-${status}`]: !!status,
         });
         const badgeCls = classNames(className, prefixCls, {
             [`${prefixCls}-status`]: !!status,
             [`${prefixCls}-not-a-wrapper`]: !children,
         });
-        warning(!(children && status), '`Badge[children]` and `Badge[status]` cannot be used at the same time.');
+        const styleWithOffset = offset ? Object.assign({ marginTop: offset[0], marginLeft: offset[1] }, style) : style;
         // <Badge status="success" />
         if (!children && status) {
-            const statusCls = classNames({
-                [`${prefixCls}-status-dot`]: !!status,
-                [`${prefixCls}-status-${status}`]: true,
-            });
-            return (<span className={badgeCls}>
+            return (<span className={badgeCls} style={styleWithOffset}>
           <span className={statusCls}/>
           <span className={`${prefixCls}-status-text`}>{text}</span>
         </span>);
         }
-        const scrollNumber = hidden ? null : (<ScrollNumber data-show={!hidden} className={scrollNumberCls} count={displayCount} style={style}/>);
+        const scrollNumber = hidden ? null : (<ScrollNumber prefixCls={scrollNumberPrefixCls} data-show={!hidden} className={scrollNumberCls} count={displayCount} title={count} style={styleWithOffset}/>);
         const statusText = (hidden || !text) ? null : (<span className={`${prefixCls}-status-text`}>{text}</span>);
-        return (<span {...restProps} className={badgeCls} title={count}>
+        return (<span {...restProps} className={badgeCls}>
         {children}
-        <Animate component="" showProp="data-show" transitionName={children ? `${prefixCls}-zoom` : ''} transitionAppear={true}>
+        <Animate component="" showProp="data-show" transitionName={children ? `${prefixCls}-zoom` : ''} transitionAppear>
           {scrollNumber}
         </Animate>
         {statusText}
@@ -58,6 +59,7 @@ export default class Badge extends React.Component {
 }
 Badge.defaultProps = {
     prefixCls: 'ant-badge',
+    scrollNumberPrefixCls: 'ant-scroll-number',
     count: null,
     showZero: false,
     dot: false,

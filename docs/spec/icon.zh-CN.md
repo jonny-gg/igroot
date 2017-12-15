@@ -83,7 +83,7 @@ iGroot 的图标设计中，外轮廓线统一半径为 72px 的圆角，icon �
 
 ### 颜色
 
-<img class="preview-img no-padding" align="right" src="https://zos.alipayobjects.com/rmsportal/uYhuxxiWZlgVwdmfqUli.png" description="注：表格中 @Black = #000000、@White = #FFFFFF、@Blue-6 = #108EE9">
+<img class="preview-img no-padding" align="right" src="https://zos.alipayobjects.com/rmsportal/uYhuxxiWZlgVwdmfqUli.png" description="注：表格中 @Black = #000000、@White = #FFFFFF、@Blue-6 = #20a0ff">
 
 图标的颜色需要与搭配文案的色值保持一致（表示状态的除外）。
 

@@ -35,7 +35,7 @@ function insertSpace(child: React.ReactChild, needInserted: boolean) {
 
 export type ButtonType = 'primary' | 'ghost' | 'dashed' | 'danger';
 export type ButtonShape = 'circle' | 'circle-outline';
-export type ButtonSize = 'small' | 'large' | 'modal';
+export type ButtonSize = 'small' | 'default' | 'large';
 
 export interface ButtonProps {
   type?: ButtonType;
@@ -61,14 +61,13 @@ export default class Button extends React.Component<ButtonProps, any> {
   static defaultProps = {
     prefixCls: 'ant-btn',
     loading: false,
-    clicked: false,
     ghost: false,
   };
 
   static propTypes = {
     type: PropTypes.string,
     shape: PropTypes.oneOf(['circle', 'circle-outline']),
-    size: PropTypes.oneOf(['large', 'default', 'small','modal']),
+    size: PropTypes.oneOf(['large', 'default', 'small']),
     htmlType: PropTypes.oneOf(['submit', 'button', 'reset']),
     onClick: PropTypes.func,
     loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
@@ -83,6 +82,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     super(props);
     this.state = {
       loading: props.loading,
+      clicked: false,
     };
   }
 
@@ -124,7 +124,7 @@ export default class Button extends React.Component<ButtonProps, any> {
 
   render() {
     const {
-      type, shape, size = '', className, htmlType, children, icon, prefixCls, ghost, ...others,
+      type, shape, size, className, htmlType, children, icon, prefixCls, ghost, ...others,
     } = this.props;
 
     const { loading, clicked } = this.state;
@@ -138,10 +138,6 @@ export default class Button extends React.Component<ButtonProps, any> {
         break;
       case 'small':
         sizeCls = 'sm';
-        break;
-      case 'modal':
-        sizeCls = 'md';
-        break;
       default:
         break;
     }
@@ -163,7 +159,7 @@ export default class Button extends React.Component<ButtonProps, any> {
 
     return (
       <button
-        {...omit(others, ['loading', 'clicked'])}
+        {...omit(others, ['loading'])}
         type={htmlType || 'button'}
         className={classes}
         onClick={this.handleClick}

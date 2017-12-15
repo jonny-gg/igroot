@@ -75,7 +75,7 @@ class SiderDemo extends React.Component {
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '12px 0' }}>
+            <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
@@ -84,7 +84,7 @@ class SiderDemo extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            iGroot ©2017 Created by iGroot FED
+            Ant Design ©2016 Created by Ant UED
           </Footer>
         </Layout>
       </Layout>

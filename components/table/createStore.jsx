@@ -1,9 +1,8 @@
-import assign from 'object-assign';
 export default function createStore(initialState) {
     let state = initialState;
     const listeners = [];
     function setState(partial) {
-        state = assign({}, state, partial);
+        state = Object.assign({}, state, partial);
         for (let i = 0; i < listeners.length; i++) {
             listeners[i]();
         }

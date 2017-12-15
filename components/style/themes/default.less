@@ -44,10 +44,8 @@
 @text-color-secondary-dark: fade(#fff, 67%);
 @font-size-base         : 12px;
 @font-size-lg           : @font-size-base + 2px;
-@font-size-sm           : @font-size-base - 2px;
-@font-size-md           : @font-size-base - 2px;
 @line-height-base       : 1.5;
-@border-radius-base     : 3px;
+@border-radius-base     : 4px;
 @border-radius-sm       : 2px;
 
 // The background colors for active and hover states for things like
@@ -114,7 +112,6 @@
 @btn-font-weight        : 500;
 @btn-border-radius-base : @border-radius-base;
 @btn-border-radius-sm   : @border-radius-base;
-@btn-border-radius-md   : @border-radius-base;
 
 @btn-primary-color      : #fff;
 @btn-primary-bg         : @primary-color;
@@ -134,19 +131,15 @@
 @btn-padding-base       : 0 15px;
 @btn-font-size-lg       : @font-size-lg;
 @btn-padding-lg         : @btn-padding-base;
-@btn-padding-sm         : 2px 7px;
-@btn-padding-md         : 0 28px;
-
+@btn-padding-sm         : 0 7px;
 
 @btn-height-base        : 28px;
 @btn-height-lg          : 32px;
-@btn-height-sm          : 24px;
-@btn-height-md          : @btn-height-sm;
+@btn-height-sm          : 22px;
 
 @btn-circle-size        : @btn-height-base;
 @btn-circle-size-lg     : @btn-height-lg;
 @btn-circle-size-sm     : @btn-height-sm;
-@btn-circle-size-md     : @btn-height-md;
 
 @btn-group-border       : @primary-7;
 
@@ -190,7 +183,7 @@
 
 // Layout
 @layout-body-background      : #ececec;
-@layout-header-background    : #2e373e;
+@layout-header-background    : #404040;
 @layout-footer-background    : @layout-body-background;
 @layout-header-height        : 64px;
 @layout-header-padding       : 0 50px;
@@ -225,23 +218,28 @@
 @label-color                 : @heading-color;
 @form-item-margin-bottom     : 24px;
 @form-item-trailing-colon    : true;
+@form-vertical-label-padding : 0 0 8px;
+@form-vertical-label-margin  : 0;
 
 // Input
 // ---
-@input-height-base           : 28px;
-@input-height-lg             : 32px;
-@input-height-sm             : 22px;
-@input-padding-horizontal    : 7px;
-@input-padding-vertical-base : 4px;
-@input-padding-vertical-sm   : 1px;
-@input-padding-vertical-lg   : 6px;
-@input-placeholder-color     : hsv(0, 0, 75%);
-@input-color                 : @text-color;
-@input-border-color          : @border-color-base;
-@input-bg                    : #fff;
-@input-addon-bg              : #eee;
-@input-hover-border-color    : @primary-color;
-@input-disabled-bg           : @disabled-bg;
+@input-height-base               : 28px;
+@input-height-lg                 : 32px;
+@input-height-sm                 : 22px;
+@input-padding-horizontal        : 7px;
+@input-padding-horizontal-base   : @input-padding-horizontal;
+@input-padding-horizontal-sm     : @input-padding-horizontal;
+@input-padding-horizontal-lg     : @input-padding-horizontal;
+@input-padding-vertical-base     : 4px;
+@input-padding-vertical-sm       : 1px;
+@input-padding-vertical-lg       : 6px;
+@input-placeholder-color         : hsv(0, 0, 75%);
+@input-color                     : @text-color;
+@input-border-color              : @border-color-base;
+@input-bg                        : #fff;
+@input-addon-bg                  : #eee;
+@input-hover-border-color        : @primary-color;
+@input-disabled-bg               : @disabled-bg;
 
 // Tooltip
 // ---
@@ -280,17 +278,16 @@
 // Modal
 // --
 @modal-mask-bg: rgba(55, 55, 55, 0.6);
-@modal-title-background: @primary-color;
 
 // Progress
 // --
-@process-default-color: @primary-color;
+@progress-default-color: @primary-color;
 @progress-remaining-color: @background-color-base;
 
 // Menu
 // ---
 @menu-dark-bg: @layout-header-background;
-@menu-dark-submenu-bg: #222b31;
+@menu-dark-submenu-bg: #333;
 @menu-collapsed-width: 64px;
 
 // Spin
@@ -305,7 +302,7 @@
 @table-header-sort-bg: @background-color-active;
 @table-row-hover-bg: @primary-1;
 @table-selected-row-bg: #fafafa;
-@table-padding-vertical: 12px;
+@table-padding-vertical: 16px;
 @table-padding-horizontal: 8px;
 
 // Tag

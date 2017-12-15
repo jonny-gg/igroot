@@ -1,3 +1,4 @@
-import RcTable from 'rc-table';
-export default class ColumnGroup extends RcTable.ColumnGroup {
+import * as React from 'react';
+export default class ColumnGroup extends React.Component {
 }
+ColumnGroup.__ANT_TABLE_COLUMN_GROUP = true;

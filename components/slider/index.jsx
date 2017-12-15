@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import RcSlider from 'rc-slider/lib/Slider';
 import RcRange from 'rc-slider/lib/Range';
 import RcHandle from 'rc-slider/lib/Handle';
@@ -24,20 +24,30 @@ export default class Slider extends React.Component {
             var { value, dragging, index } = _a, restProps = __rest(_a, ["value", "dragging", "index"]);
             const { tooltipPrefixCls, tipFormatter } = this.props;
             const { visibles } = this.state;
-            return (<Tooltip prefixCls={tooltipPrefixCls} title={tipFormatter ? tipFormatter(value) : ''} visible={tipFormatter && (visibles[index] || dragging)} placement="top" transitionName="zoom-down" key={index}>
-        <RcHandle {...restProps} onMouseEnter={() => this.toggleTooltipVisible(index, true)} onMouseLeave={() => this.toggleTooltipVisible(index, false)}/>
+            const visible = tipFormatter ? (visibles[index] || dragging) : false;
+            return (<Tooltip prefixCls={tooltipPrefixCls} title={tipFormatter ? tipFormatter(value) : ''} visible={visible} placement="top" transitionName="zoom-down" key={index}>
+        <RcHandle {...restProps} value={value} onMouseEnter={() => this.toggleTooltipVisible(index, true)} onMouseLeave={() => this.toggleTooltipVisible(index, false)}/>
       </Tooltip>);
+        };
+        this.saveSlider = (node) => {
+            this.rcSlider = node;
         };
         this.state = {
             visibles: {},
         };
     }
+    focus() {
+        this.rcSlider.focus();
+    }
+    blur() {
+        this.rcSlider.focus();
+    }
     render() {
         const _a = this.props, { range } = _a, restProps = __rest(_a, ["range"]);
         if (range) {
-            return <RcRange {...restProps} handle={this.handleWithTooltip}/>;
+            return <RcRange {...restProps} ref={this.saveSlider} handle={this.handleWithTooltip}/>;
         }
-        return <RcSlider {...restProps} handle={this.handleWithTooltip}/>;
+        return <RcSlider {...restProps} ref={this.saveSlider} handle={this.handleWithTooltip}/>;
     }
 }
 Slider.defaultProps = {

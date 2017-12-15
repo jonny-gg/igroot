@@ -1,26 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import Button from '../button';
-import Icon from '../icon';
 function noop() {
 }
-export default class TransferOperation extends React.Component {
+export default class Operation extends React.Component {
     render() {
-        const { moveToLeft, moveToRight, leftArrowText, rightArrowText, leftActive, rightActive, className, } = this.props;
-        const moveToLeftButton = (<Button type="primary" size="small" disabled={!leftActive} onClick={moveToLeft}>
-        {<span><Icon type="left"/>{leftArrowText}</span>}
-      </Button>);
-        const moveToRightButton = (<Button type="primary" size="small" disabled={!rightActive} onClick={moveToRight}>
-        {<span>{rightArrowText}<Icon type="right"/></span>}
-      </Button>);
+        const { moveToLeft = noop, moveToRight = noop, leftArrowText = '', rightArrowText = '', leftActive, rightActive, className, } = this.props;
         return (<div className={className}>
-        {moveToLeftButton}
-        {moveToRightButton}
+        <Button type="primary" size="small" disabled={!leftActive} onClick={moveToLeft} icon="left">
+          {leftArrowText}
+        </Button>
+        <Button type="primary" size="small" disabled={!rightActive} onClick={moveToRight} icon="right">
+          {rightArrowText}
+        </Button>
       </div>);
     }
 }
-TransferOperation.defaultProps = {
-    leftArrowText: '',
-    rightArrowText: '',
-    moveToLeft: noop,
-    moveToRight: noop,
-};

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Upload from './Upload';
 export default class Dragger extends React.Component {
     render() {

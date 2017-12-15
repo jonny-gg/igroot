@@ -7,16 +7,28 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import RcCheckbox from 'rc-checkbox';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
 export default class Radio extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.saveCheckbox = (node) => {
+            this.rcCheckbox = node;
+        };
+    }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return !shallowEqual(this.props, nextProps) ||
             !shallowEqual(this.state, nextState) ||
             !shallowEqual(this.context.radioGroup, nextContext.radioGroup);
+    }
+    focus() {
+        this.rcCheckbox.focus();
+    }
+    blur() {
+        this.rcCheckbox.blur();
     }
     render() {
         const { props, context } = this;
@@ -24,6 +36,7 @@ export default class Radio extends React.Component {
         const { radioGroup } = context;
         let radioProps = Object.assign({}, restProps);
         if (radioGroup) {
+            radioProps.name = radioGroup.name;
             radioProps.onChange = radioGroup.onChange;
             radioProps.checked = props.value === radioGroup.value;
             radioProps.disabled = props.disabled || radioGroup.disabled;
@@ -34,7 +47,7 @@ export default class Radio extends React.Component {
             [`${prefixCls}-wrapper-disabled`]: radioProps.disabled,
         });
         return (<label className={wrapperClassString} style={style} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
-        <RcCheckbox {...radioProps} prefixCls={prefixCls}/>
+        <RcCheckbox {...radioProps} prefixCls={prefixCls} ref={this.saveCheckbox}/>
         {children !== undefined ? <span>{children}</span> : null}
       </label>);
     }

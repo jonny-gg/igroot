@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Option, OptGroup } from 'rc-select';
 import classNames from 'classnames';
 import Select from '../select';
@@ -13,12 +13,21 @@ export default class AutoComplete extends React.Component {
         this.getInputElement = () => {
             const { children } = this.props;
             const element = children && React.isValidElement(children) && children.type !== Option ?
-                React.Children.only(this.props.children) :
-                <Input />;
-            return (<InputElement {...element.props} className={classNames('ant-input', element.props.className)}>
-        {element}
-      </InputElement>);
+                React.Children.only(this.props.children) : <Input />;
+            const elementProps = Object.assign({}, element.props);
+            // https://github.com/ant-design/ant-design/pull/7742
+            delete elementProps.children;
+            return (<InputElement {...elementProps}>{element}</InputElement>);
         };
+        this.saveSelect = (node) => {
+            this.select = node;
+        };
+    }
+    focus() {
+        this.select.focus();
+    }
+    blur() {
+        this.select.blur();
     }
     render() {
         let { size, className = '', notFoundContent, prefixCls, optionLabelProp, dataSource, children, } = this.props;
@@ -52,7 +61,7 @@ export default class AutoComplete extends React.Component {
                 }
             }) : [];
         }
-        return (<Select {...this.props} className={cls} mode="combobox" optionLabelProp={optionLabelProp} getInputElement={this.getInputElement} notFoundContent={notFoundContent}>
+        return (<Select {...this.props} className={cls} mode="combobox" optionLabelProp={optionLabelProp} getInputElement={this.getInputElement} notFoundContent={notFoundContent} ref={this.saveSelect}>
         {options}
       </Select>);
     }

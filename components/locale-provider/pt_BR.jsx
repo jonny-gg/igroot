@@ -1,5 +1,4 @@
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import * as moment from 'moment';
 moment.locale('pt-br');
 import Pagination from 'rc-pagination/lib/locale/pt_BR';
 import DatePicker from '../date-picker/locale/pt_BR';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Animate from 'rc-animate';
 import Icon from '../icon';
 import Tooltip from '../tooltip';
@@ -14,7 +14,7 @@ export default class UploadList extends React.Component {
     constructor() {
         super(...arguments);
         this.handleClose = (file) => {
-            const onRemove = this.props.onRemove;
+            const { onRemove } = this.props;
             if (onRemove) {
                 onRemove(file);
             }
@@ -82,7 +82,7 @@ export default class UploadList extends React.Component {
                 [`${prefixCls}-list-item`]: true,
                 [`${prefixCls}-list-item-${file.status}`]: true,
             });
-            const preview = file.url ? (<a href={file.url} target="_blank" rel="noopener noreferrer" className={`${prefixCls}-list-item-name`} onClick={e => this.handlePreview(file, e)} title={file.name}>
+            const preview = file.url ? (<a {...file.linkProps} href={file.url} target="_blank" rel="noopener noreferrer" className={`${prefixCls}-list-item-name`} onClick={e => this.handlePreview(file, e)} title={file.name}>
           {file.name}
         </a>) : (<span className={`${prefixCls}-list-item-name`} onClick={e => this.handlePreview(file, e)} title={file.name}>
           {file.name}
@@ -99,7 +99,13 @@ export default class UploadList extends React.Component {
             const actions = (listType === 'picture-card' && file.status !== 'uploading')
                 ? <span className={`${prefixCls}-list-item-actions`}>{previewIcon}{removeIcon}</span>
                 : removeIconCross;
-            const message = file.response || (file.error && file.error.statusText) || locale.uploadError;
+            let message;
+            if (file.response && typeof file.response === 'string') {
+                message = file.response;
+            }
+            else {
+                message = (file.error && file.error.statusText) || locale.uploadError;
+            }
             const iconAndPreview = (file.status === 'error')
                 ? <Tooltip title={message}>{icon}{preview}</Tooltip>
                 : <span>{icon}{preview}</span>;

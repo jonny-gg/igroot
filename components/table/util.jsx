@@ -1,15 +1,18 @@
-import React from 'react';
-import assign from 'object-assign';
-import ColumnGroup from './ColumnGroup';
+import * as React from 'react';
 export function flatArray(data = [], childrenName = 'children') {
     const result = [];
     const loop = (array) => {
         array.forEach(item => {
-            const newItem = assign({}, item);
-            delete newItem[childrenName];
-            result.push(newItem);
-            if (item[childrenName] && item[childrenName].length > 0) {
-                loop(item[childrenName]);
+            if (item[childrenName]) {
+                const newItem = Object.assign({}, item);
+                delete newItem[childrenName];
+                result.push(newItem);
+                if (item[childrenName].length > 0) {
+                    loop(item[childrenName]);
+                }
+            }
+            else {
+                result.push(item);
             }
         });
     };
@@ -22,7 +25,7 @@ export function treeMap(tree, mapper, childrenName = 'children') {
         if (node[childrenName]) {
             extra[childrenName] = treeMap(node[childrenName], mapper, childrenName);
         }
-        return assign({}, mapper(node, index), extra);
+        return Object.assign({}, mapper(node, index), extra);
     });
 }
 export function flatFilter(tree, callback) {
@@ -43,11 +46,11 @@ export function normalizeColumns(elements) {
         if (!React.isValidElement(element)) {
             return;
         }
-        const column = assign({}, element.props);
+        const column = Object.assign({}, element.props);
         if (element.key) {
             column.key = element.key;
         }
-        if (element.type === ColumnGroup) {
+        if (element.type && element.type.__ANT_TABLE_COLUMN_GROUP) {
             column.children = normalizeColumns(column.children);
         }
         columns.push(column);

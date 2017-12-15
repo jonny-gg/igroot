@@ -1,9 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import Animate from 'rc-animate';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import Icon from '../icon';
 import getScroll from '../_util/getScroll';
 import getRequestAnimationFrame from '../_util/getRequestAnimationFrame';
 const reqAnimFrame = getRequestAnimationFrame();
@@ -19,14 +18,14 @@ const easeInOutCubic = (t, b, c, d) => {
 };
 function noop() { }
 function getDefaultTarget() {
-    return typeof window !== 'undefined' ?
-        window : null;
+    return window;
 }
 export default class BackTop extends React.Component {
     constructor(props) {
         super(props);
         this.getCurrentScrollTop = () => {
-            const targetNode = (this.props.target || getDefaultTarget)();
+            const getTarget = this.props.target || getDefaultTarget;
+            const targetNode = getTarget();
             if (targetNode === window) {
                 return window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
             }
@@ -58,7 +57,8 @@ export default class BackTop extends React.Component {
         };
     }
     setScrollTop(value) {
-        const targetNode = (this.props.target || getDefaultTarget)();
+        const getTarget = this.props.target || getDefaultTarget;
+        const targetNode = getTarget();
         if (targetNode === window) {
             document.body.scrollTop = value;
             document.documentElement.scrollTop = value;
@@ -68,8 +68,9 @@ export default class BackTop extends React.Component {
         }
     }
     componentDidMount() {
+        const getTarget = this.props.target || getDefaultTarget;
+        this.scrollEvent = addEventListener(getTarget(), 'scroll', this.handleScroll);
         this.handleScroll();
-        this.scrollEvent = addEventListener((this.props.target || getDefaultTarget)(), 'scroll', this.handleScroll);
     }
     componentWillUnmount() {
         if (this.scrollEvent) {
@@ -80,7 +81,7 @@ export default class BackTop extends React.Component {
         const { prefixCls = 'ant-back-top', className = '', children } = this.props;
         const classString = classNames(prefixCls, className);
         const defaultElement = (<div className={`${prefixCls}-content`}>
-        <Icon className={`${prefixCls}-icon`} type="to-top"/>
+        <div className={`${prefixCls}-icon`}/>
       </div>);
         // fix https://fb.me/react-unknown-prop
         const divProps = omit(this.props, [

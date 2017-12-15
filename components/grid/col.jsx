@@ -7,10 +7,9 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import assign from 'object-assign';
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 const objectOrNumber = PropTypes.oneOfType([PropTypes.object, PropTypes.number]);
 export default class Col extends React.Component {
@@ -18,7 +17,7 @@ export default class Col extends React.Component {
         const props = this.props;
         const { span, order, offset, push, pull, className, children, prefixCls = 'ant-col' } = props, others = __rest(props, ["span", "order", "offset", "push", "pull", "className", "children", "prefixCls"]);
         let sizeClassObj = {};
-        ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
             let sizeProps = {};
             if (typeof props[size] === 'number') {
                 sizeProps.span = props[size];
@@ -27,13 +26,7 @@ export default class Col extends React.Component {
                 sizeProps = props[size] || {};
             }
             delete others[size];
-            sizeClassObj = assign({}, sizeClassObj, {
-                [`${prefixCls}-${size}-${sizeProps.span}`]: sizeProps.span !== undefined,
-                [`${prefixCls}-${size}-order-${sizeProps.order}`]: sizeProps.order || sizeProps.order === 0,
-                [`${prefixCls}-${size}-offset-${sizeProps.offset}`]: sizeProps.offset || sizeProps.offset === 0,
-                [`${prefixCls}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0,
-                [`${prefixCls}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0,
-            });
+            sizeClassObj = Object.assign({}, sizeClassObj, { [`${prefixCls}-${size}-${sizeProps.span}`]: sizeProps.span !== undefined, [`${prefixCls}-${size}-order-${sizeProps.order}`]: sizeProps.order || sizeProps.order === 0, [`${prefixCls}-${size}-offset-${sizeProps.offset}`]: sizeProps.offset || sizeProps.offset === 0, [`${prefixCls}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0, [`${prefixCls}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0 });
         });
         const classes = classNames({
             [`${prefixCls}-${span}`]: span !== undefined,

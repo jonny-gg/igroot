@@ -1,86 +1,73 @@
-import { placements } from 'rc-tooltip/lib/placements';
-const autoAdjustOverflow = {
+import { placements as rcPlacements } from 'rc-tooltip/lib/placements';
+const autoAdjustOverflowEnabled = {
     adjustX: 1,
     adjustY: 1,
 };
+const autoAdjustOverflowDisabled = {
+    adjustX: 0,
+    adjustY: 0,
+};
 const targetOffset = [0, 0];
-export default function getPlacements(config = {}) {
-    if (!config.arrowPointAtCenter) {
-        return placements;
+export function getOverflowOptions(autoAdjustOverflow) {
+    if (typeof autoAdjustOverflow === 'boolean') {
+        return autoAdjustOverflow ? autoAdjustOverflowEnabled : autoAdjustOverflowDisabled;
     }
-    const { arrowWidth = 5, horizontalArrowShift = 16, verticalArrowShift = 12 } = config;
-    return {
+    return Object.assign({}, autoAdjustOverflowDisabled, autoAdjustOverflow);
+}
+export default function getPlacements(config = {}) {
+    const { arrowWidth = 5, horizontalArrowShift = 16, verticalArrowShift = 12, autoAdjustOverflow = true } = config;
+    const placementMap = {
         left: {
             points: ['cr', 'cl'],
-            overflow: autoAdjustOverflow,
             offset: [-4, 0],
-            targetOffset,
         },
         right: {
             points: ['cl', 'cr'],
-            overflow: autoAdjustOverflow,
             offset: [4, 0],
-            targetOffset,
         },
         top: {
             points: ['bc', 'tc'],
-            overflow: autoAdjustOverflow,
             offset: [0, -4],
-            targetOffset,
         },
         bottom: {
             points: ['tc', 'bc'],
-            overflow: autoAdjustOverflow,
             offset: [0, 4],
-            targetOffset,
         },
         topLeft: {
             points: ['bl', 'tc'],
-            overflow: autoAdjustOverflow,
             offset: [-(horizontalArrowShift + arrowWidth), -4],
-            targetOffset,
         },
         leftTop: {
             points: ['tr', 'cl'],
-            overflow: autoAdjustOverflow,
             offset: [-4, -(verticalArrowShift + arrowWidth)],
-            targetOffset,
         },
         topRight: {
             points: ['br', 'tc'],
-            overflow: autoAdjustOverflow,
             offset: [horizontalArrowShift + arrowWidth, -4],
-            targetOffset,
         },
         rightTop: {
             points: ['tl', 'cr'],
-            overflow: autoAdjustOverflow,
             offset: [4, -(verticalArrowShift + arrowWidth)],
-            targetOffset,
         },
         bottomRight: {
             points: ['tr', 'bc'],
-            overflow: autoAdjustOverflow,
             offset: [horizontalArrowShift + arrowWidth, 4],
-            targetOffset,
         },
         rightBottom: {
             points: ['bl', 'cr'],
-            overflow: autoAdjustOverflow,
             offset: [4, verticalArrowShift + arrowWidth],
-            targetOffset,
         },
         bottomLeft: {
             points: ['tl', 'bc'],
-            overflow: autoAdjustOverflow,
             offset: [-(horizontalArrowShift + arrowWidth), 4],
-            targetOffset,
         },
         leftBottom: {
             points: ['br', 'cl'],
-            overflow: autoAdjustOverflow,
             offset: [-4, verticalArrowShift + arrowWidth],
-            targetOffset,
         },
     };
+    Object.keys(placementMap).forEach(key => {
+        placementMap[key] = config.arrowPointAtCenter ? Object.assign({}, placementMap[key], { overflow: getOverflowOptions(autoAdjustOverflow), targetOffset }) : Object.assign({}, rcPlacements[key], { overflow: getOverflowOptions(autoAdjustOverflow) });
+    });
+    return placementMap;
 }

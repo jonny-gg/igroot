@@ -7,24 +7,29 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import RcPagination from 'rc-pagination';
-import zhCN from 'rc-pagination/lib/locale/zh_CN';
+import enUS from 'rc-pagination/lib/locale/en_US';
 import classNames from 'classnames';
-import injectLocale from '../locale-provider/injectLocale';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import Select from '../select';
 import MiniSelect from './MiniSelect';
-class Pagination extends React.Component {
+export default class Pagination extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.renderPagination = (locale) => {
+            const _a = this.props, { className, size } = _a, restProps = __rest(_a, ["className", "size"]);
+            const isSmall = size === 'small';
+            return (<RcPagination {...restProps} className={classNames(className, { mini: isSmall })} selectComponentClass={isSmall ? MiniSelect : Select} locale={locale}/>);
+        };
+    }
     render() {
-        const _a = this.props, { className, size } = _a, restProps = __rest(_a, ["className", "size"]);
-        const locale = this.getLocale();
-        const isSmall = size === 'small';
-        return (<RcPagination {...restProps} className={classNames(className, { mini: isSmall })} selectComponentClass={isSmall ? MiniSelect : Select} locale={locale}/>);
+        return (<LocaleReceiver componentName="Pagination" defaultLocale={enUS}>
+        {this.renderPagination}
+      </LocaleReceiver>);
     }
 }
 Pagination.defaultProps = {
     prefixCls: 'ant-pagination',
     selectPrefixCls: 'ant-select',
 };
-const injectPaginationLocale = injectLocale('Pagination', zhCN);
-export default injectPaginationLocale(Pagination);

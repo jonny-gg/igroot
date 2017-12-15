@@ -1,9 +1,6 @@
-import React from 'react';
-import { Component, cloneElement } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import calculateNodeHeight from './calculateNodeHeight';
-import assign from 'object-assign';
 import omit from 'omit.js';
 function fixControlledValue(value) {
     if (typeof value === 'undefined' || value === null) {
@@ -11,27 +8,9 @@ function fixControlledValue(value) {
     }
     return value;
 }
-function onNextFrame(cb) {
-    if (window.requestAnimationFrame) {
-        return window.requestAnimationFrame(cb);
-    }
-    return window.setTimeout(cb, 1);
-}
-function clearNextFrameAction(nextFrameId) {
-    if (window.cancelAnimationFrame) {
-        window.cancelAnimationFrame(nextFrameId);
-    }
-    else {
-        window.clearTimeout(nextFrameId);
-    }
-}
-export default class Input extends Component {
+export default class Input extends React.Component {
     constructor() {
         super(...arguments);
-        this.state = {
-            textareaStyles: null,
-            isFocus: false,
-        };
         this.handleKeyDown = (e) => {
             const { onPressEnter, onKeyDown } = this.props;
             if (e.keyCode === 13 && onPressEnter) {
@@ -41,45 +20,28 @@ export default class Input extends Component {
                 onKeyDown(e);
             }
         };
-        this.handleTextareaChange = (e) => {
-            if (!('value' in this.props)) {
-                this.resizeTextarea();
-            }
-            const onChange = this.props.onChange;
-            if (onChange) {
-                onChange(e);
-            }
+        this.saveInput = (node) => {
+            this.input = node;
         };
-        this.resizeTextarea = () => {
-            const { type, autosize } = this.props;
-            if (type !== 'textarea' || !autosize || !this.refs.input) {
-                return;
-            }
-            const minRows = autosize ? autosize.minRows : null;
-            const maxRows = autosize ? autosize.maxRows : null;
-            const textareaStyles = calculateNodeHeight(this.refs.input, false, minRows, maxRows);
-            this.setState({ textareaStyles });
-        };
-    }
-    componentDidMount() {
-        this.resizeTextarea();
-    }
-    componentWillReceiveProps(nextProps) {
-        // Re-render with the new content then recalculate the height as required.
-        if (this.props.value !== nextProps.value) {
-            if (this.nextFrameActionId) {
-                clearNextFrameAction(this.nextFrameActionId);
-            }
-            this.nextFrameActionId = onNextFrame(this.resizeTextarea);
-        }
     }
     focus() {
-        this.refs.input.focus();
+        this.input.focus();
+    }
+    blur() {
+        this.input.blur();
+    }
+    getInputClassName() {
+        const { prefixCls, size, disabled } = this.props;
+        return classNames(prefixCls, {
+            [`${prefixCls}-sm`]: size === 'small',
+            [`${prefixCls}-lg`]: size === 'large',
+            [`${prefixCls}-disabled`]: disabled,
+        });
     }
     renderLabeledInput(children) {
         const props = this.props;
         // Not wrap when there is not addons
-        if (props.type === 'textarea' || (!props.addonBefore && !props.addonAfter)) {
+        if ((!props.addonBefore && !props.addonAfter)) {
             return children;
         }
         const wrapperClassName = `${props.prefixCls}-group`;
@@ -93,20 +55,30 @@ export default class Input extends Component {
         const className = classNames(`${props.prefixCls}-wrapper`, {
             [wrapperClassName]: (addonBefore || addonAfter),
         });
-        const node = (<span className={className}>
+        const groupClassName = classNames(`${props.prefixCls}-group-wrapper`, {
+            [`${props.prefixCls}-group-wrapper-sm`]: props.size === 'small',
+            [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
+        });
+        // Need another wrapper for changing display:table to display:inline-block
+        // and put style prop in wrapper
+        if (addonBefore || addonAfter) {
+            return (<span className={groupClassName} style={props.style}>
+          <span className={className}>
+            {addonBefore}
+            {React.cloneElement(children, { style: null })}
+            {addonAfter}
+          </span>
+        </span>);
+        }
+        return (<span className={className}>
         {addonBefore}
         {children}
         {addonAfter}
       </span>);
-        // Need another wrapper for changing display:table to display:inline-block
-        if (addonBefore || addonAfter) {
-            return <span className={`${props.prefixCls}-group-wrapper`}>{node}</span>;
-        }
-        return node;
     }
     renderLabeledIcon(children) {
         const { props } = this;
-        if (props.type === 'textarea' || !('prefix' in props || 'suffix' in props)) {
+        if (!('prefix' in props || 'suffix' in props)) {
             return children;
         }
         const prefix = props.prefix ? (<span className={`${props.prefixCls}-prefix`}>
@@ -115,54 +87,43 @@ export default class Input extends Component {
         const suffix = props.suffix ? (<span className={`${props.prefixCls}-suffix`}>
         {props.suffix}
       </span>) : null;
-        return (<span className={`${props.prefixCls}-affix-wrapper`} style={props.style}>
+        const affixWrapperCls = classNames(props.className, `${props.prefixCls}-affix-wrapper`, {
+            [`${props.prefixCls}-affix-wrapper-sm`]: props.size === 'small',
+            [`${props.prefixCls}-affix-wrapper-lg`]: props.size === 'large',
+        });
+        return (<span className={affixWrapperCls} style={props.style}>
         {prefix}
-        {cloneElement(children, { style: null })}
+        {React.cloneElement(children, { style: null, className: this.getInputClassName() })}
         {suffix}
       </span>);
     }
     renderInput() {
-        const props = assign({}, this.props);
+        const { value, className } = this.props;
         // Fix https://fb.me/react-unknown-prop
         const otherProps = omit(this.props, [
             'prefixCls',
             'onPressEnter',
-            'autosize',
             'addonBefore',
             'addonAfter',
             'prefix',
             'suffix',
         ]);
-        const prefixCls = props.prefixCls;
-        if (!props.type) {
-            return props.children;
-        }
-        const inputClassName = classNames(prefixCls, {
-            [`${prefixCls}-sm`]: props.size === 'small',
-            [`${prefixCls}-lg`]: props.size === 'large',
-        }, props.className);
-        if ('value' in props) {
-            otherProps.value = fixControlledValue(props.value);
+        if ('value' in this.props) {
+            otherProps.value = fixControlledValue(value);
             // Input elements must be either controlled or uncontrolled,
             // specify either the value prop, or the defaultValue prop, but not both.
             delete otherProps.defaultValue;
         }
-        switch (props.type) {
-            case 'textarea':
-                return (<textarea {...otherProps} style={assign({}, props.style, this.state.textareaStyles)} className={inputClassName} onKeyDown={this.handleKeyDown} onChange={this.handleTextareaChange} ref="input"/>);
-            default:
-                return this.renderLabeledIcon(<input {...otherProps} className={inputClassName} onKeyDown={this.handleKeyDown} ref="input"/>);
-        }
+        return this.renderLabeledIcon(<input {...otherProps} className={classNames(this.getInputClassName(), className)} onKeyDown={this.handleKeyDown} ref={this.saveInput}/>);
     }
     render() {
         return this.renderLabeledInput(this.renderInput());
     }
 }
 Input.defaultProps = {
-    disabled: false,
     prefixCls: 'ant-input',
     type: 'text',
-    autosize: false,
+    disabled: false,
 };
 Input.propTypes = {
     type: PropTypes.string,
@@ -171,6 +132,7 @@ Input.propTypes = {
         PropTypes.number,
     ]),
     size: PropTypes.oneOf(['small', 'default', 'large']),
+    maxLength: PropTypes.string,
     disabled: PropTypes.bool,
     value: PropTypes.any,
     defaultValue: PropTypes.any,

@@ -7,16 +7,28 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RcCheckbox from 'rc-checkbox';
 import shallowEqual from 'shallowequal';
 export default class Checkbox extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.saveCheckbox = (node) => {
+            this.rcCheckbox = node;
+        };
+    }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return !shallowEqual(this.props, nextProps) ||
             !shallowEqual(this.state, nextState) ||
             !shallowEqual(this.context.checkboxGroup, nextContext.checkboxGroup);
+    }
+    focus() {
+        this.rcCheckbox.focus();
+    }
+    blur() {
+        this.rcCheckbox.blur();
     }
     render() {
         const { props, context } = this;
@@ -26,7 +38,7 @@ export default class Checkbox extends React.Component {
         if (checkboxGroup) {
             checkboxProps.onChange = () => checkboxGroup.toggleOption({ label: children, value: props.value });
             checkboxProps.checked = checkboxGroup.value.indexOf(props.value) !== -1;
-            checkboxProps.disabled = 'disabled' in props ? props.disabled : checkboxGroup.disabled;
+            checkboxProps.disabled = props.disabled || checkboxGroup.disabled;
         }
         const classString = classNames(className, {
             [`${prefixCls}-wrapper`]: true,
@@ -35,7 +47,7 @@ export default class Checkbox extends React.Component {
             [`${prefixCls}-indeterminate`]: indeterminate,
         });
         return (<label className={classString} style={style} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        <RcCheckbox {...checkboxProps} prefixCls={prefixCls} className={checkboxClass}/>
+        <RcCheckbox {...checkboxProps} prefixCls={prefixCls} className={checkboxClass} ref={this.saveCheckbox}/>
         {children !== undefined ? <span>{children}</span> : null}
       </label>);
     }

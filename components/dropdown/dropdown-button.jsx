@@ -7,28 +7,30 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import Button from '../button';
 import Icon from '../icon';
 import Dropdown from './dropdown';
-const ButtonGroup = Button.Group;
 import classNames from 'classnames';
+const ButtonGroup = Button.Group;
 export default class DropdownButton extends React.Component {
     render() {
-        const _a = this.props, { type, overlay, trigger, align, children, className, onClick, prefixCls, disabled, visible, onVisibleChange, placement } = _a, restProps = __rest(_a, ["type", "overlay", "trigger", "align", "children", "className", "onClick", "prefixCls", "disabled", "visible", "onVisibleChange", "placement"]);
-        const cls = classNames(prefixCls, className);
+        const _a = this.props, { type, disabled, onClick, children, prefixCls, className, overlay, trigger, align, visible, onVisibleChange, placement, getPopupContainer } = _a, restProps = __rest(_a, ["type", "disabled", "onClick", "children", "prefixCls", "className", "overlay", "trigger", "align", "visible", "onVisibleChange", "placement", "getPopupContainer"]);
         const dropdownProps = {
             align,
             overlay,
             trigger: disabled ? [] : trigger,
             onVisibleChange,
             placement,
+            getPopupContainer,
         };
         if ('visible' in this.props) {
             dropdownProps.visible = visible;
         }
-        return (<ButtonGroup {...restProps} className={cls}>
-        <Button type={type} onClick={onClick} disabled={disabled}>{children}</Button>
+        return (<ButtonGroup {...restProps} className={classNames(prefixCls, className)}>
+        <Button type={type} disabled={disabled} onClick={onClick}>
+          {children}
+        </Button>
         <Dropdown {...dropdownProps}>
           <Button type={type} disabled={disabled}>
             <Icon type="down"/>

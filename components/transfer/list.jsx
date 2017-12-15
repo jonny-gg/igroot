@@ -1,9 +1,8 @@
-import React from 'react';
-import { findDOMNode } from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Animate from 'rc-animate';
 import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
-import assign from 'object-assign';
 import Checkbox from '../checkbox';
 import Search from './search';
 import Item from './item';
@@ -29,8 +28,8 @@ export default class TransferList extends React.Component {
             }
             // Manually trigger scroll event for lazy search bug
             // https://github.com/ant-design/ant-design/issues/5631
-            this.triggerScrollTimer = setTimeout(() => {
-                const listNode = findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
+            this.triggerScrollTimer = window.setTimeout(() => {
+                const listNode = ReactDOM.findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
                 if (listNode) {
                     triggerEvent(listNode, 'scroll');
                 }
@@ -60,7 +59,7 @@ export default class TransferList extends React.Component {
         };
     }
     componentDidMount() {
-        this.timer = setTimeout(() => {
+        this.timer = window.setTimeout(() => {
             this.setState({
                 mounted: true,
             });
@@ -86,8 +85,8 @@ export default class TransferList extends React.Component {
     render() {
         const { prefixCls, dataSource, titleText, checkedKeys, lazy, body = noop, footer = noop, showSearch, style, filter, searchPlaceholder, notFoundContent, itemUnit, itemsUnit, onScroll, } = this.props;
         // Custom Layout
-        const footerDom = footer(assign({}, this.props));
-        const bodyDom = body(assign({}, this.props));
+        const footerDom = footer(Object.assign({}, this.props));
+        const bodyDom = body(Object.assign({}, this.props));
         const listCls = classNames(prefixCls, {
             [`${prefixCls}-with-footer`]: !!footerDom,
         });

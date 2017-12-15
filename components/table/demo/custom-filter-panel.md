@@ -89,7 +89,7 @@ class App extends React.Component {
           <Button type="primary" onClick={this.onSearch}>Search</Button>
         </div>
       ),
-      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
+      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#20a0ff' : '#aaa' }} />,
       filterDropdownVisible: this.state.filterDropdownVisible,
       onFilterDropdownVisibleChange: (visible) => {
         this.setState({

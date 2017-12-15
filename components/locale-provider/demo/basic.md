@@ -15,7 +15,7 @@ Wrap your app with `LocaleProvider`, and apply the corresponding language packag
 
 ````jsx
 import { Pagination, LocaleProvider } from 'igroot';
-import enUS from 'igroot/lib/locale-provider/en_US';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 const App = () => (
   <div>

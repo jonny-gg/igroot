@@ -7,10 +7,11 @@ title:
 
 ## zh-CN
 
-`igroot@2.0` 之后，时间类组件的 `value` 改为 `moment` 类型，所以在提交前需要预处理。
+`antd@2.0` 之后，时间类组件的 `value` 改为 `moment` 类型，所以在提交前需要预处理。
 
 ## en-US
 
+After `antd@2.0`, the `value` of time-related components had been changed to `moment`. So, we need to pre-process those values.
 
 ````jsx
 import { Form, DatePicker, TimePicker, Button } from 'igroot';

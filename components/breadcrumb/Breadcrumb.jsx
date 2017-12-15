@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { cloneElement } from 'react';
 import warning from '../_util/warning';
@@ -23,7 +23,7 @@ export default class Breadcrumb extends React.Component {
     componentDidMount() {
         const props = this.props;
         warning(!('linkRender' in props || 'nameRender' in props), '`linkRender` and `nameRender` are removed, please use `itemRender` instead, ' +
-            'see: http://u.ant.design/item-render.');
+            'see: https://u.ant.design/item-render.');
     }
     render() {
         let crumbs;

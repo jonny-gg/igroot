@@ -26,17 +26,7 @@ function onChange(dates, dateStrings) {
 ReactDOM.render(
   <div>
     <RangePicker
-      ranges={
-        { '今天': [moment(),moment()] ,
-         '昨天': [moment().subtract(1, 'd'),moment().subtract(1, 'd')] ,
-         '近2天': [moment().subtract(2, 'd'),moment()],
-         '近7天': [moment().subtract(7, 'd'),moment()] ,
-         '近30天': [moment().subtract(30, 'd'),moment()] ,
-         '上月': [moment().subtract(1, 'month').startOf('month'),
-                  moment().subtract(1, 'month').endOf('month')] ,
-         '本月': [moment().startOf('month'),moment()],
-         }
-      }
+      ranges={{ Today: [moment(), moment()], 'This Month': [moment(), moment().endOf('month')] }}
       onChange={onChange}
     />
     <br />

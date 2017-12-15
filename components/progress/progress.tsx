@@ -4,7 +4,7 @@ import Icon from '../icon';
 import { Circle } from 'rc-progress';
 import classNames from 'classnames';
 const statusColorMap = {
-  normal: '#108ee9',
+  normal: '#20a0ff',
   exception: '#ff5500',
   success: '#87d068',
 };

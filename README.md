@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://groot.i.qingcdn.com:8001">
+  <a href="http://igroot.i.qingcdn.com:8001">
     <img width="320" src="http://fe.baishancloud.com/images/page-logo.png">
   </a>
 </p>
@@ -56,9 +56,9 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 
 ## 链接
 
-- [首页](http://groot.i.qingcdn.com:8001/index-cn)
-- [UI 组件库](http://groot.i.qingcdn.com:8001/docs/react/introduce-cn)
+- [首页](http://igroot.i.qingcdn.com:8001/index-cn)
+- [UI 组件库](http://igroot.i.qingcdn.com:8001/docs/react/introduce-cn)
 - [React 底层基础组件](http://react-component.github.io/)
-- [定制主题](http://groot.i.qingcdn.com:8001/docs/react/customize-theme-cn)
+- [定制主题](http://igroot.i.qingcdn.com:8001/docs/react/customize-theme-cn)
 
 ## 待完善...

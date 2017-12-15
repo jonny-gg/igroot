@@ -99,7 +99,7 @@ title:
 
 <table style="font-size:12px;float:right;width:600px;margin-left:60px;margin-bottom:100px;">
   <tr>
-    <th style="border-bottom: 2px solid #108ee9;width:20%;">使用</th>
+    <th style="border-bottom: 2px solid #20a0ff;width:20%;">使用</th>
     <th style="border-bottom: 2px solid #f04134;width:25%;">不使用</th>
     <th>备注</th>
   </tr>

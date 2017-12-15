@@ -8,12 +8,12 @@ function animate(node, show, done) {
         start() {
             if (!show) {
                 node.style.height = `${node.offsetHeight}px`;
-                node.style.opacity = 1;
+                node.style.opacity = '1';
             }
             else {
                 height = node.offsetHeight;
-                node.style.height = 0;
-                node.style.opacity = 0;
+                node.style.height = '0px';
+                node.style.opacity = '0';
             }
         },
         active() {
@@ -22,7 +22,7 @@ function animate(node, show, done) {
             }
             requestAnimationFrameId = reqAnimFrame(() => {
                 node.style.height = `${show ? height : 0}px`;
-                node.style.opacity = show ? 1 : 0;
+                node.style.opacity = show ? '1' : '0';
             });
         },
         end() {

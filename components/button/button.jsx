@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'omit.js';
@@ -44,20 +44,15 @@ export default class Button extends React.Component {
             // Add click effect
             this.setState({ clicked: true });
             clearTimeout(this.timeout);
-            this.timeout = setTimeout(() => this.setState({ clicked: false }), 500);
+            this.timeout = window.setTimeout(() => this.setState({ clicked: false }), 500);
             const onClick = this.props.onClick;
             if (onClick) {
                 onClick(e);
             }
         };
-        // Handle auto focus when click button in Chrome
-        this.handleMouseUp = (e) => {
-            if (this.props.onMouseUp) {
-                this.props.onMouseUp(e);
-            }
-        };
         this.state = {
             loading: props.loading,
+            clicked: false,
         };
     }
     componentWillReceiveProps(nextProps) {
@@ -67,7 +62,7 @@ export default class Button extends React.Component {
             clearTimeout(this.delayTimeout);
         }
         if (typeof loading !== 'boolean' && loading && loading.delay) {
-            this.delayTimeout = setTimeout(() => this.setState({ loading }), loading.delay);
+            this.delayTimeout = window.setTimeout(() => this.setState({ loading }), loading.delay);
         }
         else {
             this.setState({ loading });
@@ -82,7 +77,7 @@ export default class Button extends React.Component {
         }
     }
     render() {
-        const _a = this.props, { type, shape, size = '', className, htmlType, children, icon, prefixCls, ghost } = _a, others = __rest(_a, ["type", "shape", "size", "className", "htmlType", "children", "icon", "prefixCls", "ghost"]);
+        const _a = this.props, { type, shape, size, className, htmlType, children, icon, prefixCls, ghost } = _a, others = __rest(_a, ["type", "shape", "size", "className", "htmlType", "children", "icon", "prefixCls", "ghost"]);
         const { loading, clicked } = this.state;
         // large => lg
         // small => sm
@@ -93,12 +88,11 @@ export default class Button extends React.Component {
                 break;
             case 'small':
                 sizeCls = 'sm';
-            case 'modal':
-                sizeCls = 'md';
             default:
                 break;
         }
-        const classes = classNames(prefixCls, {
+        const ComponentProp = others.href ? 'a' : 'button';
+        const classes = classNames(prefixCls, className, {
             [`${prefixCls}-${type}`]: type,
             [`${prefixCls}-${shape}`]: shape,
             [`${prefixCls}-${sizeCls}`]: sizeCls,
@@ -106,27 +100,26 @@ export default class Button extends React.Component {
             [`${prefixCls}-loading`]: loading,
             [`${prefixCls}-clicked`]: clicked,
             [`${prefixCls}-background-ghost`]: ghost,
-        }, className);
+        });
         const iconType = loading ? 'loading' : icon;
         const iconNode = iconType ? <Icon type={iconType}/> : null;
-        const needInserted = React.Children.count(children) === 1 && !iconType;
-        const kids = React.Children.map(children, child => insertSpace(child, needInserted));
-        return (<button {...omit(others, ['loading', 'clicked'])} type={htmlType || 'button'} className={classes} onMouseUp={this.handleMouseUp} onClick={this.handleClick}>
+        const needInserted = React.Children.count(children) === 1 && (!iconType || iconType === 'loading');
+        const kids = children ? React.Children.map(children, child => insertSpace(child, needInserted)) : null;
+        return (<ComponentProp {...omit(others, ['loading'])} type={others.href ? undefined : (htmlType || 'button')} className={classes} onClick={this.handleClick}>
         {iconNode}{kids}
-      </button>);
+      </ComponentProp>);
     }
 }
 Button.__ANT_BUTTON = true;
 Button.defaultProps = {
     prefixCls: 'ant-btn',
     loading: false,
-    clicked: false,
     ghost: false,
 };
 Button.propTypes = {
     type: PropTypes.string,
     shape: PropTypes.oneOf(['circle', 'circle-outline']),
-    size: PropTypes.oneOf(['large', 'default', 'small', 'modal']),
+    size: PropTypes.oneOf(['large', 'default', 'small']),
     htmlType: PropTypes.oneOf(['submit', 'button', 'reset']),
     onClick: PropTypes.func,
     loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),

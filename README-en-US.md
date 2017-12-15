@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://groot.i.qingcdn.com:8001">
+  <a href="http://igroot.i.qingcdn.com:8001">
     <img width="320" src="https://t.alipayobjects.com/images/rmsweb/T1B9hfXcdvXXXXXXXX.svg">
   </a>
 </p>
@@ -81,13 +81,13 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 
 ## Internationalization
 
-See [i18n](http://groot.i.qingcdn.com:8001/docs/react/i18n).
+See [i18n](http://igroot.i.qingcdn.com:8001/docs/react/i18n).
 
 ## Links
 
-- [Home page](http://groot.i.qingcdn.com:8001/)
-- [UI library](http://groot.i.qingcdn.com:8001/docs/react/introduce)
+- [Home page](http://igroot.i.qingcdn.com:8001/)
+- [UI library](http://igroot.i.qingcdn.com:8001/docs/react/introduce)
 - [rc-components](http://react-component.github.io/)
-- [Customize Theme](http://groot.i.qingcdn.com:8001/docs/react/customize-theme)
+- [Customize Theme](http://igroot.i.qingcdn.com:8001/docs/react/customize-theme)
 
 ## To be perfect...

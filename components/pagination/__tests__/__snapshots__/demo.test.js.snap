@@ -161,7 +161,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
       class="ant-pagination-item-link"
     />
   </li>
-  <div
+  <li
     class="ant-pagination-options"
   >
     <div
@@ -172,7 +172,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
         aria-expanded="false"
         aria-haspopup="true"
         class="ant-select-selection
-                  ant-select-selection--single"
+            ant-select-selection--single"
         role="combobox"
         tabindex="0"
       >
@@ -196,7 +196,7 @@ exports[`renders ./components/pagination/demo/changer.md correctly 1`] = `
         </span>
       </div>
     </div>
-  </div>
+  </li>
 </ul>
 `;
 
@@ -452,7 +452,7 @@ exports[`renders ./components/pagination/demo/jump.md correctly 1`] = `
       class="ant-pagination-item-link"
     />
   </li>
-  <div
+  <li
     class="ant-pagination-options"
   >
     <div
@@ -465,7 +465,7 @@ exports[`renders ./components/pagination/demo/jump.md correctly 1`] = `
       />
       页
     </div>
-  </div>
+  </li>
 </ul>
 `;
 
@@ -610,7 +610,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
         class="ant-pagination-item-link"
       />
     </li>
-    <div
+    <li
       class="ant-pagination-options"
     >
       <div
@@ -621,7 +621,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
           aria-expanded="false"
           aria-haspopup="true"
           class="ant-select-selection
-                    ant-select-selection--single"
+            ant-select-selection--single"
           role="combobox"
           tabindex="0"
         >
@@ -655,7 +655,7 @@ exports[`renders ./components/pagination/demo/mini.md correctly 1`] = `
         />
         页
       </div>
-    </div>
+    </li>
   </ul>
   <ul
     class="ant-pagination mini"
@@ -854,7 +854,9 @@ exports[`renders ./components/pagination/demo/simple.md correctly 1`] = `
     tabindex="0"
     title="上一页"
   >
-    <a />
+    <a
+      class="ant-pagination-item-link"
+    />
   </li>
   <li
     class="ant-pagination-simple-pager"
@@ -878,7 +880,9 @@ exports[`renders ./components/pagination/demo/simple.md correctly 1`] = `
     tabindex="0"
     title="下一页"
   >
-    <a />
+    <a
+      class="ant-pagination-item-link"
+    />
   </li>
 </ul>
 `;

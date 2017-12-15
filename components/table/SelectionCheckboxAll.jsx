@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Checkbox from '../checkbox';
 import Dropdown from '../dropdown';
 import Menu from '../menu';
@@ -11,7 +11,7 @@ export default class SelectionCheckboxAll extends React.Component {
             let checked = e.target.checked;
             this.props.onSelect(checked ? 'all' : 'removeAll', 0, null);
         };
-        this.defaultSelections = [{
+        this.defaultSelections = props.hideDefaultSelections ? [] : [{
                 key: 'all',
                 text: props.locale.selectAll,
                 onSelect: () => { },
@@ -110,14 +110,14 @@ export default class SelectionCheckboxAll extends React.Component {
         if (selections) {
             let newSelections = Array.isArray(selections) ? this.defaultSelections.concat(selections)
                 : this.defaultSelections;
-            let menu = (<Menu className={`${selectionPrefixCls}-menu`} selectedKeys={[]}>
+            const menu = (<Menu className={`${selectionPrefixCls}-menu`} selectedKeys={[]}>
           {this.renderMenus(newSelections)}
         </Menu>);
-            customSelections = (<Dropdown overlay={menu} getPopupContainer={getPopupContainer}>
+            customSelections = newSelections.length > 0 ? (<Dropdown overlay={menu} getPopupContainer={getPopupContainer}>
           <div className={`${selectionPrefixCls}-down`}>
             <Icon type="down"/>
           </div>
-        </Dropdown>);
+        </Dropdown>) : null;
         }
         return (<div className={selectionPrefixCls}>
         <Checkbox className={classNames({ [`${selectionPrefixCls}-select-all-custom`]: customSelections })} checked={checked} indeterminate={indeterminate} disabled={disabled} onChange={this.handleSelectAllChagne}/>

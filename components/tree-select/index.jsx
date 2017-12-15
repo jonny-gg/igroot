@@ -7,23 +7,41 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import RcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from 'rc-tree-select';
 import classNames from 'classnames';
-import injectLocale from '../locale-provider/injectLocale';
-class TreeSelect extends React.Component {
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import warning from '../_util/warning';
+export default class TreeSelect extends React.Component {
+    constructor(props) {
+        super(props);
+        this.saveTreeSelect = (node) => {
+            this.rcTreeSelect = node;
+        };
+        this.renderTreeSelect = (locale) => {
+            const _a = this.props, { prefixCls, className, size, notFoundContent, dropdownStyle } = _a, restProps = __rest(_a, ["prefixCls", "className", "size", "notFoundContent", "dropdownStyle"]);
+            const cls = classNames({
+                [`${prefixCls}-lg`]: size === 'large',
+                [`${prefixCls}-sm`]: size === 'small',
+            }, className);
+            let checkable = restProps.treeCheckable;
+            if (checkable) {
+                checkable = <span className={`${prefixCls}-tree-checkbox-inner`}/>;
+            }
+            return (<RcTreeSelect {...restProps} prefixCls={prefixCls} className={cls} dropdownStyle={Object.assign({ maxHeight: '100vh', overflow: 'auto' }, dropdownStyle)} treeCheckable={checkable} notFoundContent={notFoundContent || locale.notFoundContent} ref={this.saveTreeSelect}/>);
+        };
+        warning(props.multiple !== false || !props.treeCheckable, '`multiple` will alway be `true` when `treeCheckable` is true');
+    }
+    focus() {
+        this.rcTreeSelect.focus();
+    }
+    blur() {
+        this.rcTreeSelect.blur();
+    }
     render() {
-        const locale = this.getLocale();
-        const _a = this.props, { prefixCls, className, size, notFoundContent = locale.notFoundContent, dropdownStyle } = _a, restProps = __rest(_a, ["prefixCls", "className", "size", "notFoundContent", "dropdownStyle"]);
-        const cls = classNames({
-            [`${prefixCls}-lg`]: size === 'large',
-            [`${prefixCls}-sm`]: size === 'small',
-        }, className);
-        let checkable = restProps.treeCheckable;
-        if (checkable) {
-            checkable = <span className={`${prefixCls}-tree-checkbox-inner`}/>;
-        }
-        return (<RcTreeSelect {...restProps} prefixCls={prefixCls} className={cls} dropdownStyle={Object.assign({ maxHeight: '100vh', overflow: 'auto' }, dropdownStyle)} treeCheckable={checkable} notFoundContent={notFoundContent}/>);
+        return (<LocaleReceiver componentName="Select" defaultLocale={{}}>
+        {this.renderTreeSelect}
+      </LocaleReceiver>);
     }
 }
 TreeSelect.TreeNode = TreeNode;
@@ -37,6 +55,3 @@ TreeSelect.defaultProps = {
     showSearch: false,
     dropdownClassName: 'ant-select-tree-dropdown',
 };
-// Use Select's locale
-const injectSelectLocale = injectLocale('Select', {});
-export default injectSelectLocale(TreeSelect);

@@ -195,7 +195,7 @@ ReactDOM.render(<EditableTable />, mountNode);
 
 .editable-cell-icon:hover,
 .editable-cell-icon-check:hover {
-  color: #108ee9;
+  color: #20a0ff;
 }
 
 .editable-add-btn {

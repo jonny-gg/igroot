@@ -1,6 +1,6 @@
 ---
 order: 1
-title: 
+title:
   zh-CN: 手风琴
   en-US: Accordion
 ---
