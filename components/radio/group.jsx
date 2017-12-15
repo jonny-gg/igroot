@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -51,6 +51,7 @@ export default class RadioGroup extends React.Component {
                 onChange: this.onRadioChange,
                 value: this.state.value,
                 disabled: this.props.disabled,
+                name: this.props.name,
             },
         };
     }
@@ -75,14 +76,14 @@ export default class RadioGroup extends React.Component {
     }
     render() {
         const props = this.props;
-        const { prefixCls = 'ant-radio-group', className = '' } = props;
+        const { prefixCls = 'ant-radio-group', className = '', options } = props;
         const classString = classNames(prefixCls, {
             [`${prefixCls}-${props.size}`]: props.size,
         }, className);
         let children = props.children;
         // 如果存在 options, 优先使用
-        if (props.options && props.options.length > 0) {
-            children = props.options.map((option, index) => {
+        if (options && options.length > 0) {
+            children = options.map((option, index) => {
                 if (typeof option === 'string') {
                     return (<Radio key={index} disabled={this.props.disabled} value={option} onChange={this.onRadioChange} checked={this.state.value === option}>
               {option}
@@ -95,7 +96,7 @@ export default class RadioGroup extends React.Component {
                 }
             });
         }
-        return (<div className={classString} style={props.style} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
+        return (<div className={classString} style={props.style} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} id={props.id}>
         {children}
       </div>);
     }

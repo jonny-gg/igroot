@@ -1,14 +1,28 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import RcSwitch from 'rc-switch';
 import classNames from 'classnames';
+import omit from 'omit.js';
 export default class Switch extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.saveSwitch = (node) => {
+            this.rcSwitch = node;
+        };
+    }
+    focus() {
+        this.rcSwitch.focus();
+    }
+    blur() {
+        this.rcSwitch.blur();
+    }
     render() {
-        const { prefixCls, size, className = '' } = this.props;
+        const { prefixCls, size, loading, className = '' } = this.props;
         const classes = classNames(className, {
             [`${prefixCls}-small`]: size === 'small',
+            [`${prefixCls}-loading`]: loading,
         });
-        return <RcSwitch {...this.props} className={classes}/>;
+        return (<RcSwitch {...omit(this.props, ['loading'])} className={classes} ref={this.saveSwitch}/>);
     }
 }
 Switch.defaultProps = {

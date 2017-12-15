@@ -15,7 +15,6 @@ export function fileToObject(file) {
         error: file.error,
         percent: 0,
         originFileObj: file,
-        status: null,
     };
 }
 /**
@@ -40,11 +39,11 @@ export function genPercentAdd() {
     };
 }
 export function getFileItem(file, fileList) {
-    const matchKey = file.uid ? 'uid' : 'name';
+    const matchKey = file.uid !== undefined ? 'uid' : 'name';
     return fileList.filter(item => item[matchKey] === file[matchKey])[0];
 }
 export function removeFileItem(file, fileList) {
-    const matchKey = file.uid ? 'uid' : 'name';
+    const matchKey = file.uid !== undefined ? 'uid' : 'name';
     const removed = fileList.filter(item => item[matchKey] !== file[matchKey]);
     if (removed.length === fileList.length) {
         return null;

@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import TimelineItem from './TimelineItem';
 export default class Timeline extends React.Component {
@@ -17,8 +17,10 @@ export default class Timeline extends React.Component {
         const classString = classNames(prefixCls, {
             [`${prefixCls}-pending`]: !!pending,
         }, className);
-        const items = React.Children.map(children, (ele, idx) => React.cloneElement(ele, {
-            last: idx === children.length - 1,
+        // Remove falsy items
+        const falsylessItems = React.Children.toArray(children).filter(item => !!item);
+        const items = React.Children.map(falsylessItems, (ele, idx) => React.cloneElement(ele, {
+            last: idx === (React.Children.count(falsylessItems) - 1),
         }));
         const pendingItem = (!!pending) ? (<TimelineItem pending={!!pending}>{pendingNode}</TimelineItem>) : null;
         return (<ul {...restProps} className={classString}>
@@ -27,6 +29,7 @@ export default class Timeline extends React.Component {
       </ul>);
     }
 }
+Timeline.Item = TimelineItem;
 Timeline.defaultProps = {
     prefixCls: 'ant-timeline',
 };

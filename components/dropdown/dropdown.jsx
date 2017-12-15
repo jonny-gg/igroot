@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import * as React from 'react';
 import RcDropdown from 'rc-dropdown';
 import classNames from 'classnames';
 import warning from '../_util/warning';
@@ -16,14 +16,20 @@ export default class Dropdown extends React.Component {
         warning(!overlayProps.mode || overlayProps.mode === 'vertical', `mode="${overlayProps.mode}" is not supported for Dropdown\'s Menu.`);
     }
     render() {
-        const { children, prefixCls, overlay } = this.props;
-        const dropdownTrigger = cloneElement(children, {
+        const { children, prefixCls, overlay, trigger, disabled } = this.props;
+        const dropdownTrigger = React.cloneElement(children, {
             className: classNames(children.props.className, `${prefixCls}-trigger`),
+            disabled,
         });
-        const fixedModeOverlay = cloneElement(overlay, {
+        // menu cannot be selectable in dropdown defaultly
+        const overlayProps = overlay && overlay.props;
+        const selectable = (overlayProps && 'selectable' in overlayProps)
+            ? overlayProps.selectable : false;
+        const fixedModeOverlay = React.cloneElement(overlay, {
             mode: 'vertical',
+            selectable,
         });
-        return (<RcDropdown transitionName={this.getTransitionName()} {...this.props} overlay={fixedModeOverlay}>
+        return (<RcDropdown {...this.props} transitionName={this.getTransitionName()} trigger={disabled ? [] : trigger} overlay={fixedModeOverlay}>
         {dropdownTrigger}
       </RcDropdown>);
     }

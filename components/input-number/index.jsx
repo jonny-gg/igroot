@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import RcInputNumber from 'rc-input-number';
 export default class InputNumber extends React.Component {
@@ -17,7 +17,13 @@ export default class InputNumber extends React.Component {
             [`${this.props.prefixCls}-lg`]: size === 'large',
             [`${this.props.prefixCls}-sm`]: size === 'small',
         }, className);
-        return <RcInputNumber className={inputNumberClass} {...others}/>;
+        return <RcInputNumber ref={(c) => this.inputNumberRef = c} className={inputNumberClass} {...others}/>;
+    }
+    focus() {
+        this.inputNumberRef.focus();
+    }
+    blur() {
+        this.inputNumberRef.blur();
     }
 }
 InputNumber.defaultProps = {

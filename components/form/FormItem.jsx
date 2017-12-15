@@ -1,12 +1,32 @@
-import React from 'react';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Animate from 'rc-animate';
 import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
 import Row from '../grid/row';
 import Col from '../grid/col';
-import { FIELD_META_PROP } from './constants';
 import warning from '../_util/warning';
+import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 export default class FormItem extends React.Component {
+    constructor() {
+        super(...arguments);
+        // Resolve duplicated ids bug between different forms
+        // https://github.com/ant-design/ant-design/issues/7351
+        this.onLabelClick = () => {
+            const id = this.props.id || this.getId();
+            if (!id) {
+                return;
+            }
+            const controls = document.querySelectorAll(`[id="${id}"]`);
+            if (controls.length !== 1) {
+                const control = ReactDOM.findDOMNode(this).querySelector(`[id="${id}"]`);
+                if (control && control.focus) {
+                    control.focus();
+                }
+            }
+        };
+    }
     componentDidMount() {
         warning(this.getControls(this.props.children, true).length <= 1, '`Form.Item` cannot generate `validateStatus` and `help` automatically, ' +
             'while there are more than one `getFieldDecorator` in it.');
@@ -15,10 +35,11 @@ export default class FormItem extends React.Component {
         return PureRenderMixin.shouldComponentUpdate.apply(this, args);
     }
     getHelpMsg() {
-        const context = this.context;
         const props = this.props;
-        if (props.help === undefined && context.form) {
-            return this.getId() ? (context.form.getFieldError(this.getId()) || []).join(', ') : '';
+        const onlyControl = this.getOnlyControl();
+        if (props.help === undefined && onlyControl) {
+            const errors = this.getField().errors;
+            return errors ? errors.map((e) => e.message).join(', ') : '';
         }
         return props.help;
     }
@@ -30,7 +51,8 @@ export default class FormItem extends React.Component {
                 break;
             }
             const child = childrenArray[i];
-            if (child.type === FormItem) {
+            if (child.type &&
+                (child.type === FormItem || child.type.displayName === 'FormItem')) {
                 continue;
             }
             if (!child.props) {
@@ -59,45 +81,51 @@ export default class FormItem extends React.Component {
     getMeta() {
         return this.getChildProp(FIELD_META_PROP);
     }
+    getField() {
+        return this.getChildProp(FIELD_DATA_PROP);
+    }
     renderHelp() {
         const prefixCls = this.props.prefixCls;
         const help = this.getHelpMsg();
-        return help ? (<div className={`${prefixCls}-explain`} key="help">
+        const children = help ? (<div className={`${prefixCls}-explain`} key="help">
         {help}
       </div>) : null;
+        return (<Animate transitionName="show-help" component="" transitionAppear key="help">
+        {children}
+      </Animate>);
     }
     renderExtra() {
         const { prefixCls, extra } = this.props;
         return extra ? (<div className={`${prefixCls}-extra`}>{extra}</div>) : null;
     }
     getValidateStatus() {
-        const { isFieldValidating, getFieldError, getFieldValue } = this.context.form;
-        const fieldId = this.getId();
-        if (!fieldId) {
+        const onlyControl = this.getOnlyControl();
+        if (!onlyControl) {
             return '';
         }
-        if (isFieldValidating(fieldId)) {
+        const field = this.getField();
+        if (field.validating) {
             return 'validating';
         }
-        if (!!getFieldError(fieldId)) {
+        if (field.errors) {
             return 'error';
         }
-        const fieldValue = getFieldValue(fieldId);
+        const fieldValue = 'value' in field ? field.value : this.getMeta().initialValue;
         if (fieldValue !== undefined && fieldValue !== null && fieldValue !== '') {
             return 'success';
         }
         return '';
     }
     renderValidateWrapper(c1, c2, c3) {
-        let classes = '';
-        const form = this.context.form;
         const props = this.props;
-        const validateStatus = (props.validateStatus === undefined && form) ?
+        const onlyControl = this.getOnlyControl;
+        const validateStatus = (props.validateStatus === undefined && onlyControl) ?
             this.getValidateStatus() :
             props.validateStatus;
+        let classes = '';
         if (validateStatus) {
             classes = classNames({
-                'has-feedback': props.hasFeedback,
+                'has-feedback': props.hasFeedback || validateStatus === 'validating',
                 'has-success': validateStatus === 'success',
                 'has-warning': validateStatus === 'warning',
                 'has-error': validateStatus === 'error',
@@ -120,9 +148,9 @@ export default class FormItem extends React.Component {
         if (required !== undefined) {
             return required;
         }
-        if (this.context.form) {
+        if (this.getOnlyControl()) {
             const meta = this.getMeta() || {};
-            const validate = (meta.validate || []);
+            const validate = meta.validate || [];
             return validate.filter((item) => !!item.rules).some((item) => {
                 return item.rules.some((rule) => rule.required);
             });
@@ -145,19 +173,13 @@ export default class FormItem extends React.Component {
             labelChildren = label.replace(/[：|:]\s*$/, '');
         }
         return label ? (<Col {...labelCol} className={labelColClassName} key="label">
-        <label htmlFor={id || this.getId()} className={labelClassName} title={typeof label === 'string' ? label : ''}>
+        <label htmlFor={id || this.getId()} className={labelClassName} title={typeof label === 'string' ? label : ''} onClick={this.onLabelClick}>
           {labelChildren}
         </label>
       </Col>) : null;
     }
     renderChildren() {
-        const props = this.props;
-        const children = React.Children.map(props.children, (child) => {
-            if (child && typeof child.type === 'function' && !child.props.size) {
-                return React.cloneElement(child, { size: 'large' });
-            }
-            return child;
-        });
+        const { children } = this.props;
         return [
             this.renderLabel(),
             this.renderWrapper(this.renderValidateWrapper(children, this.renderHelp(), this.renderExtra())),
@@ -201,6 +223,5 @@ FormItem.propTypes = {
     colon: PropTypes.bool,
 };
 FormItem.contextTypes = {
-    form: PropTypes.object,
     vertical: PropTypes.bool,
 };

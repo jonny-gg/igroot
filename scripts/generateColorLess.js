@@ -10,7 +10,7 @@ const COLOR_MAP = {
   '#ecf6fd': 'color(~`colorPalette("@{primary-color}", 1)`)', // @primary-1
   '#d2eafb': 'color(~`colorPalette("@{primary-color}", 2)`)', // @primary-2
   '#49a9ee': 'color(~`colorPalette("@{primary-color}", 5)`)', // @primary-5
-  '#108ee9': '@primary-color',
+  '#20a0ff': '@primary-color',
   '#0e77ca': 'color(~`colorPalette("@{primary-color}", 7)`)', // @primary-7
   '#40a5ed': 'tint(@primary-color, 20%)',
   '#70bbf2': 'tint(@primary-color, 40%)',
@@ -81,7 +81,7 @@ less.render.call(less, content, {
   css = `${colorPalette}\n${css}`;
   css = `${tinyColor}\n${css}`;
   css = `${bezierEasing}\n${css}`;
-  css = `@primary-color: #108ee9;\n${css}`;
+  css = `@primary-color: #20a0ff;\n${css}`;
 
   const siteDir = path.resolve(__dirname, '../_site');
   if (!fs.existsSync(siteDir)) {

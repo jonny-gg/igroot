@@ -34,7 +34,7 @@ ReactDOM.render(
       </Menu>
     </Header>
     <Content style={{ padding: '0 50px' }}>
-      <Breadcrumb style={{ margin: '12px 0' }}>
+      <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>List</Breadcrumb.Item>
         <Breadcrumb.Item>App</Breadcrumb.Item>
@@ -73,7 +73,7 @@ ReactDOM.render(
       </Layout>
     </Content>
     <Footer style={{ textAlign: 'center' }}>
-      iGroot ©2016 Created by iGroot FED
+      Ant Design ©2016 Created by Ant UED
     </Footer>
   </Layout>
 , mountNode);

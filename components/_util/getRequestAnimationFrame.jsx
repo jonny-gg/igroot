@@ -14,7 +14,8 @@ export default function getRequestAnimationFrame() {
         return () => { };
     }
     if (window.requestAnimationFrame) {
-        return window.requestAnimationFrame;
+        // https://github.com/vuejs/vue/issues/4465
+        return window.requestAnimationFrame.bind(window);
     }
     const prefix = availablePrefixs.filter(key => `${key}RequestAnimationFrame` in window)[0];
     return prefix
@@ -30,6 +31,6 @@ export function cancelRequestAnimationFrame(id) {
     }
     const prefix = availablePrefixs.filter(key => `${key}CancelAnimationFrame` in window || `${key}CancelRequestAnimationFrame` in window)[0];
     return prefix ?
-        (window[`${prefix}CancelAnimationFrame`] || window[`${prefix}CancelRequestAnimationFrame`]).call(this, id)
-        : clearTimeout(id);
+        (window[`${prefix}CancelAnimationFrame`] ||
+            window[`${prefix}CancelRequestAnimationFrame`]).call(this, id) : clearTimeout(id);
 }

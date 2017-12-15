@@ -9,14 +9,14 @@ title:
 
 我们添加了多种预设色彩的标签样式，用作不同场景使用。如果预设值不能满足你的需求，可以设置为具体的色值。
 
-> 预设色彩在 `igroot@1.0.0` 之后支持。
+> 预设色彩在 `antd@2.7.0` 之后支持。
 
 ## en-US
 
-After `igroot@1.0.0`, We preset a series of colorful tag style for different situation usage.
+After `antd@2.7.0`, We preset a series of colorful tag style for different situation usage.
 And you can always set it to a hex color string for custom color.
 
-> Preset colors are supported after `igroot@1.0.0`.
+> Preset colors are supported after `antd@2.7.0`.
 
 ````jsx
 import { Tag } from 'igroot';
@@ -38,7 +38,7 @@ ReactDOM.render(
       <Tag color="#f50">#f50</Tag>
       <Tag color="#2db7f5">#2db7f5</Tag>
       <Tag color="#87d068">#87d068</Tag>
-      <Tag color="#108ee9">#108ee9</Tag>
+      <Tag color="#20a0ff">#20a0ff</Tag>
     </div>
   </div>
 , mountNode);

@@ -14,7 +14,7 @@ title:
 Image, Icon and letter are supported, and the latter two kinds avatar can have custom colors and background colors.
 
 ````jsx
-import { Avatar, Row, Col } from 'igroot';
+import { Avatar } from 'igroot';
 
 ReactDOM.render(
   <div>

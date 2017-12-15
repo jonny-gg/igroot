@@ -196,12 +196,12 @@ exports[`renders ./components/tag/demo/colorful.md correctly 1`] = `
     <div
       class="ant-tag ant-tag-has-color"
       data-show="true"
-      style="background-color:#108ee9;"
+      style="background-color:#20a0ff;"
     >
       <span
         class="ant-tag-text"
       >
-        #108ee9
+        #20a0ff
       </span>
     </div>
   </div>

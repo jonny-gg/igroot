@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Button from '../button';
 export default class ActionButton extends React.Component {
     constructor(props) {
@@ -23,6 +23,9 @@ export default class ActionButton extends React.Component {
                         // It's unnecessary to set loading=false, for the Modal will be unmounted after close.
                         // this.setState({ loading: false });
                         closeModal(...args);
+                    }, () => {
+                        // See: https://github.com/ant-design/ant-design/issues/6183
+                        this.setState({ loading: false });
                     });
                 }
             }
@@ -46,7 +49,7 @@ export default class ActionButton extends React.Component {
     render() {
         const { type, children } = this.props;
         const loading = this.state.loading;
-        return (<Button type={type} size="large" onClick={this.onClick} loading={loading}>
+        return (<Button type={type} onClick={this.onClick} loading={loading}>
         {children}
       </Button>);
     }

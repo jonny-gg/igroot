@@ -1,11 +1,20 @@
-import React from 'react';
-import moment from 'moment';
+import * as React from 'react';
+import * as moment from 'moment';
 import RcTimePicker from 'rc-time-picker/lib/TimePicker';
 import classNames from 'classnames';
-import assign from 'object-assign';
-import injectLocale from '../locale-provider/injectLocale';
-import defaultLocale from './locale/zh_CN';
-class TimePicker extends React.Component {
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from './locale/en_US';
+export function generateShowHourMinuteSecond(format) {
+    // Ref: http://momentjs.com/docs/#/parsing/string-format/
+    return {
+        showHour: (format.indexOf('H') > -1 ||
+            format.indexOf('h') > -1 ||
+            format.indexOf('k') > -1),
+        showMinute: format.indexOf('m') > -1,
+        showSecond: format.indexOf('s') > -1,
+    };
+}
+export default class TimePicker extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = (value) => {
@@ -26,10 +35,22 @@ class TimePicker extends React.Component {
         this.saveTimePicker = (timePickerRef) => {
             this.timePickerRef = timePickerRef;
         };
+        this.renderTimePicker = (locale) => {
+            const props = Object.assign({}, this.props);
+            delete props.defaultValue;
+            const format = this.getDefaultFormat();
+            const className = classNames(props.className, {
+                [`${props.prefixCls}-${props.size}`]: !!props.size,
+            });
+            const addon = (panel) => (props.addon ? (<div className={`${props.prefixCls}-panel-addon`}>
+          {props.addon(panel)}
+        </div>) : null);
+            return (<RcTimePicker {...generateShowHourMinuteSecond(format)} {...props} ref={this.saveTimePicker} format={format} className={className} value={this.state.value} placeholder={props.placeholder === undefined ? locale.placeholder : props.placeholder} onChange={this.handleChange} onOpen={this.handleOpenClose} onClose={this.handleOpenClose} addon={addon}/>);
+        };
         const value = props.value || props.defaultValue;
         if (value && !moment.isMoment(value)) {
             throw new Error('The value/defaultValue of TimePicker must be a moment object after `antd@2.0`, ' +
-                'see: http://u.ant.design/time-picker-value');
+                'see: https://u.ant.design/time-picker-value');
         }
         this.state = {
             value,
@@ -43,6 +64,9 @@ class TimePicker extends React.Component {
     focus() {
         this.timePickerRef.focus();
     }
+    blur() {
+        this.timePickerRef.blur();
+    }
     getDefaultFormat() {
         const { format, use12Hours } = this.props;
         if (format) {
@@ -54,16 +78,9 @@ class TimePicker extends React.Component {
         return 'HH:mm:ss';
     }
     render() {
-        const props = assign({}, this.props);
-        delete props.defaultValue;
-        const format = this.getDefaultFormat();
-        const className = classNames(props.className, {
-            [`${props.prefixCls}-${props.size}`]: !!props.size,
-        });
-        const addon = (panel) => (props.addon ? (<div className={`${props.prefixCls}-panel-addon`}>
-          {props.addon(panel)}
-        </div>) : null);
-        return (<RcTimePicker showHour={format.indexOf('HH') > -1 || format.indexOf('h') > -1} showMinute={format.indexOf('mm') > -1} showSecond={format.indexOf('ss') > -1} {...props} ref={this.saveTimePicker} format={format} className={className} value={this.state.value} placeholder={props.placeholder === undefined ? this.getLocale().placeholder : props.placeholder} onChange={this.handleChange} onOpen={this.handleOpenClose} onClose={this.handleOpenClose} addon={addon}/>);
+        return (<LocaleReceiver componentName="TimePicker" defaultLocale={defaultLocale}>
+        {this.renderTimePicker}
+      </LocaleReceiver>);
     }
 }
 TimePicker.defaultProps = {
@@ -78,6 +95,5 @@ TimePicker.defaultProps = {
     hideDisabledOptions: false,
     placement: 'bottomLeft',
     transitionName: 'slide-up',
+    focusOnOpen: true,
 };
-const injectTimePickerLocale = injectLocale('TimePicker', defaultLocale);
-export default injectTimePickerLocale(TimePicker);

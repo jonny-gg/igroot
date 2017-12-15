@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Menu, { SubMenu, Item as MenuItem } from 'rc-menu';
 import closest from 'dom-closest';
 import classNames from 'classnames';
@@ -11,6 +11,17 @@ import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper';
 export default class FilterMenu extends React.Component {
     constructor(props) {
         super(props);
+        this.setNeverShown = (column) => {
+            const rootNode = ReactDOM.findDOMNode(this);
+            const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`);
+            if (filterBelongToScrollBody) {
+                // When fixed column have filters, there will be two dropdown menus
+                // Filter dropdown menu inside scroll body should never be shown
+                // To fix https://github.com/ant-design/ant-design/issues/5010 and
+                // https://github.com/ant-design/ant-design/issues/7909
+                this.neverShown = !!column.fixed;
+            }
+        };
         this.setSelectedKeys = ({ selectedKeys }) => {
             this.setState({ selectedKeys });
         };
@@ -65,17 +76,11 @@ export default class FilterMenu extends React.Component {
     }
     componentDidMount() {
         const { column } = this.props;
-        const rootNode = ReactDOM.findDOMNode(this);
-        const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`);
-        if (filterBelongToScrollBody && column.fixed) {
-            // When fixed column have filters, there will be two dropdown menus
-            // Filter dropdown menu inside scroll body should never be shown
-            // To fix https://github.com/ant-design/ant-design/issues/5010
-            this.neverShown = true;
-        }
+        this.setNeverShown(column);
     }
     componentWillReceiveProps(nextProps) {
         const { column } = nextProps;
+        this.setNeverShown(column);
         const newState = {};
         if ('selectedKeys' in nextProps) {
             newState.selectedKeys = nextProps.selectedKeys;
@@ -149,7 +154,7 @@ export default class FilterMenu extends React.Component {
           </a>
         </div>
       </FilterDropdownMenuWrapper>);
-        return (<Dropdown trigger={['click']} overlay={menus} visible={this.neverShown ? false : this.state.visible} onVisibleChange={this.onVisibleChange} getPopupContainer={getPopupContainer}>
+        return (<Dropdown trigger={['click']} overlay={menus} visible={this.neverShown ? false : this.state.visible} onVisibleChange={this.onVisibleChange} getPopupContainer={getPopupContainer} forceRender>
         {this.renderFilterIcon()}
       </Dropdown>);
     }

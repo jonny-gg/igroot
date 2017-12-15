@@ -1,3 +1,3 @@
-import RcTable from 'rc-table';
-export default class Column extends RcTable.Column {
+import * as React from 'react';
+export default class Column extends React.Component {
 }

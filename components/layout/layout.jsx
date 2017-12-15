@@ -7,14 +7,15 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 function generator(props) {
-    return (Basic) => {
+    return (BasicComponent) => {
         return class Adapter extends React.Component {
             render() {
                 const { prefixCls } = props;
-                return <Basic prefixCls={prefixCls} {...this.props}/>;
+                return <BasicComponent prefixCls={prefixCls} {...this.props}/>;
             }
         };
     };
@@ -22,21 +23,45 @@ function generator(props) {
 class Basic extends React.Component {
     render() {
         const _a = this.props, { prefixCls, className, children } = _a, others = __rest(_a, ["prefixCls", "className", "children"]);
-        let hasSider;
-        React.Children.forEach(children, (element) => {
-            if (element && element.type && element.type.__ANT_LAYOUT_SIDER) {
-                hasSider = true;
-            }
-        });
+        const divCls = classNames(className, prefixCls);
+        return (<div className={divCls} {...others}>{children}</div>);
+    }
+}
+class BasicLayout extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.state = { siders: [] };
+    }
+    getChildContext() {
+        return {
+            siderHook: {
+                addSider: (id) => {
+                    this.setState({
+                        siders: [...this.state.siders, id],
+                    });
+                },
+                removeSider: (id) => {
+                    this.setState({
+                        siders: this.state.siders.filter(currentId => currentId !== id),
+                    });
+                },
+            },
+        };
+    }
+    render() {
+        const _a = this.props, { prefixCls, className, children } = _a, others = __rest(_a, ["prefixCls", "className", "children"]);
         const divCls = classNames(className, prefixCls, {
-            [`${prefixCls}-has-sider`]: hasSider,
+            [`${prefixCls}-has-sider`]: this.state.siders.length > 0,
         });
         return (<div className={divCls} {...others}>{children}</div>);
     }
 }
+BasicLayout.childContextTypes = {
+    siderHook: PropTypes.object,
+};
 const Layout = generator({
     prefixCls: 'ant-layout',
-})(Basic);
+})(BasicLayout);
 const Header = generator({
     prefixCls: 'ant-layout-header',
 })(Basic);

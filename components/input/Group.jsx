@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 const Group = (props) => {
     const { prefixCls = 'ant-input-group', className = '' } = props;

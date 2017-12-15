@@ -2,7 +2,7 @@ import getRequestAnimationFrame, { cancelRequestAnimationFrame } from '../_util/
 const reqAnimFrame = getRequestAnimationFrame();
 export default function throttleByAnimationFrame(fn) {
     let requestId;
-    const later = args => () => {
+    const later = (args) => () => {
         requestId = null;
         fn(...args);
     };

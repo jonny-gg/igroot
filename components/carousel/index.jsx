@@ -1,9 +1,9 @@
+import * as React from 'react';
+import debounce from 'lodash.debounce';
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
-import assign from 'object-assign';
-import debounce from 'lodash.debounce';
 if (typeof window !== 'undefined') {
-    const matchMediaPolyfill = function matchMediaPolyfill(mediaQuery) {
+    const matchMediaPolyfill = (mediaQuery) => {
         return {
             media: mediaQuery,
             matches: false,
@@ -15,18 +15,23 @@ if (typeof window !== 'undefined') {
     };
     window.matchMedia = window.matchMedia || matchMediaPolyfill;
 }
-import SlickCarousel from 'react-slick';
-import React from 'react';
+// Use require over import (will be lifted up)
+// make sure matchMedia polyfill run before require('react-slick')
+// Fix https://github.com/ant-design/ant-design/issues/6560
+// Fix https://github.com/ant-design/ant-design/issues/3308
+const SlickCarousel = require('react-slick').default;
 export default class Carousel extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.onWindowResized = () => {
             // Fix https://github.com/ant-design/ant-design/issues/2550
-            const { slick } = this.refs;
             const { autoplay } = this.props;
-            if (autoplay && slick && slick.innerSlider && slick.innerSlider.autoPlay) {
-                slick.innerSlider.autoPlay();
+            if (autoplay && this.slick && this.slick.innerSlider && this.slick.innerSlider.autoPlay) {
+                this.slick.innerSlider.autoPlay();
             }
+        };
+        this.saveSlick = (node) => {
+            this.slick = node;
         };
         this.onWindowResized = debounce(this.onWindowResized, 500, {
             leading: false,
@@ -37,6 +42,8 @@ export default class Carousel extends React.Component {
         if (autoplay) {
             window.addEventListener('resize', this.onWindowResized);
         }
+        // https://github.com/ant-design/ant-design/issues/7191
+        this.innerSlider = this.slick && this.slick.innerSlider;
     }
     componentWillUnmount() {
         const { autoplay } = this.props;
@@ -45,8 +52,17 @@ export default class Carousel extends React.Component {
             this.onWindowResized.cancel();
         }
     }
+    next() {
+        this.slick.slickNext();
+    }
+    prev() {
+        this.slick.slickPrev();
+    }
+    goTo(slide) {
+        this.slick.slickGoTo(slide);
+    }
     render() {
-        let props = assign({}, this.props);
+        let props = Object.assign({}, this.props);
         if (props.effect === 'fade') {
             props.fade = true;
         }
@@ -55,7 +71,7 @@ export default class Carousel extends React.Component {
             className = `${className} ${className}-vertical`;
         }
         return (<div className={className}>
-        <SlickCarousel ref="slick" {...props}/>
+        <SlickCarousel ref={this.saveSlick} {...props}/>
       </div>);
     }
 }

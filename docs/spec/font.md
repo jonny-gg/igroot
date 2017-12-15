@@ -51,7 +51,7 @@ iGroot 使用不同的字号和字重来传递视觉的信息层次。默认字�
 
 ## 字体颜色
 
-<img class="preview-img no-padding" align="right" src="https://zos.alipayobjects.com/rmsportal/kNFpUKqccPYxzfiQlFTh.png" description="注：表格中 @Black = #000000、@White = #FFFFFF、@Blue-6 = #108EE9">
+<img class="preview-img no-padding" align="right" src="https://zos.alipayobjects.com/rmsportal/kNFpUKqccPYxzfiQlFTh.png" description="注：表格中 @Black = #000000、@White = #FFFFFF、@Blue-6 = #20a0ff">
 
 文本颜色如果和背景颜色太接近就会很难以阅读，这对于深色背景和浅色背景同样适用。
 

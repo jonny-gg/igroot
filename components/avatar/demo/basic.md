@@ -14,7 +14,7 @@ title:
 Three sizes and two shapes are available.
 
 ````jsx
-import { Avatar, Row, Col } from 'igroot';
+import { Avatar } from 'igroot';
 
 ReactDOM.render(
   <div>

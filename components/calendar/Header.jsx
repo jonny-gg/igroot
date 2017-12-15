@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { PREFIX_CLS } from './Constants';
 import Select from '../select';
 import { Group, Button } from '../radio';
@@ -28,6 +28,9 @@ export default class Header extends React.Component {
                 onTypeChange(e.target.value);
             }
         };
+        this.getCalenderHeaderNode = (node) => {
+            this.calenderHeaderNode = node;
+        };
     }
     getYearSelectElement(year) {
         const { yearSelectOffset, yearSelectTotal, locale, prefixCls, fullscreen } = this.props;
@@ -38,7 +41,7 @@ export default class Header extends React.Component {
         for (let index = start; index < end; index++) {
             options.push(<Option key={`${index}`}>{index + suffix}</Option>);
         }
-        return (<Select size={fullscreen ? 'default' : 'small'} dropdownMatchSelectWidth={false} className={`${prefixCls}-year-select`} onChange={this.onYearChange} value={String(year)}>
+        return (<Select size={fullscreen ? 'default' : 'small'} dropdownMatchSelectWidth={false} className={`${prefixCls}-year-select`} onChange={this.onYearChange} value={String(year)} getPopupContainer={() => this.calenderHeaderNode}>
         {options}
       </Select>);
     }
@@ -59,7 +62,7 @@ export default class Header extends React.Component {
         for (let index = 0; index < 12; index++) {
             options.push(<Option key={`${index}`}>{months[index]}</Option>);
         }
-        return (<Select size={fullscreen ? 'default' : 'small'} dropdownMatchSelectWidth={false} className={`${prefixCls}-month-select`} value={String(month)} onChange={this.onMonthChange}>
+        return (<Select size={fullscreen ? 'default' : 'small'} dropdownMatchSelectWidth={false} className={`${prefixCls}-month-select`} value={String(month)} onChange={this.onMonthChange} getPopupContainer={() => this.calenderHeaderNode}>
         {options}
       </Select>);
     }
@@ -73,7 +76,7 @@ export default class Header extends React.Component {
         <Button value="date">{locale.month}</Button>
         <Button value="month">{locale.year}</Button>
       </Group>);
-        return (<div className={`${prefixCls}-header`}>
+        return (<div className={`${prefixCls}-header`} ref={this.getCalenderHeaderNode}>
         {yearSelect}
         {monthSelect}
         {typeSwitch}

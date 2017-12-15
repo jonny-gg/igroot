@@ -7,12 +7,11 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import assign from 'object-assign';
 import Icon from '../icon';
 import CheckableTag from './CheckableTag';
 export default class Tag extends React.Component {
@@ -52,7 +51,11 @@ export default class Tag extends React.Component {
         };
     }
     isPresetColor(color) {
-        return /^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color);
+        if (!color) {
+            return false;
+        }
+        return (/^(pink|red|yellow|orange|cyan|green|blue|purple|geekblue|magenta|volcano|gold|lime)(-inverse)?$/
+            .test(color));
     }
     render() {
         const _a = this.props, { prefixCls, closable, color, className, children, style } = _a, otherProps = __rest(_a, ["prefixCls", "closable", "color", "className", "children", "style"]);
@@ -68,14 +71,12 @@ export default class Tag extends React.Component {
             'onClose',
             'afterClose',
         ]);
-        const tagStyle = assign({
-            backgroundColor: (color && !isPresetColor) ? color : null,
-        }, style);
+        const tagStyle = Object.assign({ backgroundColor: (color && !isPresetColor) ? color : null }, style);
         const tag = this.state.closed ? null : (<div data-show={!this.state.closing} {...divProps} className={classString} style={tagStyle}>
         <span className={`${prefixCls}-text`}>{children}</span>
         {closeIcon}
       </div>);
-        return (<Animate component="" showProp="data-show" transitionName={`${prefixCls}-zoom`} transitionAppear={true} onEnd={this.animationEnd}>
+        return (<Animate component="" showProp="data-show" transitionName={`${prefixCls}-zoom`} transitionAppear onEnd={this.animationEnd}>
         {tag}
       </Animate>);
     }

@@ -99,6 +99,7 @@ exports[`renders ./components/menu/demo/inline.md correctly 1`] = `
       >
         <div
           class="ant-menu-item-group-title"
+          title="Item 1"
         >
           Item 1
         </div>
@@ -128,6 +129,7 @@ exports[`renders ./components/menu/demo/inline.md correctly 1`] = `
       >
         <div
           class="ant-menu-item-group-title"
+          title="Item 2"
         >
           Item 2
         </div>
@@ -347,10 +349,10 @@ exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
   tabindex="0"
 >
   <li
-    class="ant-menu-submenu-inline ant-menu-submenu-selected ant-menu-submenu"
+    class="ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu"
   >
     <div
-      aria-expanded="false"
+      aria-expanded="true"
       aria-haspopup="true"
       aria-owns="sub1$Menu"
       class="ant-menu-submenu-title"
@@ -365,6 +367,45 @@ exports[`renders ./components/menu/demo/sider-current.md correctly 1`] = `
         </span>
       </span>
     </div>
+    <ul
+      aria-activedescendant=""
+      class="ant-menu ant-menu-inline  ant-menu-sub"
+      id="sub1$Menu"
+      role="menu"
+    >
+      <li
+        aria-selected="false"
+        class="ant-menu-item"
+        role="menuitem"
+        style="padding-left:48px;"
+      >
+        Option 1
+      </li>
+      <li
+        aria-selected="false"
+        class="ant-menu-item"
+        role="menuitem"
+        style="padding-left:48px;"
+      >
+        Option 2
+      </li>
+      <li
+        aria-selected="false"
+        class="ant-menu-item"
+        role="menuitem"
+        style="padding-left:48px;"
+      >
+        Option 3
+      </li>
+      <li
+        aria-selected="false"
+        class="ant-menu-item"
+        role="menuitem"
+        style="padding-left:48px;"
+      >
+        Option 4
+      </li>
+    </ul>
   </li>
   <li
     class="ant-menu-submenu-inline ant-menu-submenu"
@@ -511,9 +552,10 @@ exports[`renders ./components/menu/demo/switch-mode.md correctly 1`] = `
           <div
             aria-expanded="false"
             aria-haspopup="true"
-            aria-owns="sub2$Menu"
+            aria-owns="sub1-2$Menu"
             class="ant-menu-submenu-title"
             style="padding-left:48px;"
+            title="Submenu"
           >
             Submenu
           </div>
@@ -725,8 +767,8 @@ exports[`renders ./components/menu/demo/vertical.md correctly 1`] = `
       class="ant-menu-submenu-title"
     >
       <span>
-        <icon
-          type="setting"
+        <i
+          class="anticon anticon-setting"
         />
         <span>
           Navigation Three

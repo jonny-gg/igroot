@@ -7,10 +7,10 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-export default function ButtonGroup(props) {
-    const { prefixCls = 'ant-btn-group', size = '', className } = props, others = __rest(props, ["prefixCls", "size", "className"]);
+const ButtonGroup = (props) => {
+    const { prefixCls = 'ant-btn-group', size, className } = props, others = __rest(props, ["prefixCls", "size", "className"]);
     // large => lg
     // small => sm
     let sizeCls = '';
@@ -27,4 +27,5 @@ export default function ButtonGroup(props) {
         [`${prefixCls}-${sizeCls}`]: sizeCls,
     }, className);
     return <div {...others} className={classes}/>;
-}
+};
+export default ButtonGroup;

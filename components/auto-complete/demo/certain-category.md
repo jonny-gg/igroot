@@ -22,25 +22,25 @@ const OptGroup = AutoComplete.OptGroup;
 const dataSource = [{
   title: '话题',
   children: [{
-    title: 'iGroot',
+    title: 'AntDesign',
     count: 10000,
   }, {
-    title: 'iGroot UI',
+    title: 'AntDesign UI',
     count: 10600,
   }],
 }, {
   title: '问题',
   children: [{
-    title: 'iGroot UI 有多好',
+    title: 'AntDesign UI 有多好',
     count: 60100,
   }, {
-    title: 'iGroot 是啥',
+    title: 'AntDesign 是啥',
     count: 30010,
   }],
 }, {
   title: '文章',
   children: [{
-    title: 'iGroot 是一个设计语言',
+    title: 'AntDesign 是一个设计语言',
     count: 100000,
   }],
 }];
@@ -51,7 +51,7 @@ function renderTitle(title) {
       {title}
       <a
         style={{ float: 'right' }}
-        href="https://www.google.com/search?q=igroot"
+        href="https://www.google.com/search?q=antd"
         target="_blank"
         rel="noopener noreferrer"
       >更多
@@ -75,7 +75,7 @@ const options = dataSource.map(group => (
 )).concat([
   <Option disabled key="all" className="show-all">
     <a
-      href="https://www.google.com/search?q=igroot"
+      href="https://www.google.com/search?q=antd"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -141,7 +141,7 @@ ReactDOM.render(<Complete />, mountNode);
 }
 
 .certain-category-search.ant-select-focused .certain-category-icon {
-  color: #108ee9;
+  color: #20a0ff;
 }
 
 .certain-category-icon {

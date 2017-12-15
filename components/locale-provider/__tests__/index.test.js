@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import moment from 'moment';
 import { LocaleProvider, Pagination, DatePicker, TimePicker, Calendar,
-         Popconfirm, Table, Modal, Select, Transfer } from '../../';
+  Popconfirm, Table, Modal, Select, Transfer } from '../../';
 import enGB from '../en_GB';
 import frFR from '../fr_FR';
 import nlBE from '../nl_BE';

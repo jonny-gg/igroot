@@ -6,9 +6,9 @@ title: 业务组件XXX
 这里是 iGroot 的 React 实现，开发和服务于企业级后台产品。
 
 <div class="pic-plus">
-  <img width="150" src="http://groot.i.qingcdn.com/image/groot/page_logo.png">
+  <img width="150" src="http://fe.baishancloud.com/images/page-logo.png">
   <span>+</span>
-  <img width="160" src="http://groot.i.qingcdn.com/image/groot/react.png">
+  <img width="160" src="http://fe.baishancloud.com/images/react.png">
 </div>
 
 <style>
@@ -119,7 +119,7 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 
 ## 链接
 
-- [首页](http://groot.i.qingcdn.com:8001/)
+- [首页](http://igroot.i.qingcdn.com:8001/)
 - [UI 组件库](/docs/react/introduce)
 - [定制主题](/docs/react/customize-theme)
 - [React 底层基础组件](http://react-component.github.io/)

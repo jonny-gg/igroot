@@ -7,12 +7,13 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import React from 'react';
+import * as React from 'react';
 import Tooltip from '../tooltip';
 import Icon from '../icon';
 import Button from '../button';
-import injectLocale from '../locale-provider/injectLocale';
-class Popconfirm extends React.Component {
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from '../locale-provider/default';
+export default class Popconfirm extends React.Component {
     constructor(props) {
         super(props);
         this.onConfirm = (e) => {
@@ -32,6 +33,28 @@ class Popconfirm extends React.Component {
         this.onVisibleChange = (visible) => {
             this.setVisible(visible);
         };
+        this.saveTooltip = (node) => {
+            this.tooltip = node;
+        };
+        this.renderOverlay = (popconfirmLocale) => {
+            const { prefixCls, title, cancelText, okText, okType } = this.props;
+            return (<div>
+        <div className={`${prefixCls}-inner-content`}>
+          <div className={`${prefixCls}-message`}>
+            <Icon type="exclamation-circle"/>
+            <div className={`${prefixCls}-message-title`}>{title}</div>
+          </div>
+          <div className={`${prefixCls}-buttons`}>
+            <Button onClick={this.onCancel} size="small">
+              {cancelText || popconfirmLocale.cancelText}
+            </Button>
+            <Button onClick={this.onConfirm} type={okType} size="small">
+              {okText || popconfirmLocale.okText}
+            </Button>
+          </div>
+        </div>
+      </div>);
+        };
         this.state = {
             visible: props.visible,
         };
@@ -40,6 +63,9 @@ class Popconfirm extends React.Component {
         if ('visible' in nextProps) {
             this.setState({ visible: nextProps.visible });
         }
+    }
+    getPopupDomNode() {
+        return this.tooltip.getPopupDomNode();
     }
     setVisible(visible) {
         const props = this.props;
@@ -52,25 +78,11 @@ class Popconfirm extends React.Component {
         }
     }
     render() {
-        const _a = this.props, { prefixCls, title, placement, okText, cancelText } = _a, restProps = __rest(_a, ["prefixCls", "title", "placement", "okText", "cancelText"]);
-        const popconfirmLocale = this.getLocale();
-        const overlay = (<div>
-        <div className={`${prefixCls}-inner-content`}>
-          <div className={`${prefixCls}-message`}>
-            <Icon type="exclamation-circle"/>
-            <div className={`${prefixCls}-message-title`}>{title}</div>
-          </div>
-          <div className={`${prefixCls}-buttons`}>
-            <Button onClick={this.onCancel} size="small">
-              {cancelText || popconfirmLocale.cancelText}
-            </Button>
-            <Button onClick={this.onConfirm} type="primary" size="small">
-              {okText || popconfirmLocale.okText}
-            </Button>
-          </div>
-        </div>
-      </div>);
-        return (<Tooltip {...restProps} prefixCls={prefixCls} placement={placement} onVisibleChange={this.onVisibleChange} visible={this.state.visible} overlay={overlay}/>);
+        const _a = this.props, { prefixCls, placement } = _a, restProps = __rest(_a, ["prefixCls", "placement"]);
+        const overlay = (<LocaleReceiver componentName="Popconfirm" defaultLocale={defaultLocale.Popconfirm}>
+        {this.renderOverlay}
+      </LocaleReceiver>);
+        return (<Tooltip {...restProps} prefixCls={prefixCls} placement={placement} onVisibleChange={this.onVisibleChange} visible={this.state.visible} overlay={overlay} ref={this.saveTooltip}/>);
     }
 }
 Popconfirm.defaultProps = {
@@ -78,9 +90,5 @@ Popconfirm.defaultProps = {
     transitionName: 'zoom-big',
     placement: 'top',
     trigger: 'click',
+    okType: 'primary',
 };
-const injectPopconfirmLocale = injectLocale('Popconfirm', {
-    cancelText: '取消',
-    okText: '确定',
-});
-export default injectPopconfirmLocale(Popconfirm);

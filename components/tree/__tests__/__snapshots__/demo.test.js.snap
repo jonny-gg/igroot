@@ -4,7 +4,7 @@ exports[`renders ./components/tree/demo/basic.md correctly 1`] = `
 <ul
   class="ant-tree"
   role="tree-node"
-  unselectable="true"
+  unselectable="on"
 >
   <li
     class=""
@@ -176,7 +176,7 @@ exports[`renders ./components/tree/demo/basic-controlled.md correctly 1`] = `
 <ul
   class="ant-tree"
   role="tree-node"
-  unselectable="true"
+  unselectable="on"
 >
   <li
     class=""
@@ -185,7 +185,7 @@ exports[`renders ./components/tree/demo/basic-controlled.md correctly 1`] = `
       class="ant-tree-switcher ant-tree-switcher_open"
     />
     <span
-      class="ant-tree-checkbox"
+      class="ant-tree-checkbox ant-tree-checkbox-indeterminate"
     >
       <span
         class="ant-tree-checkbox-inner"
@@ -212,7 +212,7 @@ exports[`renders ./components/tree/demo/basic-controlled.md correctly 1`] = `
           class="ant-tree-switcher ant-tree-switcher_open"
         />
         <span
-          class="ant-tree-checkbox ant-tree-checkbox-checked ant-tree-checkbox-disabled"
+          class="ant-tree-checkbox ant-tree-checkbox-checked"
         >
           <span
             class="ant-tree-checkbox-inner"
@@ -488,7 +488,7 @@ exports[`renders ./components/tree/demo/customized-icon.md correctly 1`] = `
 <ul
   class="ant-tree ant-tree-show-line"
   role="tree-node"
-  unselectable="true"
+  unselectable="on"
 >
   <li
     class=""
@@ -652,7 +652,7 @@ exports[`renders ./components/tree/demo/draggable.md correctly 1`] = `
 <ul
   class="ant-tree draggable-tree"
   role="tree-node"
-  unselectable="true"
+  unselectable="on"
 >
   <li
     class=""
@@ -842,15 +842,67 @@ exports[`renders ./components/tree/demo/dynamic.md correctly 1`] = `
 <ul
   class="ant-tree"
   role="tree-node"
-  unselectable="true"
-/>
+  unselectable="on"
+>
+  <li
+    class=""
+  >
+    <span
+      class="ant-tree-switcher ant-tree-switcher_close"
+    />
+    <span
+      class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"
+      title="Expand to load"
+    >
+      <span
+        class="ant-tree-title"
+      >
+        Expand to load
+      </span>
+    </span>
+  </li>
+  <li
+    class=""
+  >
+    <span
+      class="ant-tree-switcher ant-tree-switcher_close"
+    />
+    <span
+      class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-close"
+      title="Expand to load"
+    >
+      <span
+        class="ant-tree-title"
+      >
+        Expand to load
+      </span>
+    </span>
+  </li>
+  <li
+    class=""
+  >
+    <span
+      class="ant-tree-switcher ant-tree-switcher-noop"
+    />
+    <span
+      class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"
+      title="Tree Node"
+    >
+      <span
+        class="ant-tree-title"
+      >
+        Tree Node
+      </span>
+    </span>
+  </li>
+</ul>
 `;
 
 exports[`renders ./components/tree/demo/line.md correctly 1`] = `
 <ul
   class="ant-tree ant-tree-show-line"
   role="tree-node"
-  unselectable="true"
+  unselectable="on"
 >
   <li
     class=""
@@ -988,7 +1040,7 @@ exports[`renders ./components/tree/demo/search.md correctly 1`] = `
 <div>
   <span
     class="ant-input-search ant-input-affix-wrapper"
-    style="width:300px;"
+    style="margin-bottom:8px;"
   >
     <input
       class="ant-input"
@@ -1006,7 +1058,7 @@ exports[`renders ./components/tree/demo/search.md correctly 1`] = `
   <ul
     class="ant-tree"
     role="tree-node"
-    unselectable="true"
+    unselectable="on"
   >
     <li
       class=""
