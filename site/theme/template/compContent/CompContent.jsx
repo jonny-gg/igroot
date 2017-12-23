@@ -25,7 +25,7 @@ function getModuleData(props) {
         moduleName === 'changelog' || moduleName === 'changelog-cn' ?
         [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog] :
         props.picked[moduleName];
-        
+
     const excludedSuffix = utils.isZhCN(props.location.pathname) ? 'en-US.md' : 'zh-CN.md';
     return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
 }
@@ -250,28 +250,6 @@ export default class CompsContent extends React.Component {
                                             null
                                     }
                                 </section>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tab="业务组件" key="2">
-                        <Row>
-                            <Col lg={4} md={6} sm={24} xs={24}>
-                                <Menu
-                                    className="aside-container"
-                                    mode="inline"
-                                    openKeys={this.state.openKeys}
-                                    selectedKeys={[activeMenuItem]}
-                                    onOpenChange={this.handleMenuOpenChange}
-                                >
-                                    {menuItems[0]}
-                                </Menu>
-                            </Col>
-                            <Col lg={20} md={18} sm={24} xs={24} className={mainContainerClass}>
-                                {
-                                    props.demos ?
-                                        <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} /> :
-                                        <Article {...props} content={localizedPageData} />
-                                }
                             </Col>
                         </Row>
                     </TabPane>

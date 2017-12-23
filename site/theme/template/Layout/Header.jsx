@@ -186,6 +186,11 @@ export default class Header extends React.Component {
             <FormattedMessage id="app.header.menu.components" />
           </Link>
         </Menu.Item>
+        <Menu.Item key="docs/business">
+          <Link to={utils.getLocalizedPathname('/docs/business/introduce', isZhCN)}>
+            <FormattedMessage id="app.header.menu.business" />
+          </Link>
+        </Menu.Item>
         <Menu.Item key="docs/theme">
           <Link to={utils.getLocalizedPathname('/docs/theme/introduce', isZhCN)}>
             <FormattedMessage id="app.header.menu.customize-theme" />

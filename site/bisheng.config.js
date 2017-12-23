@@ -9,6 +9,7 @@ module.exports = {
   source: {
     components: './components',
     docs: './docs',
+    // businessComps: './business_components'
   },
   theme: './site/theme',
   htmlTemplate: './site/theme/static/template.html',
@@ -28,11 +29,7 @@ module.exports = {
       Other: 7,
     },
     docVersions: {
-      '0.1.x': 'http://01x.igroot',
-      '0.10.x': 'http://010x.ant.design',
-      '0.11.x': 'http://011x.ant.design',
-      '0.12.x': 'http://012x.ant.design',
-      '1.x': 'http://1x.ant.design',
+      
     },
   },
   filePathMapper(filePath) {

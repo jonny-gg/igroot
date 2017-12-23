@@ -9,7 +9,7 @@ function pickerGenerator(module) {
   return (markdownData) => {
     const { filename } = markdownData.meta;
     if (tester.test(filename) &&
-        !/\/demo$/.test(path.dirname(filename))) {
+      !/\/demo$/.test(path.dirname(filename))) {
       return {
         meta: markdownData.meta,
       };
@@ -27,8 +27,9 @@ module.exports = {
   pick: {
     components(markdownData) {
       const { filename } = markdownData.meta;
+      console.log(filename, 'fileName')
       if (!/^components/.test(filename) ||
-          /[/\\]demo$/.test(path.dirname(filename))) return;
+        /[/\\]demo$/.test(path.dirname(filename))) return;
 
       return {
         meta: markdownData.meta,
@@ -48,6 +49,7 @@ module.exports = {
     'docs/theme': pickerGenerator('theme'),
     'docs/icon': pickerGenerator('icon'),
     'docs/start': pickerGenerator('start'),
+    'docs/business': pickerGenerator('business'),
   },
   plugins: [
     'bisheng-plugin-description',
@@ -91,6 +93,9 @@ module.exports = {
       component: contentTmpl,
     }, {
       path: 'docs/start/:children',
+      component: contentTmpl,
+    }, {
+      path: 'docs/business/:children',
       component: contentTmpl,
     }],
   },
