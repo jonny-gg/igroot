@@ -9,7 +9,7 @@ module.exports = {
   source: {
     components: './components',
     docs: './docs',
-    // businessComps: './business_components'
+    bcomponents: './bcomponents'
   },
   theme: './site/theme',
   htmlTemplate: './site/theme/static/template.html',

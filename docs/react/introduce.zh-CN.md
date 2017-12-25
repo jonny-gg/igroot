@@ -1,6 +1,6 @@
 ---
 order: 0
-title: 业务组件XXX
+title: 组件生态
 ---
 
 这里是 iGroot 的 React 实现，开发和服务于企业级后台产品。
@@ -121,7 +121,7 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 
 - [首页](http://igroot.i.qingcdn.com:8001/)
 - [UI 组件库](/docs/react/introduce)
-- [定制主题](/docs/react/customize-theme)
+- [定制主题](/docs/theme/introduce)
 - [React 底层基础组件](http://react-component.github.io/)
 
 ## 互助

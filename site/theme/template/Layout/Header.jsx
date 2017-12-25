@@ -119,12 +119,15 @@ export default class Header extends React.Component {
     const docVersions = { ...themeConfig.docVersions, [igrootVersion]: igrootVersion };
     const versionOptions = Object.keys(docVersions)
             .map(version => <Option value={docVersions[version]} key={version}>{version}</Option>);
-    const { components } = picked;
+    const { components, bcomponents } = picked;
     const module = location.pathname.replace(/(^\/|\/$)/g, '').split('/').slice(0, -1).join('/');
     let activeMenuItem = module || 'home';
     if (activeMenuItem === 'components' || location.pathname === 'changelog') {
       activeMenuItem = 'docs/react';
     }
+    // if (activeMenuItem === 'bcomponents' || location.pathname === 'changelog') {
+    //   activeMenuItem = 'docs/business';
+    // }
 
     const { locale } = this.context.intl;
     const isZhCN = locale === 'zh-CN';

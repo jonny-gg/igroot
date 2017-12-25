@@ -3,6 +3,7 @@ const path = require('path');
 const homeTmpl = './template/Home/index';
 const contentTmpl = './template/Content/index';
 const compsContentTmpl = './template/compContent/index';
+const bcompsContentTmpl = './template/bcompContent/index';
 
 function pickerGenerator(module) {
   const tester = new RegExp(`^docs/${module}`);
@@ -27,8 +28,16 @@ module.exports = {
   pick: {
     components(markdownData) {
       const { filename } = markdownData.meta;
-      console.log(filename, 'fileName')
       if (!/^components/.test(filename) ||
+        /[/\\]demo$/.test(path.dirname(filename))) return;
+
+      return {
+        meta: markdownData.meta,
+      };
+    },
+    bcomponents(markdownData) {
+      const { filename } = markdownData.meta;
+      if (!/^bcomponents/.test(filename) ||
         /[/\\]demo$/.test(path.dirname(filename))) return;
 
       return {
@@ -96,7 +105,10 @@ module.exports = {
       component: contentTmpl,
     }, {
       path: 'docs/business/:children',
-      component: contentTmpl,
+      component: bcompsContentTmpl,
+    }, {
+      path: 'bcomponents/:children/',
+      component: bcompsContentTmpl,
     }],
   },
 };

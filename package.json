@@ -41,6 +41,7 @@
     "create-react-class": "^15.6.0",
     "css-animation": "^1.2.5",
     "dom-closest": "^0.2.0",
+    "igroot-form-modal": "0.0.3",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.19.3",
     "omit.js": "^1.0.0",
