@@ -11,14 +11,14 @@ const TabPane = Tabs.TabPane;
 const SubMenu = Menu.SubMenu;
 
 function getActiveMenuItem(props) {
-    console.log(props, 'getActiveMenuItem')
+    // console.log(props, 'getActiveMenuItem')
     const children = props.params.children;
     return (children && children.replace('-cn', '')) ||
         props.location.pathname.replace(/(^\/|-cn$)/g, '');
 }
 
 function getModuleData(props) {
-    console.log(props, 'getModuleData')
+    // console.log(props, 'getModuleData')
     const pathname = props.location.pathname;
     console.log(pathname);
     const moduleName = /^\/?bcomponents/.test(pathname) ?
@@ -33,7 +33,7 @@ function getModuleData(props) {
 }
 
 function fileNameToPath(filename) {
-    console.log(filename, 'fileNameToPath')
+    // console.log(filename, 'fileNameToPath')
     const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
     return snippets[snippets.length - 1];
 }

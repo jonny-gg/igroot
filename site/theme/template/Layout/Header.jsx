@@ -118,25 +118,30 @@ export default class Header extends React.Component {
     } = this.props;
     const docVersions = { ...themeConfig.docVersions, [igrootVersion]: igrootVersion };
     const versionOptions = Object.keys(docVersions)
-            .map(version => <Option value={docVersions[version]} key={version}>{version}</Option>);
+      .map(version => <Option value={docVersions[version]} key={version}>{version}</Option>);
     const { components, bcomponents } = picked;
     const module = location.pathname.replace(/(^\/|\/$)/g, '').split('/').slice(0, -1).join('/');
     let activeMenuItem = module || 'home';
     if (activeMenuItem === 'components' || location.pathname === 'changelog') {
       activeMenuItem = 'docs/react';
     }
-    // if (activeMenuItem === 'bcomponents' || location.pathname === 'changelog') {
-    //   activeMenuItem = 'docs/business';
-    // }
+    // 点击业务组件菜单 确保菜单还是被选中的
+    if (activeMenuItem === 'bcomponents' || location.pathname === 'changelog') {
+      activeMenuItem = 'docs/business';
+    }
 
+    const AllComponents = Array.from(new Set(components.concat(bcomponents)))
+    console.log(AllComponents, 'AllComponents')
     const { locale } = this.context.intl;
     const isZhCN = locale === 'zh-CN';
     const excludedSuffix = isZhCN ? 'en-US.md' : 'zh-CN.md';
-    const options = components
+    const options = AllComponents
       .filter(({ meta }) => !meta.filename.endsWith(excludedSuffix))
       .map(({ meta }) => {
         const pathSnippet = meta.filename.split('/')[1];
-        const url = `/components/${pathSnippet}`;
+        const url =
+          meta.category === 'Components' ?
+            `/components/${pathSnippet}` : `/bcomponents/${pathSnippet}`;
         const { subtitle } = meta;
         return (
           <Option value={url} key={url} data-label={`${meta.title.toLowerCase()} ${subtitle || ''}`}>
@@ -159,20 +164,20 @@ export default class Header extends React.Component {
 
     const menu = [
       // 不区分中英文+版本
-/*     <Button className="lang" type="ghost" size="small" onClick={this.handleLangChange} key="lang">
-        <FormattedMessage id="app.header.lang" />
-      </Button>,*/
- /*      <Select
-        key="version"
-        className="version"
-        size="small"
-        dropdownMatchSelectWidth={false}
-        defaultValue={igrootVersion}
-        onChange={this.handleVersionChange}
-        getPopupContainer={trigger => trigger.parentNode}
-      >
-        {versionOptions}
-      </Select>,*/
+      /*     <Button className="lang" type="ghost" size="small" onClick={this.handleLangChange} key="lang">
+              <FormattedMessage id="app.header.lang" />
+            </Button>,*/
+      /*      <Select
+             key="version"
+             className="version"
+             size="small"
+             dropdownMatchSelectWidth={false}
+             defaultValue={igrootVersion}
+             onChange={this.handleVersionChange}
+             getPopupContainer={trigger => trigger.parentNode}
+           >
+             {versionOptions}
+           </Select>,*/
       <Menu mode={menuMode} selectedKeys={[activeMenuItem]} id="nav" key="nav">
         <Menu.Item key="home">
           <Link to={utils.getLocalizedPathname('/', isZhCN)}>
@@ -199,7 +204,7 @@ export default class Header extends React.Component {
             <FormattedMessage id="app.header.menu.customize-theme" />
           </Link>
         </Menu.Item>
-        
+
         <Menu.Item key="docs/icon">
           <Link to={utils.getLocalizedPathname('/docs/icon/introduce', isZhCN)}>
             <FormattedMessage id="app.header.menu.icons" />
