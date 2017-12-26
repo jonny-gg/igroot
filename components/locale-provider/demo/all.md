@@ -16,7 +16,7 @@ Components which need localization support are listed here, you can toggle the l
 ````jsx
 import { LocaleProvider, Pagination, DatePicker, TimePicker, Calendar,
          Popconfirm, Table, Modal, Button, Select, Transfer, Radio } from 'igroot';
-import enUS from 'antd/lib/locale-provider/en_US';
+import enUS from 'igroot/lib/locale-provider/en_US';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('en');

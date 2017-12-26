@@ -22,7 +22,7 @@ A breadcrumb displays the current location within a hierarchy. It allows going b
 | routes | The routing stack information of router | object\[] |  | - |
 | separator | Custom separator | string\|ReactNode |  | `/` |
 
-> `linkRender` and `nameRender` were removed after `antd@2.0`, please use `itemRender` instead.
+> `linkRender` and `nameRender` were removed after `igroot@2.0`, please use `itemRender` instead.
 
 ### Use with browserHistory
 

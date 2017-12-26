@@ -1,7 +1,7 @@
-import * as antd from '..';
+import * as igroot from '..';
 
 describe('igroot', () => {
   it('exports modules correctly', () => {
-    expect(Object.keys(antd)).toMatchSnapshot();
+    expect(Object.keys(igroot)).toMatchSnapshot();
   });
 });

@@ -26,14 +26,11 @@ $ npm -v
 3.10.10  
 ```
 
-如果再使用 npm install 过程中发现下载包的速度非常慢，可以考虑安装 cnpm。
-```
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-```
+如果再使用 npm install 过程中发现下载包的速度非常慢，可以考虑安装 使用淘宝镜像。
 
 ## 安装 SL
 ```bash
-$ npm install -g sl-core
+$ npm install -g sl-core --registry=https://registry.npm.taobao.org
 ```
 
 到这里，你的环境算是准备好了，赶紧进入开发吧~

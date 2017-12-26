@@ -75,7 +75,7 @@ describe('Tooltip', () => {
     expect(wrapper.ref('tooltip').prop('visible')).toBe(false);
   });
 
-  it('should hide when mouse leave antd disabled Button', () => {
+  it('should hide when mouse leave igroot disabled Button', () => {
     const onVisibleChange = jest.fn();
     const wrapper = mount(
       <Tooltip

@@ -51,7 +51,7 @@ function renderTitle(title) {
       {title}
       <a
         style={{ float: 'right' }}
-        href="https://www.google.com/search?q=antd"
+        href="https://www.google.com/search?q=igroot"
         target="_blank"
         rel="noopener noreferrer"
       >更多
@@ -75,7 +75,7 @@ const options = dataSource.map(group => (
 )).concat([
   <Option disabled key="all" className="show-all">
     <a
-      href="https://www.google.com/search?q=antd"
+      href="https://www.google.com/search?q=igroot"
       target="_blank"
       rel="noopener noreferrer"
     >

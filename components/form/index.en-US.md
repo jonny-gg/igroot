@@ -170,7 +170,7 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
 
 ```jsx
 import { Form } from 'igroot';
-import { FormComponentProps } from 'antd/lib/form/Form';
+import { FormComponentProps } from 'igroot/lib/form/Form';
 
 interface UserFormProps extends FormComponentProps {
   age: number;

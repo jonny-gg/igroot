@@ -141,7 +141,7 @@ Properties for row selection.
 
 ```jsx
 import { Table } from 'igroot';
-import { TableColumnConfig } from 'antd/lib/table/Table';
+import { TableColumnConfig } from 'igroot/lib/table/Table';
 
 interface IUser {
   key: number,
