@@ -89,12 +89,12 @@ class App extends React.Component {
           <Button type="primary" onClick={this.onSearch}>Search</Button>
         </div>
       ),
-      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#20a0ff' : '#aaa' }} />,
+      filterIcon: <Icon type="smile-o" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />,
       filterDropdownVisible: this.state.filterDropdownVisible,
       onFilterDropdownVisibleChange: (visible) => {
         this.setState({
           filterDropdownVisible: visible,
-        }, () => this.searchInput.focus());
+        }, () => this.searchInput && this.searchInput.focus());
       },
     }, {
       title: 'Age',

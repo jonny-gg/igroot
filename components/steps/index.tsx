@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import RcSteps from 'rc-steps';
 
@@ -17,7 +17,7 @@ export default class Steps extends React.Component<StepsProps, any> {
 
   static defaultProps = {
     prefixCls: 'ant-steps',
-    iconPrefix: 'ant',
+    iconPrefix: 'igroot',
     current: 0,
   };
 

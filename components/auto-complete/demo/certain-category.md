@@ -51,7 +51,7 @@ function renderTitle(title) {
       {title}
       <a
         style={{ float: 'right' }}
-        href="https://www.google.com/search?q=igroot"
+        href="https://www.google.com/search?q=antd"
         target="_blank"
         rel="noopener noreferrer"
       >更多
@@ -75,7 +75,7 @@ const options = dataSource.map(group => (
 )).concat([
   <Option disabled key="all" className="show-all">
     <a
-      href="https://www.google.com/search?q=igroot"
+      href="https://www.google.com/search?q=antd"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -141,7 +141,7 @@ ReactDOM.render(<Complete />, mountNode);
 }
 
 .certain-category-search.ant-select-focused .certain-category-icon {
-  color: #20a0ff;
+  color: #108ee9;
 }
 
 .certain-category-icon {

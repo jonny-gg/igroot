@@ -1,9 +1,9 @@
-import React from 'react';
-import moment from 'moment';
+import * as React from 'react';
+import * as moment from 'moment';
 import RcTimePicker from 'rc-time-picker/lib/TimePicker';
 import classNames from 'classnames';
-import injectLocale from '../locale-provider/injectLocale';
-import defaultLocale from './locale/zh_CN';
+import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import defaultLocale from './locale/en_US';
 
 export function generateShowHourMinuteSecond(format: string) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -38,13 +38,21 @@ export interface TimePickerProps {
   getPopupContainer?: (triggerNode: Element) => HTMLElement;
   addon?: Function;
   use12Hours?: boolean;
+  focusOnOpen?: boolean;
+  hourStep?: number;
+  minuteStep?: number;
+  secondStep?: number;
   allowEmpty?: boolean;
   clearText?: string;
   defaultOpenValue?: moment.Moment;
   popupClassName?: string;
 }
 
-abstract class TimePicker extends React.Component<TimePickerProps, any> {
+export interface TimePickerLocale {
+  placeholder: string;
+}
+
+export default class TimePicker extends React.Component<TimePickerProps, any> {
   static defaultProps = {
     prefixCls: 'ant-time-picker',
     align: {
@@ -57,16 +65,17 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
     hideDisabledOptions: false,
     placement: 'bottomLeft',
     transitionName: 'slide-up',
+    focusOnOpen: true,
   };
 
-  timePickerRef: any;
+  private timePickerRef: typeof RcTimePicker;
 
   constructor(props: TimePickerProps) {
     super(props);
     const value = props.value || props.defaultValue;
     if (value && !moment.isMoment(value)) {
       throw new Error(
-        'The value/defaultValue of TimePicker must be a moment object after `igroot@1.0`, ' +
+        'The value/defaultValue of TimePicker must be a moment object after `antd@2.0`, ' +
         'see: https://u.ant.design/time-picker-value',
       );
     }
@@ -74,8 +83,6 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
       value,
     };
   }
-
-  abstract getLocale();
 
   componentWillReceiveProps(nextProps: TimePickerProps) {
     if ('value' in nextProps) {
@@ -93,19 +100,23 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
     }
   }
 
-  handleOpenClose = ({ open }) => {
+  handleOpenClose = ({ open }: { open: boolean }) => {
     const { onOpenChange } = this.props;
     if (onOpenChange) {
       onOpenChange(open);
     }
   }
 
-  saveTimePicker = (timePickerRef) => {
+  saveTimePicker = (timePickerRef: typeof RcTimePicker) => {
     this.timePickerRef = timePickerRef;
   }
 
   focus() {
     this.timePickerRef.focus();
+  }
+
+  blur() {
+    this.timePickerRef.blur();
   }
 
   getDefaultFormat() {
@@ -118,7 +129,7 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
     return 'HH:mm:ss';
   }
 
-  render() {
+  renderTimePicker = (locale: TimePickerLocale) => {
     const props = {
       ...this.props,
     };
@@ -129,7 +140,7 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
       [`${props.prefixCls}-${props.size}`]: !!props.size,
     });
 
-    const addon = (panel) => (
+    const addon = (panel: React.ReactElement<any>) => (
       props.addon ? (
         <div className={`${props.prefixCls}-panel-addon`}>
           {props.addon(panel)}
@@ -145,7 +156,7 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
         format={format}
         className={className}
         value={this.state.value}
-        placeholder={props.placeholder === undefined ? this.getLocale().placeholder : props.placeholder}
+        placeholder={props.placeholder === undefined ? locale.placeholder : props.placeholder}
         onChange={this.handleChange}
         onOpen={this.handleOpenClose}
         onClose={this.handleOpenClose}
@@ -153,7 +164,15 @@ abstract class TimePicker extends React.Component<TimePickerProps, any> {
       />
     );
   }
-}
 
-const injectTimePickerLocale = injectLocale('TimePicker', defaultLocale);
-export default injectTimePickerLocale<TimePickerProps>(TimePicker as any);
+  render() {
+    return (
+      <LocaleReceiver
+        componentName="TimePicker"
+        defaultLocale={defaultLocale}
+      >
+        {this.renderTimePicker}
+      </LocaleReceiver>
+    );
+  }
+}

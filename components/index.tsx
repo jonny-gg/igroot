@@ -7,7 +7,7 @@ if (ENV !== 'production' &&
     console.warn &&
     typeof window !== 'undefined') {
   console.warn(
-    'You are using a whole package of igroot, ' +
+    'You are using a whole package of antd, ' +
     'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.',
   );
 }
@@ -47,6 +47,8 @@ export { default as Col } from './col';
 
 export { default as DatePicker } from './date-picker';
 
+export { default as Divider } from './divider';
+
 export { default as Dropdown } from './dropdown';
 
 export { default as Form } from './form';
@@ -58,6 +60,8 @@ export { default as Input } from './input';
 export { default as InputNumber } from './input-number';
 
 export { default as Layout } from './layout';
+
+export { default as List } from './list';
 
 export { default as LocaleProvider } from './locale-provider';
 

@@ -13,23 +13,24 @@ title: LocaleProvider
 
 ```jsx
 import { LocaleProvider } from 'igroot';
-import enUS from 'igroot/lib/locale-provider/en_US';
+import fr_FR from 'antd/lib/locale-provider/fr_FR';
+import 'moment/locale/fr';
 
 ...
 
-return <LocaleProvider locale={enUS}><App /></LocaleProvider>;
+return <LocaleProvider locale={fr_FR}><App /></LocaleProvider>;
 ```
 
 We provide some locale like English, Chinese, Russian, German, French and etc, all locale packages can be found in [here](https://github.com/ant-design/ant-design/blob/master/components/locale-provider/).
 
-Note: if you need to use igroot's UMD dist file, please import `igroot/dist/igroot-with-locales.js`:
+Note: if you need to use antd's UMD dist file, please use `antd/dist/antd-with-locales.js` and corresponding moment locale:
 
 ```jsx
-const { LocaleProvider, locales } = window.igroot;
+const { LocaleProvider, locales } = window.antd;
 
 ...
 
-return <LocaleProvider locale={locales.en_US}><App /></LocaleProvider>;
+return <LocaleProvider locale={locales.fr_FR}><App /></LocaleProvider>;
 ```
 
 ### Add a new language
@@ -44,4 +45,4 @@ This component aims for localization of the built-in text, if you want to suppor
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| locale | language package setting, you can find the packages in this path: `igroot/lib/locale-provider/` | object | - |
+| locale | language package setting, you can find the packages in this path: `antd/lib/locale-provider/` | object | - |
