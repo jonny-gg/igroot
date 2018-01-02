@@ -1,7 +1,7 @@
 ---
 category: BComponents
 type: General
-title: FormModal
-subtitle: 表单模态框
+title: FormFilter
+subtitle: 表单过滤
 cols: 1
 ---
