@@ -82,7 +82,7 @@ class LoadMoreList extends React.Component {
           <List.Item actions={[<a>edit</a>, <a>more</a>]}>
             <List.Item.Meta
               avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title={<a href="https://ant.design">{item.name.last}</a>}
+              title={<a href="https://igroot.i.qingcdn.com:8001">{item.name.last}</a>}
               description="Ant Design, a design language for background applications, is refined by Ant UED Team"
             />
             <div>content</div>

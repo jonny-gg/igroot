@@ -54,7 +54,7 @@ exports[`renders ./components/menu/demo/horizontal.md correctly 1`] = `
     role="menuitem"
   >
     <a
-      href="https://ant.design"
+      href="https://igroot.i.qingcdn.com:8001"
       rel="noopener noreferrer"
       target="_blank"
     >

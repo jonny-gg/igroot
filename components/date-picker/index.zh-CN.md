@@ -68,7 +68,7 @@ subtitle: 日期选择框
 | format | 展示的日期格式，配置参考 [moment.js](http://momentjs.com/) | string | "YYYY-MM-DD" |
 | renderExtraFooter | 在面板中添加额外的页脚 | () => React.ReactNode | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker/#API) |
-| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/) | moment() |
+| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](https://igroot.i.qingcdn.com:8001/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/) | moment() |
 | showToday | 是否展示“今天”按钮 | boolean | true |
 | value | 日期 | [moment](http://momentjs.com/) | 无 |
 | onChange | 时间发生变化的回调 | function(date: moment, dateString: string) | 无 |
@@ -104,7 +104,7 @@ subtitle: 日期选择框
 | ranges       | 预设时间范围快捷选择 | { [range: string]&#x3A; [moment](http://momentjs.com/)\[] } | 无 |
 | renderExtraFooter | 在面板中添加额外的页脚 | () => React.ReactNode | - |
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker/#API) |
-| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](https://ant.design/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
+| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](https://igroot.i.qingcdn.com:8001/components/date-picker/#components-date-picker-demo-disabled-date) | [moment](http://momentjs.com/)\[] | [moment(), moment()] |
 | value | 日期 | [moment](http://momentjs.com/)\[] | 无 |
 | onCalendarChange | 待选日期发生变化的回调 | function(dates: [moment, moment], dateStrings: [string, string]) | 无 |
 | onChange | 日期范围发生变化的回调 | function(dates: [moment, moment], dateStrings: [string, string]) | 无 |

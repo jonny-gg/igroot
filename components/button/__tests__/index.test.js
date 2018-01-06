@@ -77,7 +77,7 @@ describe('Button', () => {
 
   it('should support link button', () => {
     const wrapper = mount(
-      <Button target="_blank" href="http://ant.design">link button</Button>
+      <Button target="_blank" href="http://igroot.i.qingcdn.com:8001">link button</Button>
     );
     expect(wrapper.render()).toMatchSnapshot();
   });

@@ -53,7 +53,7 @@ exports[`Button renders correctly 1`] = `
 exports[`Button should support link button 1`] = `
 <a
   class="ant-btn"
-  href="http://ant.design"
+  href="http://igroot.i.qingcdn.com:8001"
   target="_blank"
 >
   <span>

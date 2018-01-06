@@ -52,7 +52,7 @@ class App extends React.Component {
           </MenuItemGroup>
         </SubMenu>
         <Menu.Item key="alipay">
-          <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
+          <a href="https://igroot.i.qingcdn.com:8001" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
         </Menu.Item>
       </Menu>
     );
