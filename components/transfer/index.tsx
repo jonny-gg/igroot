@@ -101,6 +101,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
     this.state = {
       leftFilter: '',
       rightFilter: '',
+      startKey: '',
       sourceSelectedKeys: selectedKeys.filter(key => targetKeys.indexOf(key) === -1),
       targetSelectedKeys: selectedKeys.filter(key => targetKeys.indexOf(key) > -1),
     };
@@ -204,6 +205,74 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
   moveToLeft = () => this.moveTo('left');
   moveToRight = () => this.moveTo('right');
+
+  handleDoubleClick = (listType: string, itemKey: any) => {
+    const move = listType === 'source' ? this.moveToRight : this.moveToLeft
+
+    this.setState({ [`${listType}SelectedKeys`]: [itemKey] }, move)
+  }
+
+  handleDownItem = (startKey: any) => this.setState({ startKey })
+  handleHoverSelect = (listType: string, itemKey: any) => {
+    const { leftDataSource, rightDataSource } = this.splitDataSource(this.props)
+    const dataSource = listType === 'source' ? leftDataSource : rightDataSource
+    const key = `${listType}SelectedKeys`
+    const finalValueIndex = dataSource.findIndex(data => data.key === this.state.startKey)
+    const itemIndex = dataSource.findIndex(data => data.key === itemKey)
+
+    const {min, max} = ((a, b) => {
+      if(a > b)
+        return {min: b, max: a}
+
+      else
+        return {min: a, max: b}
+    })(finalValueIndex, itemIndex)
+
+    const obj = {}
+    const keys = Array.prototype
+      .concat(this.state[key], dataSource.slice(min, max + 1).map(data => data.key))
+      .filter(key => {
+        if (!obj[key] && key != undefined) {
+          obj[key] = true
+          return true
+        }
+
+        return false
+      })
+
+    this.setState({ [key]: keys })
+  }
+
+  handleShiftClick = (listType: string, itemKey: any) => {
+    const { leftDataSource, rightDataSource } = this.splitDataSource(this.props)
+    const dataSource = listType === 'source' ? leftDataSource : rightDataSource
+    const key = `${listType}SelectedKeys`
+    const stateKeys = this.state[key]
+    const finalValueIndex = dataSource.findIndex(data => data.key === stateKeys[stateKeys.length - 1])
+    const itemIndex = dataSource.findIndex(data => data.key === itemKey)
+
+    const {min, max} = ((a, b) => {
+      if(a > b)
+        return {min: b, max: a}
+
+      else
+        return {min: a, max: b}
+    })(finalValueIndex, itemIndex)
+
+    const obj = {}
+    const keys = Array.prototype
+      .concat(stateKeys, dataSource.slice(min, max + 1).map(data => data.key))
+      .filter(key => {
+        if (!obj[key] && key != undefined) {
+          obj[key] = true
+          return true
+        }
+
+        return false
+      })
+
+    this.setState({ [key]: keys })
+  }
 
   handleSelectChange(direction: TransferDirection, holder: string[]) {
     const { sourceSelectedKeys, targetSelectedKeys } = this.state;
@@ -352,6 +421,10 @@ export default class Transfer extends React.Component<TransferProps, any> {
           filterOption={filterOption}
           style={listStyle}
           checkedKeys={sourceSelectedKeys}
+          handleShiftClick={itemKey => this.handleShiftClick('source', itemKey)}          
+          handleDownItem={this.handleDownItem}
+          handleDoubleClick={itemKey => this.handleDoubleClick('source', itemKey)}
+          handleHoverSelect={itemKey => this.handleHoverSelect('source', itemKey)}
           handleFilter={this.handleLeftFilter}
           handleClear={this.handleLeftClear}
           handleSelect={this.handleLeftSelect}
@@ -384,6 +457,10 @@ export default class Transfer extends React.Component<TransferProps, any> {
           filterOption={filterOption}
           style={listStyle}
           checkedKeys={targetSelectedKeys}
+          handleDownItem={this.handleDownItem}
+          handleShiftClick={itemKey => this.handleShiftClick('target', itemKey)}          
+          handleDoubleClick={itemKey => this.handleDoubleClick('target', itemKey)}
+          handleHoverSelect={itemKey => this.handleHoverSelect('target', itemKey)}
           handleFilter={this.handleRightFilter}
           handleClear={this.handleRightClear}
           handleSelect={this.handleRightSelect}

@@ -89,7 +89,7 @@
       padding: 0;
       margin: 0;
       > .LazyLoad {
-        animation: transferHighlightIn 1s;
+        animation: transferHighlightIn 10s;
       }
 
       &-item {
@@ -105,6 +105,10 @@
       }
 
       &-item:not(&-item-disabled):hover {
+        cursor: pointer;
+        background-color: @item-hover-bg;
+      }
+      &-item:not(&-item-disabled):active {
         cursor: pointer;
         background-color: @item-hover-bg;
       }
