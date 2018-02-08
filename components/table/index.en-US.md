@@ -63,7 +63,7 @@ const columns = [{
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
 | footer | Table footer renderer | Function(currentPageData) |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
-| loading | Loading status of table | boolean\|[object](https://igroot.i.qingcdn.com:8001/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | `false` |
+| loading | Loading status of table | boolean\|[object](https://ant.design/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | `false` |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' <br> [Default](https://github.com/ant-design/ant-design/issues/575#issuecomment-159169511) |
 | pagination | Pagination [config](/components/pagination/), hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
@@ -143,7 +143,7 @@ Properties for row selection.
 
 ```jsx
 import { Table } from 'igroot';
-import { ColumnProps } from 'antd/lib/table';
+import { ColumnProps } from 'igroot/lib/table';
 
 interface IUser {
   key: number,

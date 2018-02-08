@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button fixbug renders {0} , 0 and {false} 1`] = `
+<button
+  class="ant-btn"
+  type="button"
+>
+  0
+</button>
+`;
+
+exports[`Button fixbug renders {0} , 0 and {false} 2`] = `
+<button
+  class="ant-btn"
+  type="button"
+>
+  <span>
+    0
+  </span>
+</button>
+`;
+
+exports[`Button fixbug renders {0} , 0 and {false} 3`] = `
+<button
+  class="ant-btn"
+  type="button"
+/>
+`;
+
 exports[`Button renders Chinese characters correctly 1`] = `
 <button
   class="ant-btn"
@@ -53,7 +80,7 @@ exports[`Button renders correctly 1`] = `
 exports[`Button should support link button 1`] = `
 <a
   class="ant-btn"
-  href="http://igroot.i.qingcdn.com:8001"
+  href="http://ant.design"
   target="_blank"
 >
   <span>

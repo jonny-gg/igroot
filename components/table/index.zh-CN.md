@@ -64,7 +64,7 @@ const columns = [{
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData) |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |
-| loading | 页面是否加载中 | boolean\|[object](https://igroot.i.qingcdn.com:8001/components/spin-cn/#API) ([更多](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | false |
+| loading | 页面是否加载中 | boolean\|[object](https://ant.design/components/spin-cn/#API) ([更多](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | false |
 | locale | 默认文案设置，目前包括排序、过滤、空数据文案 | object | filterConfirm: '确定' <br> filterReset: '重置' <br> emptyText: '暂无数据' <br> [默认值](https://github.com/ant-design/ant-design/issues/575#issuecomment-159169511) |
 | pagination | 分页器，配置项参考 [pagination](/components/pagination/)，设为 false 时不展示和进行分页 | object |  |
 | rowClassName | 表格行的类名 | Function(record, index):string | - |
@@ -77,8 +77,8 @@ const columns = [{
 | onChange | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter) |  |
 | onExpand | 点击展开图标时触发 | Function(expanded, record) |  |
 | onExpandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |  |
-| onHeaderRow | 设置头部列属性 | Function(column, index) | - |
-| onRow | 设置列属性 | Function(record, index) | - |
+| onHeaderRow | 设置头部行属性 | Function(column, index) | - |
+| onRow | 设置行属性 | Function(record, index) | - |
 
 ### Column
 
@@ -143,7 +143,7 @@ const columns = [{
 
 ```jsx
 import { Table } from 'igroot';
-import { ColumnProps } from 'antd/lib/table';
+import { ColumnProps } from 'igroot/lib/table';
 
 interface IUser {
   key: number;

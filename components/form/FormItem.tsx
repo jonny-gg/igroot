@@ -174,9 +174,9 @@ export default class FormItem extends React.Component<FormItemProps, any> {
       this.getValidateStatus() :
       props.validateStatus;
 
-    let classes = '';
+    let classes = `${this.props.prefixCls}-item-control`;
     if (validateStatus) {
-      classes = classNames({
+      classes = classNames(`${this.props.prefixCls}-item-control`, {
         'has-feedback': props.hasFeedback || validateStatus === 'validating',
         'has-success': validateStatus === 'success',
         'has-warning': validateStatus === 'warning',
@@ -185,7 +185,7 @@ export default class FormItem extends React.Component<FormItemProps, any> {
       });
     }
     return (
-      <div className={`${this.props.prefixCls}-item-control ${classes}`}>
+      <div className={classes}>
         {c1}{c2}{c3}
       </div>
     );
@@ -222,13 +222,19 @@ export default class FormItem extends React.Component<FormItemProps, any> {
 
   // Resolve duplicated ids bug between different forms
   // https://github.com/ant-design/ant-design/issues/7351
-  onLabelClick = () => {
+  onLabelClick = (e: any) => {
+    const { label } = this.props;
     const id = this.props.id || this.getId();
     if (!id) {
       return;
     }
     const controls = document.querySelectorAll(`[id="${id}"]`);
     if (controls.length !== 1) {
+      // Only prevent in default situation
+      // Avoid preventing event in `label={<a href="xx">link</a>}``
+      if (typeof label === 'string') {
+        e.preventDefault();
+      }
       const control = ReactDOM.findDOMNode(this).querySelector(`[id="${id}"]`) as HTMLElement;
       if (control && control.focus) {
         control.focus();

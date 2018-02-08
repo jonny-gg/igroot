@@ -77,8 +77,23 @@ describe('Button', () => {
 
   it('should support link button', () => {
     const wrapper = mount(
-      <Button target="_blank" href="http://igroot.i.qingcdn.com:8001">link button</Button>
+      <Button target="_blank" href="http://ant.design">link button</Button>
     );
     expect(wrapper.render()).toMatchSnapshot();
+  });
+
+  it('fixbug renders {0} , 0 and {false}', () => {
+    const wrapper = render(
+      <Button>{0}</Button>
+    );
+    expect(wrapper).toMatchSnapshot();
+    const wrapper1 = render(
+      <Button>0</Button>
+    );
+    expect(wrapper1).toMatchSnapshot();
+    const wrapper2 = render(
+      <Button>{false}</Button>
+    );
+    expect(wrapper2).toMatchSnapshot();
   });
 });

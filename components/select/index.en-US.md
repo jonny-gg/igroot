@@ -26,7 +26,7 @@ Select component to select value from options.
 | allowClear | Show clear button. | boolean | false |
 | autoFocus | Get focus by default | boolean | false |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |
-| defaultValue | Initial selected option. | string\|string\[] | - |
+| defaultValue | Initial selected option. | string\|number\|string\[]\|number\[] | - |
 | disabled | Whether disabled select | boolean | false |
 | dropdownClassName | className of dropdown menu | string | - |
 | dropdownMatchSelectWidth | Whether dropdown's with is same with select. | boolean | true |
@@ -45,17 +45,17 @@ Select component to select value from options.
 | showSearch | Whether show search input in single mode. | boolean | false |
 | size | Size of Select input. `default` `large` `small` | string | default |
 | tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |
-| value | Current selected option. | string\|string\[] | - |
+| value | Current selected option. | string\|number\|string\[]\|number\[] | - |
 | onBlur | Called when blur | function | - |
-| onChange | Called when select an option or input value change, or value of input is changed in combobox mode | function(value, label) | - |
-| onDeselect | Called when a option is deselected, the params are option's value (or key) . only called for multiple or tags, effective in multiple or tags mode only. | function(value) | - |
+| onChange | Called when select an option or input value change, or value of input is changed in combobox mode | function(value, option:Option/Array<Option\>) | - |
+| onDeselect | Called when a option is deselected, the params are option's value (or key) . only called for multiple or tags, effective in multiple or tags mode only. | function(value, option:Option) | - |
 | onFocus | Called when focus | function | - |
 | onInputKeyDown | Called when key pressed | function | - |
 | onMouseEnter | Called when mouse enter | function | - |
 | onMouseLeave | Called when mouse leave | function | - |
 | onPopupScroll | Called when dropdown scrolls | function | - |
 | onSearch | Callback function that is fired when input changed. | function(value: string) |  |
-| onSelect | Called when a option is selected, the params are option's value (or key) and option instance. | function(value, option) | - |
+| onSelect | Called when a option is selected, the params are option's value (or key) and option instance. | function(value, option:Option) | - |
 
 ### Select Methods
 
@@ -71,7 +71,7 @@ Select component to select value from options.
 | disabled | Disable this option | boolean | false |
 | key | Same usage as `value`. If React request you to set this property, you can set it to value of option, and then omit value property. | string |  |
 | title | `title` of Select after select this Option | string | - |
-| value | default to filter with this property | string | - |
+| value | default to filter with this property | string\|number | - |
 
 ### OptGroup props
 

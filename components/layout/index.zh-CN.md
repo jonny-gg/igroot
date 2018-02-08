@@ -78,6 +78,7 @@ title: Layout
 | --- | --- | --- | --- |
 | className | 容器 className | string | - |
 | style | 指定样式 | object | - |
+| hasSider | 表示子元素里有 Sider，一般不用指定。可用于服务端渲染时避免样式闪动 | boolean | - |
 
 > `Layout.Header` `Layout.Footer` `Layout.Content` API 与 `Layout` 相同
 
@@ -104,9 +105,10 @@ title: Layout
 ```js
 {
   xs: '480px',
-  sm: '768px',
-  md: '992px',
-  lg: '1200px',
-  xl: '1600px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1600px',
 }
 ```

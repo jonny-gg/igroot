@@ -16,6 +16,7 @@ export interface AbstractSelectProps {
   allowClear?: boolean;
   disabled?: boolean;
   style?: React.CSSProperties;
+  tabIndex?: number;
   placeholder?: string;
   defaultActiveFirstOption?: boolean;
   dropdownClassName?: string;
@@ -43,6 +44,8 @@ export interface SelectProps extends AbstractSelectProps {
   onBlur?: () => any;
   onFocus?: () => any;
   onInputKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  maxTagCount?: number;
+  maxTagPlaceholder?: React.ReactNode | ((omittedValues: SelectValue[]) => React.ReactNode);
   dropdownMatchSelectWidth?: boolean;
   optionFilterProp?: string;
   labelInValue?: boolean;

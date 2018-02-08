@@ -29,6 +29,7 @@ export interface ColumnProps<T> {
   children?: ColumnProps<T>[];
   onCellClick?: (record: T, event: any) => void;
   onCell?: (record: T) => any;
+  onHeaderCell?: (props: ColumnProps<T>) => any;
 }
 
 export interface TableComponents {
@@ -47,11 +48,11 @@ export interface TableComponents {
 
 export interface TableLocale {
   filterTitle?: string;
-  filterConfirm?: string;
-  filterReset?: string;
-  emptyText?: string;
-  selectAll?: string;
-  selectInvert?: string;
+  filterConfirm?: React.ReactNode;
+  filterReset?: React.ReactNode;
+  emptyText?: React.ReactNode | (() => React.ReactNode);
+  selectAll?: React.ReactNode;
+  selectInvert?: React.ReactNode;
 }
 
 export type RowSelectionType = 'checkbox' | 'radio';
@@ -152,6 +153,7 @@ export interface SelectionBoxProps {
   type?: RowSelectionType;
   defaultSelection: string[];
   rowIndex: string;
+  name?: string;
   disabled?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }

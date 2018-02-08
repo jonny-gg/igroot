@@ -35,7 +35,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
                 class="ant-list-item-meta-title"
               >
                 <a
-                  href="https://igroot.i.qingcdn.com:8001"
+                  href="https://ant.design"
                 >
                   Ant Design Title 1
                 </a>
@@ -72,7 +72,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
                 class="ant-list-item-meta-title"
               >
                 <a
-                  href="https://igroot.i.qingcdn.com:8001"
+                  href="https://ant.design"
                 >
                   Ant Design Title 2
                 </a>
@@ -109,7 +109,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
                 class="ant-list-item-meta-title"
               >
                 <a
-                  href="https://igroot.i.qingcdn.com:8001"
+                  href="https://ant.design"
                 >
                   Ant Design Title 3
                 </a>
@@ -146,7 +146,7 @@ exports[`renders ./components/list/demo/basic.md correctly 1`] = `
                 class="ant-list-item-meta-title"
               >
                 <a
-                  href="https://igroot.i.qingcdn.com:8001"
+                  href="https://ant.design"
                 >
                   Ant Design Title 4
                 </a>
@@ -209,9 +209,7 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
@@ -246,9 +244,7 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
@@ -283,9 +279,7 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
@@ -320,9 +314,7 @@ exports[`renders ./components/list/demo/grid.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
@@ -446,7 +438,7 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
           style="margin-left:-8px;margin-right:-8px"
         >
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -474,16 +466,14 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -511,16 +501,14 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -548,16 +536,14 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -585,16 +571,14 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -622,16 +606,14 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4"
+            class="ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-4 ant-col-xxl-8"
           >
             <div
               class="ant-list-item"
@@ -659,9 +641,7 @@ exports[`renders ./components/list/demo/resposive.md correctly 1`] = `
                   <div
                     class="ant-card-body"
                   >
-                    <div>
-                      Card content
-                    </div>
+                    Card content
                   </div>
                 </div>
               </div>
@@ -954,7 +934,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                     class="ant-list-item-meta-title"
                   >
                     <a
-                      href="http://igroot.i.qingcdn.com:8001"
+                      href="http://ant.design"
                     >
                       ant design part 0
                     </a>
@@ -1050,7 +1030,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                     class="ant-list-item-meta-title"
                   >
                     <a
-                      href="http://igroot.i.qingcdn.com:8001"
+                      href="http://ant.design"
                     >
                       ant design part 1
                     </a>
@@ -1146,7 +1126,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                     class="ant-list-item-meta-title"
                   >
                     <a
-                      href="http://igroot.i.qingcdn.com:8001"
+                      href="http://ant.design"
                     >
                       ant design part 2
                     </a>
@@ -1242,7 +1222,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                     class="ant-list-item-meta-title"
                   >
                     <a
-                      href="http://igroot.i.qingcdn.com:8001"
+                      href="http://ant.design"
                     >
                       ant design part 3
                     </a>
@@ -1338,7 +1318,7 @@ exports[`renders ./components/list/demo/vertical.md correctly 1`] = `
                     class="ant-list-item-meta-title"
                   >
                     <a
-                      href="http://igroot.i.qingcdn.com:8001"
+                      href="http://ant.design"
                     >
                       ant design part 4
                     </a>
