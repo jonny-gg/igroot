@@ -66,7 +66,7 @@ export default class TransferList extends React.Component<TransferListProps, any
   }
 
   componentDidMount() {
-    window.addEventListener('mouseup', e => this.setState({ hoverSelect: false }))
+    window.addEventListener('mouseup', () => this.setState({ hoverSelect: false }))
 
     this.timer = window.setTimeout(() => {
       this.setState({

@@ -24,7 +24,7 @@ export default class Item extends React.Component<any, any> {
         className={className}
         title={renderedText}
         onMouseOver={this.onHover}
-        onMouseDown={item.disabled ? undefined : e => onMouseDown(item.key)}
+        onMouseDown={item.disabled ? undefined : () => onMouseDown(item.key)}
         onClick={item.disabled ? undefined : e => this.onClick(e, item)}
         onDoubleClick={() => onDoubleClick(item.key)}
       >
@@ -56,7 +56,7 @@ export default class Item extends React.Component<any, any> {
       this.props.onClick(item)
   }
 
-  onHover = e => {
+  onHover = () => {
     if (this.props.hoverSelect)
       this.props.onHoverSelect(this.props.item.key)
   }
