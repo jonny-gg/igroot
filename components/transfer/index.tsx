@@ -14,7 +14,7 @@ export { TransferSearchProps } from './search';
 function noop() {
 }
 
-export type TransferDirection = 'left' | 'right';
+export type TransferDirection = 'left' | 'right' | 'up' | 'down';
 
 export interface TransferItem {
   key: string;
@@ -32,6 +32,7 @@ export interface TransferProps {
   render?: (record: TransferItem) => React.ReactNode;
   onChange?: (targetKeys: string[], direction: string, moveKeys: any) => void;
   onSelectChange?: (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void;
+  onSort?: (dataSources: TransferItem[]) => void;
   style?: React.CSSProperties;
   listStyle?: React.CSSProperties;
   titles?: string[];
@@ -203,8 +204,30 @@ export default class Transfer extends React.Component<TransferProps, any> {
     }
   }
 
+  // 针对数据位置移动~
+  moveSort = (direction: TransferDirection) => {
+    const { onSort } = this.props;
+    if (!onSort) return
+
+    const { sourceSelectedKeys } = this.state;
+    const dataSource = [...this.props.dataSource];
+    console.log(dataSource.map(item=>item.key), sourceSelectedKeys)
+    const itemIndex = dataSource.findIndex(data => data.key === sourceSelectedKeys[0]);
+    const elem = dataSource.splice(itemIndex, 1);
+    // console.log(elem,'ele')
+    if (direction === 'down')
+      dataSource.splice(itemIndex + 1, 0, elem[0]);
+
+    else
+      dataSource.splice(itemIndex - 1, 0, elem[0]);
+    console.log(dataSource.map(item=>item.key), 'result')
+    onSort(dataSource);
+  }
+
   moveToLeft = () => this.moveTo('left');
   moveToRight = () => this.moveTo('right');
+  moveUp = () => this.moveSort('up');
+  moveDown = () => this.moveSort('down');
 
   handleDoubleClick = (listType: string, itemKey: any) => {
     const move = listType === 'source' ? this.moveToRight : this.moveToLeft
@@ -220,12 +243,12 @@ export default class Transfer extends React.Component<TransferProps, any> {
     const finalValueIndex = dataSource.findIndex(data => data.key === this.state.startKey)
     const itemIndex = dataSource.findIndex(data => data.key === itemKey)
 
-    const {min, max} = ((a, b) => {
-      if(a > b)
-        return {min: b, max: a}
+    const { min, max } = ((a, b) => {
+      if (a > b)
+        return { min: b, max: a }
 
       else
-        return {min: a, max: b}
+        return { min: a, max: b }
     })(finalValueIndex, itemIndex)
 
     const obj = {}
@@ -251,12 +274,12 @@ export default class Transfer extends React.Component<TransferProps, any> {
     const finalValueIndex = dataSource.findIndex(data => data.key === stateKeys[stateKeys.length - 1])
     const itemIndex = dataSource.findIndex(data => data.key === itemKey)
 
-    const {min, max} = ((a, b) => {
-      if(a > b)
-        return {min: b, max: a}
+    const { min, max } = ((a, b) => {
+      if (a > b)
+        return { min: b, max: a }
 
       else
-        return {min: a, max: b}
+        return { min: a, max: b }
     })(finalValueIndex, itemIndex)
 
     const obj = {}
@@ -365,6 +388,14 @@ export default class Transfer extends React.Component<TransferProps, any> {
     return this.handleSelect('right', selectedItem, checked);
   }
 
+  handleUpSelect = (selectedItem: TransferItem, checked: boolean) => {
+    return this.handleSelect('up', selectedItem, checked)
+  }
+
+  handleDownSelect = (selectedItem: TransferItem, checked: boolean) => {
+    return this.handleSelect('down', selectedItem, checked)
+  }
+
   handleScroll = (direction: TransferDirection, e: React.SyntheticEvent<HTMLDivElement>) => {
     const { onScroll } = this.props;
     if (onScroll) {
@@ -401,12 +432,15 @@ export default class Transfer extends React.Component<TransferProps, any> {
       filterOption,
       render,
       lazy,
+      onSort,
     } = this.props;
     const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys } = this.state;
 
     const { leftDataSource, rightDataSource } = this.splitDataSource(this.props);
     const leftActive = targetSelectedKeys.length > 0;
     const rightActive = sourceSelectedKeys.length > 0;
+    const upActive = onSort && targetSelectedKeys.length == 1 || onSort && sourceSelectedKeys.length == 1
+    const downActive = onSort && targetSelectedKeys.length == 1 || onSort && sourceSelectedKeys.length == 1
 
     const cls = classNames(className, prefixCls);
 
@@ -421,7 +455,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
           filterOption={filterOption}
           style={listStyle}
           checkedKeys={sourceSelectedKeys}
-          handleShiftClick={itemKey => this.handleShiftClick('source', itemKey)}          
+          handleShiftClick={itemKey => this.handleShiftClick('source', itemKey)}
           handleDownItem={this.handleDownItem}
           handleDoubleClick={itemKey => this.handleDoubleClick('source', itemKey)}
           handleHoverSelect={itemKey => this.handleHoverSelect('source', itemKey)}
@@ -448,6 +482,10 @@ export default class Transfer extends React.Component<TransferProps, any> {
           leftActive={leftActive}
           leftArrowText={operations[1]}
           moveToLeft={this.moveToLeft}
+          moveUp={this.moveUp}
+          upActive={upActive}
+          moveDown={this.moveDown}
+          downActive={downActive}
         />
         <List
           prefixCls={`${prefixCls}-list`}
@@ -458,7 +496,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
           style={listStyle}
           checkedKeys={targetSelectedKeys}
           handleDownItem={this.handleDownItem}
-          handleShiftClick={itemKey => this.handleShiftClick('target', itemKey)}          
+          handleShiftClick={itemKey => this.handleShiftClick('target', itemKey)}
           handleDoubleClick={itemKey => this.handleDoubleClick('target', itemKey)}
           handleHoverSelect={itemKey => this.handleHoverSelect('target', itemKey)}
           handleFilter={this.handleRightFilter}

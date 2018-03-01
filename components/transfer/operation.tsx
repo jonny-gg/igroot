@@ -8,10 +8,16 @@ export interface TransferOperationProps {
   className?: string;
   leftArrowText?: string;
   rightArrowText?: string;
+  upArrowText?: string;
+  downArrowText?: string;
   moveToLeft?: React.FormEventHandler<any>;
   moveToRight?: React.FormEventHandler<any>;
+  moveUp?: React.FormEventHandler<any>;
+  moveDown?: React.FormEventHandler<any>;
   leftActive?: boolean;
   rightActive?: boolean;
+  upActive?: boolean;
+  downActive?: boolean;
 }
 
 export default class Operation extends React.Component<TransferOperationProps, any> {
@@ -19,10 +25,16 @@ export default class Operation extends React.Component<TransferOperationProps, a
     const {
       moveToLeft = noop,
       moveToRight = noop,
+      moveUp = noop,
+      moveDown = noop,
       leftArrowText = '',
       rightArrowText = '',
+      upArrowText = '',
+      downArrowText = '',
       leftActive,
       rightActive,
+      upActive,
+      downActive,
       className,
     } = this.props;
     return (
@@ -44,6 +56,24 @@ export default class Operation extends React.Component<TransferOperationProps, a
           icon="right"
         >
           {rightArrowText}
+        </Button>
+        <Button
+          type="primary"
+          size="small"
+          disabled={!upActive}
+          onClick={moveUp}
+          icon="up"
+        >
+          {upArrowText}
+        </Button>
+        <Button
+          type="primary"
+          size="small"
+          disabled={!downActive}
+          onClick={moveDown}
+          icon="down"
+        >
+          {downArrowText}
         </Button>
       </div>
     );
