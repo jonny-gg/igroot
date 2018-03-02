@@ -1,5 +1,5 @@
-import React from 'react';
-import { findDOMNode } from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Animate from 'rc-animate';
 import PureRenderMixin from 'rc-util/lib/PureRenderMixin';
@@ -12,7 +12,7 @@ import triggerEvent from '../_util/triggerEvent';
 function noop() {
 }
 
-function isRenderResultPlainObject(result) {
+function isRenderResultPlainObject(result: any) {
   return result && !React.isValidElement(result) &&
     Object.prototype.toString.call(result) === '[object Object]';
 }
@@ -25,6 +25,10 @@ export interface TransferListProps {
   filterOption?: (filterText: any, item: any) => boolean;
   style?: React.CSSProperties;
   checkedKeys: string[];
+  handleShiftClick: (itemKey: any) => void;
+  handleDownItem: (itemKey: any) => void;
+  handleDoubleClick: (itemKey: any) => void;
+  handleHoverSelect: (itemKey: any) => void;
   handleFilter: (e: any) => void;
   handleSelect: (selectedItem: any, checked: boolean) => void;
   handleSelectAll: (dataSource: any[], checkAll: boolean) => void;
@@ -53,15 +57,18 @@ export default class TransferList extends React.Component<TransferListProps, any
   timer: number;
   triggerScrollTimer: number;
 
-  constructor(props) {
+  constructor(props: TransferListProps) {
     super(props);
     this.state = {
       mounted: false,
+      hoverSelect: false,
     };
   }
 
   componentDidMount() {
-    this.timer = setTimeout(() => {
+    window.addEventListener('mouseup', () => this.setState({ hoverSelect: false }))
+
+    this.timer = window.setTimeout(() => {
       this.setState({
         mounted: true,
       });
@@ -73,11 +80,11 @@ export default class TransferList extends React.Component<TransferListProps, any
     clearTimeout(this.triggerScrollTimer);
   }
 
-  shouldComponentUpdate(...args) {
+  shouldComponentUpdate(...args: any[]) {
     return PureRenderMixin.shouldComponentUpdate.apply(this, args);
   }
 
-  getCheckStatus(filteredDataSource) {
+  getCheckStatus(filteredDataSource: TransferItem[]) {
     const { checkedKeys } = this.props;
     if (checkedKeys.length === 0) {
       return 'none';
@@ -87,21 +94,28 @@ export default class TransferList extends React.Component<TransferListProps, any
     return 'part';
   }
 
-  handleSelect = (selectedItem) => {
+  handleSelect = (selectedItem: TransferItem) => {
     const { checkedKeys } = this.props;
     const result = checkedKeys.some((key) => key === selectedItem.key);
     this.props.handleSelect(selectedItem, !result);
   }
 
-  handleFilter = (e) => {
+  // handleDoubleSelect = (selectedItem: TransferItem) => {
+  //   console.log('1312312')
+  //   const { checkedKeys } = this.props;
+  //   const result = checkedKeys.some((key) => key === selectedItem.key);
+  //   this.props.handleDoubleSelect(selectedItem, !result);
+  // }
+
+  handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.props.handleFilter(e);
     if (!e.target.value) {
       return;
     }
     // Manually trigger scroll event for lazy search bug
     // https://github.com/ant-design/ant-design/issues/5631
-    this.triggerScrollTimer = setTimeout(() => {
-      const listNode = findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
+    this.triggerScrollTimer = window.setTimeout(() => {
+      const listNode = ReactDOM.findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
       if (listNode) {
         triggerEvent(listNode, 'scroll');
       }
@@ -112,7 +126,7 @@ export default class TransferList extends React.Component<TransferListProps, any
     this.props.handleClear();
   }
 
-  matchFilter = (text, item) => {
+  matchFilter = (text: string, item: TransferItem) => {
     const { filter, filterOption } = this.props;
     if (filterOption) {
       return filterOption(filter, item);
@@ -120,7 +134,7 @@ export default class TransferList extends React.Component<TransferListProps, any
     return text.indexOf(filter) >= 0;
   }
 
-  renderItem = (item) => {
+  renderItem = (item: TransferItem) => {
     const { render = noop } = this.props;
     const renderResult = render(item);
     const isRenderResultPlain = isRenderResultPlainObject(renderResult);
@@ -132,9 +146,25 @@ export default class TransferList extends React.Component<TransferListProps, any
 
   render() {
     const {
-      prefixCls, dataSource, titleText, checkedKeys, lazy,
-      body = noop, footer = noop, showSearch, style, filter,
-      searchPlaceholder, notFoundContent, itemUnit, itemsUnit, onScroll,
+      prefixCls,
+      dataSource,
+      titleText,
+      checkedKeys,
+      lazy,
+      body = noop,
+      footer = noop,
+      showSearch,
+      style,
+      filter,
+      searchPlaceholder,
+      notFoundContent,
+      itemUnit,
+      itemsUnit,
+      onScroll,
+      handleShiftClick,
+      handleDownItem,
+      handleDoubleClick,
+      handleHoverSelect
     } = this.props;
 
     // Custom Layout
@@ -157,7 +187,7 @@ export default class TransferList extends React.Component<TransferListProps, any
       // all show items
       totalDataSource.push(item);
       if (!item.disabled) {
-         // response to checkAll items
+        // response to checkAll items
         filteredDataSource.push(item);
       }
 
@@ -171,7 +201,12 @@ export default class TransferList extends React.Component<TransferListProps, any
           renderedEl={renderedEl}
           checked={checked}
           prefixCls={prefixCls}
+          hoverSelect={this.state.hoverSelect}
           onClick={this.handleSelect}
+          onShiftClick={handleShiftClick}
+          onMouseDown={handleDownItem}
+          onDoubleClick={handleDoubleClick}
+          onHoverSelect={handleHoverSelect}
         />
       );
     });
@@ -226,7 +261,11 @@ export default class TransferList extends React.Component<TransferListProps, any
     );
 
     return (
-      <div className={listCls} style={style}>
+      <div
+        className={listCls}
+        style={style}
+        onMouseDown={() => this.setState({ hoverSelect: true })}
+      >
         <div className={`${prefixCls}-header`}>
           {checkAllCheckbox}
           <span className={`${prefixCls}-header-selected`}>

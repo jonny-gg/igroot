@@ -56,6 +56,7 @@ class App extends React.Component {
         targetKeys={this.state.targetKeys}
         onChange={this.handleChange}
         render={item => item.title}
+        onSort={item => this.setState({mockData: item})}
       />
     );
   }
