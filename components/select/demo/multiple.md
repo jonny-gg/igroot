@@ -18,8 +18,8 @@ import { Select } from 'igroot';
 const Option = Select.Option;
 
 const children = [];
-for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+for (let i = 10; i < 200; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}{i.toString(36) + i}</Option>);
 }
 
 function handleChange(value) {

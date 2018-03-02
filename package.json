@@ -1,6 +1,6 @@
 {
   "name": "igroot",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "title": "iGroot",
   "description": "An React-based implementation",
   "homepage": "http://igroot.i.qingcdn.com:8001/",
@@ -41,7 +41,6 @@
     "create-react-class": "^15.6.0",
     "css-animation": "^1.2.5",
     "dom-closest": "^0.2.0",
-    "igroot-form-modal": "0.0.3",
     "enquire.js": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.19.3",
@@ -120,6 +119,7 @@
     "eslint-tinker": "^0.4.0",
     "fetch-jsonp": "^1.0.3",
     "glob": "^7.1.1",
+    "igroot-form-modal": "0.0.3",
     "immutability-helper": "^2.5.0",
     "jest": "^21.1.0",
     "jsonml.js": "^0.1.0",
