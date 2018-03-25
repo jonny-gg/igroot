@@ -1,6 +1,6 @@
 {
   "name": "igroot",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "title": "iGroot",
   "description": "An React-based implementation",
   "homepage": "http://igroot.i.qingcdn.com:8001/",
@@ -119,7 +119,9 @@
     "eslint-tinker": "^0.4.0",
     "fetch-jsonp": "^1.0.3",
     "glob": "^7.1.1",
+    "igroot-edit-table": "0.0.2",
     "igroot-form-modal": "0.0.3",
+    "igroot-tags": "0.0.1",
     "immutability-helper": "^2.5.0",
     "jest": "^21.1.0",
     "jsonml.js": "^0.1.0",
