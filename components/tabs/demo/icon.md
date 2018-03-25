@@ -15,7 +15,7 @@ The Tab with Icon.
 
 
 ````jsx
-import { Tabs, Icon } from 'igroot';
+import { Tabs, Icon } from 'antd';
 const TabPane = Tabs.TabPane;
 
 ReactDOM.render(

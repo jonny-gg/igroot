@@ -47,6 +47,8 @@ export interface ButtonProps {
   onClick?: React.FormEventHandler<any>;
   onMouseUp?: React.FormEventHandler<any>;
   onMouseDown?: React.FormEventHandler<any>;
+  onKeyPress?: React.KeyboardEventHandler<any>;
+  onKeyDown?: React.KeyboardEventHandler<any>;
   tabIndex?: number;
   loading?: boolean | { delay?: number };
   disabled?: boolean;
@@ -93,13 +95,7 @@ export default class Button extends React.Component<ButtonProps, any> {
   }
 
   componentDidMount() {
-    // Fix for HOC usage like <FormatMessage />
-    const buttonText = (findDOMNode(this) as HTMLElement).innerText;
-    if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
-      this.setState({
-        hasTwoCNChar: true,
-      });
-    }
+    this.fixTwoCNChar();
   }
 
   componentWillReceiveProps(nextProps: ButtonProps) {
@@ -117,12 +113,33 @@ export default class Button extends React.Component<ButtonProps, any> {
     }
   }
 
+  componentDidUpdate() {
+    this.fixTwoCNChar();
+  }
+
   componentWillUnmount() {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
     if (this.delayTimeout) {
       clearTimeout(this.delayTimeout);
+    }
+  }
+
+  fixTwoCNChar() {
+    // Fix for HOC usage like <FormatMessage />
+    const node = (findDOMNode(this) as HTMLElement);
+    const buttonText = node.textContent || node.innerText;
+    if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
+      if (!this.state.hasTwoCNChar) {
+        this.setState({
+          hasTwoCNChar: true,
+        });
+      }
+    } else if (this.state.hasTwoCNChar) {
+      this.setState({
+        hasTwoCNChar: false,
+      });
     }
   }
 

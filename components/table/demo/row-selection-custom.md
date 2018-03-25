@@ -15,7 +15,7 @@ Use `rowSelection.selections` custom selections, default no select dropdown, sho
 
 
 ````jsx
-import { Table } from 'igroot';
+import { Table } from 'antd';
 
 const columns = [{
   title: 'Name',

@@ -14,7 +14,7 @@ title:
 Select your favourite topics.
 
 ````jsx
-import { Tag } from 'igroot';
+import { Tag } from 'antd';
 const CheckableTag = Tag.CheckableTag;
 
 const tagsFromServer = ['Movies', 'Books', 'Music', 'Sports'];

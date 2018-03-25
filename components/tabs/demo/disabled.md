@@ -14,7 +14,7 @@ title:
 Disabled a tab.
 
 ````jsx
-import { Tabs } from 'igroot';
+import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 
 ReactDOM.render(

@@ -37,12 +37,13 @@ Select component to select value from options.
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: ReactNode}` | boolean | false |
 | maxTagCount | Max tag count to show | number | - |
 | maxTagPlaceholder | Placeholder for not showing tags | ReactNode/function(omittedValues) | - |
-| mode | Set mode of Select (Support after 2.9) | 'multiple' \| 'tags' \| 'combobox' | - |
+| mode | Set mode of Select (Support after 2.9) | 'default' \| 'multiple' \| 'tags' \| 'combobox' | 'default' |
 | notFoundContent | Specify content to show when no result matches.. | string | 'Not Found' |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |
-| optionLabelProp | Which prop value of option will render as content of select. | string | `children` |
+| optionLabelProp | Which prop value of option will render as content of select. | string | `value` for `combobox`, `children` for other modes |
 | placeholder | Placeholder of select | string\|ReactNode | - |
 | showSearch | Whether show search input in single mode. | boolean | false |
+| showArrow | Whether to show the drop-down arrow | boolean |  true |
 | size | Size of Select input. `default` `large` `small` | string | default |
 | tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |
 | value | Current selected option. | string\|number\|string\[]\|number\[] | - |

@@ -38,11 +38,12 @@ export interface SelectProps extends AbstractSelectProps {
   defaultValue?: SelectValue;
   mode?: 'default' | 'multiple' | 'tags' | 'combobox';
   optionLabelProp?: string;
-  onChange?: (value: SelectValue) => void;
-  onSelect?: (value: SelectValue, option: Object) => any;
+  onChange?: (value: SelectValue, option: React.ReactElement<any> | React.ReactElement<any>[]) => void;
+  onSelect?: (value: SelectValue, option: React.ReactElement<any>) => any;
   onDeselect?: (value: SelectValue) => any;
   onBlur?: () => any;
   onFocus?: () => any;
+  onPopupScroll?: () => any;
   onInputKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   maxTagCount?: number;
   maxTagPlaceholder?: React.ReactNode | ((omittedValues: SelectValue[]) => React.ReactNode);

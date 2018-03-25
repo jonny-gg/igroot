@@ -14,7 +14,7 @@ title:
 Usage of basic Tag, and it could be closable by set `closable` property. Closable Tag supports `onClose` `afterClose` events.
 
 ````jsx
-import { Tag } from 'igroot';
+import { Tag } from 'antd';
 
 function log(e) {
   console.log(e);

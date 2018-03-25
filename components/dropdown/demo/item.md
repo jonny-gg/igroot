@@ -14,7 +14,7 @@ title:
 Divider and disabled menu item.
 
 ````jsx
-import { Menu, Dropdown, Icon } from 'igroot';
+import { Menu, Dropdown, Icon } from 'antd';
 
 const menu = (
   <Menu>

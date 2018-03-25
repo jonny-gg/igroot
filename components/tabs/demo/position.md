@@ -14,7 +14,7 @@ title:
 Tab's position: left, right, top or bottom.
 
 ````jsx
-import { Tabs, Select } from 'igroot';
+import { Tabs, Select } from 'antd';
 const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 

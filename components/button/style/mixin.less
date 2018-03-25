@@ -54,9 +54,12 @@
 .button-variant-danger(@color; @background; @border) {
   .button-color(@color; @background; @border);
 
-  &:hover,
-  &:focus {
+  &:hover {
     .button-color(@btn-primary-color; ~`colorPalette("@{color}", 5)`; ~`colorPalette("@{color}", 5)`);
+  }
+
+  &:focus {
+    .button-color(~`colorPalette("@{color}", 5)`; #fff; ~`colorPalette("@{color}", 5)`);
   }
 
   &:active,
@@ -108,6 +111,7 @@
   display: inline-block;
   > .@{btnClassName} {
     position: relative;
+    line-height: @btn-height-base - 2px;
 
     &:hover,
     &:focus,
@@ -124,10 +128,12 @@
   // size
   &-lg > .@{btnClassName} {
     .button-size(@btn-height-lg; @btn-padding-lg; @btn-font-size-lg; @btn-border-radius-base);
+    line-height: @btn-height-lg - 2px;
   }
 
   &-sm > .@{btnClassName} {
     .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; @btn-border-radius-sm);
+    line-height: @btn-height-sm - 2px;
     > .@{iconfont-css-prefix} {
       font-size: @font-size-base;
     }
@@ -198,7 +204,8 @@
   &:focus,
   &:active,
   &.active {
-    background: #fff;
+    background: @btn-default-bg;
+    text-decoration: none;
   }
 }
 
@@ -241,6 +248,8 @@
 
   .@{btnClassName} + .@{btnClassName},
   .@{btnClassName} + &,
+  span + .@{btnClassName},
+  .@{btnClassName} + span,
   & + .@{btnClassName},
   & + & {
     margin-left: -1px;
@@ -250,15 +259,19 @@
     border-radius: 0;
   }
 
-  > .@{btnClassName}:first-child {
+  > .@{btnClassName}:first-child,
+  > span:first-child > .@{btnClassName} {
     margin-left: 0;
-    &:not(:last-child) {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-    }
   }
 
-  > .@{btnClassName}:last-child:not(:first-child) {
+  > .@{btnClassName}:first-child:not(:last-child),
+  > span:first-child:not(:last-child) > .@{btnClassName} {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  > .@{btnClassName}:last-child:not(:first-child),
+  > span:last-child:not(:first-child) > .@{btnClassName} {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
   }

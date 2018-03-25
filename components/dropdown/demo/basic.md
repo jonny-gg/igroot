@@ -14,7 +14,7 @@ title:
 The most basic dropdown menu.
 
 ````jsx
-import { Menu, Dropdown, Icon } from 'igroot';
+import { Menu, Dropdown, Icon } from 'antd';
 
 const menu = (
   <Menu>

@@ -118,7 +118,7 @@ describe('Upload List', () => {
     });
   });
 
-  it('does not change filelist when beforeUpload returns false', () => {
+  it('does concat filelist when beforeUpload returns false', () => {
     const handleChange = jest.fn();
     const wrapper = mount(
       <Upload
@@ -139,8 +139,8 @@ describe('Upload List', () => {
       },
     });
 
-    expect(wrapper.state().fileList).toBe(fileList);
-    expect(handleChange.mock.calls[0][0].fileList).toHaveLength(1);
+    expect(wrapper.state().fileList.length).toBe(fileList.length + 1);
+    expect(handleChange.mock.calls[0][0].fileList).toHaveLength(3);
   });
 
   // https://github.com/ant-design/ant-design/issues/7762
@@ -258,7 +258,29 @@ describe('Upload List', () => {
       </Upload>
     );
     wrapper.setState({});
-    await delay(0);
+    await delay(20);
     expect(wrapper.state().fileList[2].thumbUrl).not.toBeFalsy();
+  });
+
+  it('should non-image format file preview', () => {
+    const list = [
+      {
+        ...fileList[0],
+        uid: -3,
+        url: 'https://cdn.xxx.com/aaa.zip',
+        thumbUrl: 'data:application/zip;base64,UEsDBAoAAAAAADYZYkwAAAAAAAAAAAAAAAAdAAk',
+        originFileObj: new File([], 'aaa.zip'),
+      },
+    ];
+
+    const wrapper = mount(
+      <Upload
+        listType="picture"
+        defaultFileList={list}
+      >
+        <button>upload</button>
+      </Upload>
+    );
+    expect(wrapper.render()).toMatchSnapshot();
   });
 });

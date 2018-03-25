@@ -14,7 +14,7 @@ title:
 Two compacted table size: `middle` and `small`, `small` size is used in Modal only.
 
 ````jsx
-import { Table } from 'igroot';
+import { Table } from 'antd';
 
 const columns = [{
   title: 'Name',

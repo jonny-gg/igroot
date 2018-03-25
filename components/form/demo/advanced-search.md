@@ -19,7 +19,7 @@ Because the width of label is not fixed, you may need to adjust it by customizin
 
 
 ````jsx
-import { Form, Row, Col, Input, Button, Icon } from 'igroot';
+import { Form, Row, Col, Input, Button, Icon } from 'antd';
 const FormItem = Form.Item;
 
 class AdvancedSearchForm extends React.Component {
@@ -107,8 +107,8 @@ ReactDOM.render(
   display: flex;
 }
 
-.ant-advanced-search-form .ant-form-item-label {
-  overflow: visible;
+.ant-advanced-search-form .ant-form-item-control-wrapper {
+  flex: 1;
 }
 ````
 

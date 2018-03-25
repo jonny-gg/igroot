@@ -12,6 +12,7 @@ export interface PickerProps {
   className?: string;
   style?: React.CSSProperties;
   popupStyle?: React.CSSProperties;
+  dropdownClassName?: string;
   locale?: any;
   size?: 'large' | 'small' | 'default';
   getCalendarContainer?: (triggerNode: Element) => HTMLElement;
@@ -78,7 +79,7 @@ export interface RangePickerProps extends PickerProps {
   onPanelChange?: (value?: RangePickerValue, mode?: string | string[]) => void;
 }
 
-export interface WeexPickerProps extends PickerProps, SinglePickerProps {
+export interface WeekPickerProps extends PickerProps, SinglePickerProps {
   className?: string;
   placeholder?: string;
 }
@@ -86,5 +87,5 @@ export interface WeexPickerProps extends PickerProps, SinglePickerProps {
 export interface DatePickerDecorator extends React.ClassicComponentClass<DatePickerProps> {
   RangePicker: React.ClassicComponentClass<RangePickerProps>;
   MonthPicker: React.ClassicComponentClass<MonthPickerProps>;
-  WeekPicker: React.ClassicComponentClass<WeexPickerProps>;
+  WeekPicker: React.ClassicComponentClass<WeekPickerProps>;
 }

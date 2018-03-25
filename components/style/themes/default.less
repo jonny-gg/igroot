@@ -67,12 +67,12 @@
 
 // ICONFONT
 @iconfont-css-prefix    : anticon;
-@icon-url               : "https://at.alicdn.com/t/font_148784_dky7e838xq4obt9";
+@icon-url               : "https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i";
 
 // LINK
 @link-color             : @primary-color;
-@link-hover-color       : @primary-5;
-@link-active-color      : @primary-7;
+@link-hover-color       : color(~`colorPalette("@{link-color}", 5)`);
+@link-active-color      : color(~`colorPalette("@{link-color}", 7)`);
 @link-decoration        : none;
 @link-hover-decoration  : none;
 
@@ -362,6 +362,7 @@
 @badge-height: 20px;
 @badge-dot-size: 6px;
 @badge-font-size: @font-size-sm;
+@badge-font-weight: normal;
 @badge-status-size: 6px;
 
 // Rate
@@ -386,6 +387,8 @@
 @tabs-card-height: 40px;
 @tabs-card-active-color: @primary-color;
 @tabs-title-font-size: @font-size-base;
+@tabs-title-font-size-lg: @font-size-lg;
+@tabs-title-font-size-sm: @font-size-base;
 @tabs-ink-bar-bg-color: @primary-color;
 @tab-bar-margin: 0 0 16px 0;
 @tab-horizontal-margin: 0 32px 0 0;
@@ -419,6 +422,7 @@
 // ---
 @switch-height: 22px;
 @switch-sm-height: 16px;
+@switch-sm-checked-margin-left: -(@switch-sm-height - 3px);
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
 
@@ -426,6 +430,8 @@
 // ---
 @pagination-item-size: 32px;
 @pagination-item-size-sm: 24px;
+@pagination-font-family: Arial;
+@pagination-font-weight-active: 500;
 
 // Breadcrumb
 // ---

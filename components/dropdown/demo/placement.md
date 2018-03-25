@@ -14,7 +14,7 @@ title:
 Support 6 placements.
 
 ````jsx
-import { Menu, Dropdown, Button } from 'igroot';
+import { Menu, Dropdown, Button } from 'antd';
 
 const menu = (
   <Menu>

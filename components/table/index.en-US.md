@@ -65,7 +65,7 @@ const columns = [{
 | indentSize | Indent size in pixels of tree data | number | 15 |
 | loading | Loading status of table | boolean\|[object](https://ant.design/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | `false` |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br> filterReset: 'Reset' <br> emptyText: 'No Data' <br> [Default](https://github.com/ant-design/ant-design/issues/575#issuecomment-159169511) |
-| pagination | Pagination [config](/components/pagination/), hide it by setting it to `false` | object |  |
+| pagination | Pagination [config](#pagination) or [`Pagination`] (/components/pagination/), hide it by setting it to `false` | object |  |
 | rowClassName | Row's className | Function(record, index):string | - |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
@@ -78,6 +78,27 @@ const columns = [{
 | onExpandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
 | onHeaderRow | Set props on per header row | Function(column, index) | - |
 | onRow | Set props on per row | Function(record, index) | - |
+
+#### onRow usage
+
+Same as `onRow` `onHeaderRow` `onCell` `onHeaderCell`
+
+```jsx
+<Table
+  onRow={(record) => {
+    return {
+      onClick: () => {},       // click row
+      onMouseEnter: () => {},  // mouse enter row
+      onXxxx...
+    };
+  }}
+  onHeaderRow={(column) => {
+    return {
+      onClick: () => {},        // click header row
+    };
+  }}
+/>
+```
 
 ### Column
 
@@ -99,6 +120,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |
 | render | Renderer of the table cell. The return value should be a ReactNode, or an object for [colSpan/rowSpan config](#components-table-demo-colspan-rowspan) | Function(text, record, index) {} | - |
+| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | Title of this column | string\|ReactNode | - |
@@ -114,6 +136,16 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | -------- | ----------- | ---- | ------- |
 | title | Title of the column group | string\|ReactNode | - |
 
+### pagination
+
+Properties for pagination.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
+
+More about pagination, please check [`Pagination`](/components/pagination/).
+
 ### rowSelection
 
 Properties for row selection.
@@ -124,10 +156,11 @@ Properties for row selection.
 | getCheckboxProps | Get Checkbox or Radio props | Function(record) | - |
 | hideDefaultSelections | Remove the default `Select All` and `Select Invert` selections | boolean | `false` |
 | selectedRowKeys | Controlled selected row keys | string\[] | \[] |
+| columnWidth | Set the width of the selection column | string\|number | - |
 | selections | Custom selection [config](#rowSelection), only displays default selections when set to `true` | object\[]\|boolean | - |
 | type | `checkbox` or `radio` | `checkbox` \| `radio` | `checkbox` |
 | onChange | Callback executed when selected rows change | Function(selectedRowKeys, selectedRows) | - |
-| onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows) | - |
+| onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows, nativeEvent) | - |
 | onSelectAll | Callback executed when select/deselect all rows | Function(selected, selectedRows, changeRows) | - |
 | onSelectInvert | Callback executed when row selection is inverted | Function(selectedRows) | - |
 
@@ -142,8 +175,8 @@ Properties for row selection.
 ## Using in TypeScript
 
 ```jsx
-import { Table } from 'igroot';
-import { ColumnProps } from 'igroot/lib/table';
+import { Table } from 'antd';
+import { ColumnProps } from 'antd/lib/table';
 
 interface IUser {
   key: number,

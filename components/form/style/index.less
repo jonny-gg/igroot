@@ -73,7 +73,6 @@ input[type="checkbox"] {
   .reset-component;
   margin-bottom: @form-item-margin-bottom;
   vertical-align: top;
-  transition: margin .15s steps(1);
 
   // nested FormItem
   &-control > &:last-child,
@@ -87,9 +86,12 @@ input[type="checkbox"] {
     .clearfix;
   }
 
+  &-children {
+    position: relative;
+  }
+
   &-with-help {
     margin-bottom: @form-item-margin-bottom - @font-size-base * @line-height-base - @form-help-margin-top;
-    transition: none;
   }
 
   &-label {
@@ -233,8 +235,8 @@ form {
     margin-left: 0;
   }
 
-  .@{ant-prefix}-input-number {
-    margin-right: 8px;
+  .@{ant-prefix}-input-number + .@{form-prefix-cls}-text {
+    margin-left: 8px;
   }
 
   .@{ant-prefix}-select,
@@ -371,7 +373,7 @@ form {
       margin-bottom: 24px;
     }
 
-    > div {
+    > .@{form-prefix-cls}-item-control-wrapper, > .@{form-prefix-cls}-item-label {
       display: inline-block;
       vertical-align: middle;
     }
@@ -396,15 +398,16 @@ form {
 .has-warning,
 .has-error,
 .is-validating {
-  &.has-feedback:after {
+  &.has-feedback .@{form-prefix-cls}-item-children:after {
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
     visibility: visible;
     pointer-events: none;
     width: @form-component-height;
-    height: @form-component-max-height;
-    line-height: @form-component-max-height;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -10px;
     text-align: center;
     font-size: @form-feedback-icon-size;
     animation: zoomIn .3s @ease-out-back;
@@ -414,7 +417,7 @@ form {
 }
 
 .has-success {
-  &.has-feedback:after {
+  &.has-feedback .@{form-prefix-cls}-item-children:after {
     animation-name: diffZoomIn1 !important;
     content: '\e630';
     color: @success-color;
@@ -424,7 +427,7 @@ form {
 .has-warning {
   .form-control-validation(@warning-color; @warning-color;);
 
-  &.has-feedback:after {
+  &.has-feedback .@{form-prefix-cls}-item-children:after {
     content: '\e62c';
     color: @warning-color;
     animation-name: diffZoomIn3 !important;
@@ -471,7 +474,7 @@ form {
 .has-error {
   .form-control-validation(@error-color; @error-color;);
 
-  &.has-feedback:after {
+  &.has-feedback .@{form-prefix-cls}-item-children:after {
     content: '\e62e';
     color: @error-color;
     animation-name: diffZoomIn2 !important;
@@ -541,7 +544,7 @@ form {
 }
 
 .is-validating {
-  &.has-feedback:after {
+  &.has-feedback .@{form-prefix-cls}-item-children:after {
     display: inline-block;
     animation: loadingCircle 1s infinite linear;
     content: "\e64d";

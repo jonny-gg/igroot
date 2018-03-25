@@ -15,7 +15,7 @@ Another type Tabs, which doesn't support vertical mode.
 
 
 ````jsx
-import { Tabs } from 'igroot';
+import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 
 function callback(key) {

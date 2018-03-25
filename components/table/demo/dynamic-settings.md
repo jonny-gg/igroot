@@ -65,15 +65,16 @@ const title = () => 'Here is title';
 const showHeader = true;
 const footer = () => 'Here is footer';
 const scroll = { y: 240 };
+const pagination = { position: 'bottom' };
 
 class Demo extends React.Component {
   state = {
     bordered: false,
     loading: false,
-    pagination: true,
+    pagination,
     size: 'default',
     expandedRowRender,
-    title,
+    title: undefined,
     showHeader,
     footer,
     rowSelection: {},
@@ -114,6 +115,13 @@ class Demo extends React.Component {
     this.setState({ scroll: enable ? scroll : undefined });
   }
 
+  handlePaginationChange = (e) => {
+    const { value } = e.target;
+    this.setState({
+      pagination: value === 'none' ? false : { position: value },
+    });
+  }
+
   render() {
     const state = this.state;
     return (
@@ -125,9 +133,6 @@ class Demo extends React.Component {
             </FormItem>
             <FormItem label="loading">
               <Switch checked={state.loading} onChange={this.handleToggle('loading')} />
-            </FormItem>
-            <FormItem label="Pagination">
-              <Switch checked={state.pagination} onChange={this.handleToggle('pagination')} />
             </FormItem>
             <FormItem label="Title">
               <Switch checked={!!state.title} onChange={this.handleTitleChange} />
@@ -152,6 +157,17 @@ class Demo extends React.Component {
                 <Radio.Button value="default">Default</Radio.Button>
                 <Radio.Button value="middle">Middle</Radio.Button>
                 <Radio.Button value="small">Small</Radio.Button>
+              </Radio.Group>
+            </FormItem>
+            <FormItem label="Pagination">
+              <Radio.Group
+                value={state.pagination ? state.pagination.position : 'none'}
+                onChange={this.handlePaginationChange}
+              >
+                <Radio.Button value="top">Top</Radio.Button>
+                <Radio.Button value="bottom">Bottom</Radio.Button>
+                <Radio.Button value="both">Both</Radio.Button>
+                <Radio.Button value="none">None</Radio.Button>
               </Radio.Group>
             </FormItem>
           </Form>
