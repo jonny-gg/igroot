@@ -19,6 +19,18 @@ There are four kinds of picker:
 - RangePicker
 - WeekPicker
 
+### Localization
+
+The default locale is en-US, if you need to use other languages, recommend to use internationalized components provided by us at the entrance. Look at: [LocaleProvider](http://ant.design/components/locale-provider/).
+
+If there are special needs (only modifying single component language), Please use the property: local. Example: [default](https://github.com/ant-design/ant-design/blob/master/components/date-picker/locale/example.json).
+
+```jsx
+import locale from 'antd/lib/date-picker/locale/zh_CN';
+
+<DatePicker locale={locale} />
+```
+
 **Note:** Part of locale of DatePicker, MonthPicker, RangePicker, WeekPicker is read from value. So, please set the locale of moment correctly.
 
 ```jsx
@@ -51,6 +63,8 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | size | determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | string | - |
 | style | to customize the style of the input box | object | {} |
 | onOpenChange | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) | - |
+| mode | picker panel mode | `time|date|month|year` | 'date' |
+| onPanelChange | callback when picker panel mode is changed | function(value, mode) | - |
 
 ### Common Methods
 

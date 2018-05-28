@@ -18,16 +18,16 @@ import { Alert } from 'igroot';
 
 class App extends React.Component {
   state = {
-    visiable: true,
+    visible: true,
   }
   handleClose = () => {
-    this.setState({ visiable: false });
+    this.setState({ visible: false });
   }
   render() {
     return (
       <div>
         {
-          this.state.visiable ? (
+          this.state.visible ? (
             <Alert
               message="Alert Message Text"
               type="success"

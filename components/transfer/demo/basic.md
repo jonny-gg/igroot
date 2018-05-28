@@ -52,7 +52,6 @@ class App extends React.Component {
   }
 
   handleScroll = (direction, e) => {
-    
     console.log('direction:', direction);
     console.log('target:', e.target);
   }

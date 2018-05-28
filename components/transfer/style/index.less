@@ -89,7 +89,7 @@
       padding: 0;
       margin: 0;
       > .LazyLoad {
-        animation: transferHighlightIn 5s;
+        animation: transferHighlightIn 1s;
       }
 
       &-item {
@@ -105,10 +105,6 @@
       }
 
       &-item:not(&-item-disabled):hover {
-        cursor: pointer;
-        background-color: @item-hover-bg;
-      }
-      &-item:not(&-item-disabled):active {
         cursor: pointer;
         background-color: @item-hover-bg;
       }
@@ -152,7 +148,11 @@
 
     .@{ant-prefix}-btn {
       display: block;
-      margin-bottom: 4px;
+
+      &:first-child {
+        margin-bottom: 4px;
+      }
+
       .@{iconfont-css-prefix} {
         font-size: 12px;
       }

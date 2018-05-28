@@ -2,9 +2,9 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Animate from 'rc-animate';
-import isCssAnimationSupported from '../_util/isCssAnimationSupported';
 import omit from 'omit.js';
 
+export type SpinSize = 'small' | 'default' | 'large';
 export type SpinIndicator = React.ReactElement<any>;
 
 export interface SpinProps {
@@ -12,7 +12,7 @@ export interface SpinProps {
   className?: string;
   spinning?: boolean;
   style?: React.CSSProperties;
-  size?: 'small' | 'default' | 'large';
+  size?: SpinSize;
   tip?: string;
   delay?: number;
   wrapperClassName?: string;
@@ -28,7 +28,7 @@ export default class Spin extends React.Component<SpinProps, SpinState> {
   static defaultProps = {
     prefixCls: 'ant-spin',
     spinning: true,
-    size: 'default',
+    size: 'default' as SpinSize,
     wrapperClassName: '',
   };
 
@@ -54,15 +54,6 @@ export default class Spin extends React.Component<SpinProps, SpinState> {
 
   isNestedPattern() {
     return !!(this.props && this.props.children);
-  }
-
-  componentDidMount() {
-    if (!isCssAnimationSupported()) {
-      // Show text in IE9
-      this.setState({
-        notCssAnimationSupported: true,
-      });
-    }
   }
 
   componentWillUnmount() {
@@ -119,13 +110,13 @@ export default class Spin extends React.Component<SpinProps, SpinState> {
 
   render() {
     const { className, size, prefixCls, tip, wrapperClassName, ...restProps } = this.props;
-    const { spinning, notCssAnimationSupported } = this.state;
+    const { spinning } = this.state;
 
     const spinClassName = classNames(prefixCls, {
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: spinning,
-      [`${prefixCls}-show-text`]: !!tip || notCssAnimationSupported,
+      [`${prefixCls}-show-text`]: !!tip,
     }, className);
 
     // fix https://fb.me/react-unknown-prop

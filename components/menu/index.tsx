@@ -7,7 +7,7 @@ import animation from '../_util/openAnimation';
 import warning from '../_util/warning';
 import SubMenu from './SubMenu';
 import Item from './MenuItem';
-import { SliderContext } from '../layout/Sider';
+import { SiderContext } from '../layout/Sider';
 
 export interface SelectParam {
   key: string;
@@ -26,9 +26,11 @@ export interface ClickParam {
 
 export type MenuMode = 'vertical' | 'vertical-left' | 'vertical-right' | 'horizontal' | 'inline';
 
+export type MenuTheme = 'light' | 'dark';
+
 export interface MenuProps {
   id?: string;
-  theme?: 'light' | 'dark';
+  theme?: MenuTheme;
   mode?: MenuMode;
   selectable?: boolean;
   selectedKeys?: Array<string>;
@@ -49,6 +51,7 @@ export interface MenuProps {
   inlineCollapsed?: boolean;
   subMenuCloseDelay?: number;
   subMenuOpenDelay?: number;
+  getPopupContainer?: (triggerNode: Element) => HTMLElement;
 }
 
 export interface MenuState {
@@ -63,7 +66,8 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   static defaultProps = {
     prefixCls: 'ant-menu',
     className: '',
-    theme: 'light',  // or dark
+    theme: 'light' as MenuTheme,  // or dark
+    focusable: false,
   };
   static childContextTypes = {
     inlineCollapsed: PropTypes.bool,
@@ -107,7 +111,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       antdMenuTheme: this.props.theme,
     };
   }
-  componentWillReceiveProps(nextProps: MenuProps, nextContext: SliderContext) {
+  componentWillReceiveProps(nextProps: MenuProps, nextContext: SiderContext) {
     const { prefixCls } = this.props;
     if (this.props.mode === 'inline' &&
         nextProps.mode !== 'inline') {
@@ -119,8 +123,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     }
     if ((nextProps.inlineCollapsed && !this.props.inlineCollapsed) ||
         (nextContext.siderCollapsed && !this.context.siderCollapsed)) {
+      const menuNode = findDOMNode(this) as Element;
       this.switchModeFromInline =
-        !!this.state.openKeys.length && !!findDOMNode(this).querySelectorAll(`.${prefixCls}-submenu-open`).length;
+        !!this.state.openKeys.length && !!menuNode.querySelectorAll(`.${prefixCls}-submenu-open`).length;
       this.inlineOpenKeys = this.state.openKeys;
       this.setState({ openKeys: [] });
     }

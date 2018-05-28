@@ -25,10 +25,6 @@ export interface TransferListProps {
   filterOption?: (filterText: any, item: any) => boolean;
   style?: React.CSSProperties;
   checkedKeys: string[];
-  handleShiftClick: (itemKey: any) => void;
-  handleDownItem: (itemKey: any) => void;
-  handleDoubleClick: (itemKey: any) => void;
-  handleHoverSelect: (itemKey: any) => void;
   handleFilter: (e: any) => void;
   handleSelect: (selectedItem: any, checked: boolean) => void;
   handleSelectAll: (dataSource: any[], checkAll: boolean) => void;
@@ -61,13 +57,10 @@ export default class TransferList extends React.Component<TransferListProps, any
     super(props);
     this.state = {
       mounted: false,
-      hoverSelect: false,
     };
   }
 
   componentDidMount() {
-    window.addEventListener('mouseup', () => this.setState({ hoverSelect: false }))
-
     this.timer = window.setTimeout(() => {
       this.setState({
         mounted: true,
@@ -100,13 +93,6 @@ export default class TransferList extends React.Component<TransferListProps, any
     this.props.handleSelect(selectedItem, !result);
   }
 
-  // handleDoubleSelect = (selectedItem: TransferItem) => {
-  //   console.log('1312312')
-  //   const { checkedKeys } = this.props;
-  //   const result = checkedKeys.some((key) => key === selectedItem.key);
-  //   this.props.handleDoubleSelect(selectedItem, !result);
-  // }
-
   handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.props.handleFilter(e);
     if (!e.target.value) {
@@ -115,7 +101,8 @@ export default class TransferList extends React.Component<TransferListProps, any
     // Manually trigger scroll event for lazy search bug
     // https://github.com/ant-design/ant-design/issues/5631
     this.triggerScrollTimer = window.setTimeout(() => {
-      const listNode = ReactDOM.findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
+      const transferNode = ReactDOM.findDOMNode(this) as Element;
+      const listNode = transferNode.querySelectorAll('.ant-transfer-list-content')[0];
       if (listNode) {
         triggerEvent(listNode, 'scroll');
       }
@@ -146,25 +133,9 @@ export default class TransferList extends React.Component<TransferListProps, any
 
   render() {
     const {
-      prefixCls,
-      dataSource,
-      titleText,
-      checkedKeys,
-      lazy,
-      body = noop,
-      footer = noop,
-      showSearch,
-      style,
-      filter,
-      searchPlaceholder,
-      notFoundContent,
-      itemUnit,
-      itemsUnit,
-      onScroll,
-      handleShiftClick,
-      handleDownItem,
-      handleDoubleClick,
-      handleHoverSelect
+      prefixCls, dataSource, titleText, checkedKeys, lazy,
+      body = noop, footer = noop, showSearch, style, filter,
+      searchPlaceholder, notFoundContent, itemUnit, itemsUnit, onScroll,
     } = this.props;
 
     // Custom Layout
@@ -187,7 +158,7 @@ export default class TransferList extends React.Component<TransferListProps, any
       // all show items
       totalDataSource.push(item);
       if (!item.disabled) {
-        // response to checkAll items
+         // response to checkAll items
         filteredDataSource.push(item);
       }
 
@@ -201,12 +172,7 @@ export default class TransferList extends React.Component<TransferListProps, any
           renderedEl={renderedEl}
           checked={checked}
           prefixCls={prefixCls}
-          hoverSelect={this.state.hoverSelect}
           onClick={this.handleSelect}
-          onShiftClick={handleShiftClick}
-          onMouseDown={handleDownItem}
-          onDoubleClick={handleDoubleClick}
-          onHoverSelect={handleHoverSelect}
         />
       );
     });
@@ -261,11 +227,7 @@ export default class TransferList extends React.Component<TransferListProps, any
     );
 
     return (
-      <div
-        className={listCls}
-        style={style}
-        onMouseDown={() => this.setState({ hoverSelect: true })}
-      >
+      <div className={listCls} style={style}>
         <div className={`${prefixCls}-header`}>
           {checkAllCheckbox}
           <span className={`${prefixCls}-header-selected`}>

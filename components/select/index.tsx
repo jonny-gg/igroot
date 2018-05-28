@@ -17,7 +17,7 @@ export interface AbstractSelectProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   tabIndex?: number;
-  placeholder?: string;
+  placeholder?: string | React.ReactNode;
   defaultActiveFirstOption?: boolean;
   dropdownClassName?: string;
   dropdownStyle?: React.CSSProperties;
@@ -31,13 +31,14 @@ export interface LabeledValue {
   label: React.ReactNode;
 }
 
-export type SelectValue = string | any[] | LabeledValue | LabeledValue[];
+export type SelectValue = string | string[] | number | number[] | LabeledValue | LabeledValue[];
 
 export interface SelectProps extends AbstractSelectProps {
   value?: SelectValue;
   defaultValue?: SelectValue;
   mode?: 'default' | 'multiple' | 'tags' | 'combobox';
   optionLabelProp?: string;
+  firstActiveValue?: string | string[];
   onChange?: (value: SelectValue, option: React.ReactElement<any> | React.ReactElement<any>[]) => void;
   onSelect?: (value: SelectValue, option: React.ReactElement<any>) => any;
   onDeselect?: (value: SelectValue) => any;
@@ -58,7 +59,7 @@ export interface SelectProps extends AbstractSelectProps {
 
 export interface OptionProps {
   disabled?: boolean;
-  value?: any;
+  value?: string | number;
   title?: string;
   children?: React.ReactNode;
 }

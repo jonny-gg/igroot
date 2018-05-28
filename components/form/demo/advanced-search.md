@@ -19,7 +19,7 @@ Because the width of label is not fixed, you may need to adjust it by customizin
 
 
 ````jsx
-import { Form, Row, Col, Input, Button, Icon } from 'antd';
+import { Form, Row, Col, Input, Button, Icon } from 'igroot';
 const FormItem = Form.Item;
 
 class AdvancedSearchForm extends React.Component {
@@ -52,7 +52,12 @@ class AdvancedSearchForm extends React.Component {
       children.push(
         <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
           <FormItem label={`Field ${i}`}>
-            {getFieldDecorator(`field-${i}`)(
+            {getFieldDecorator(`field-${i}`, {
+              rules: [{
+                required: true,
+                message: 'Input something!',
+              }],
+            })(
               <Input placeholder="placeholder" />
             )}
           </FormItem>

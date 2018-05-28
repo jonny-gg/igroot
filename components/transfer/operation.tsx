@@ -1,40 +1,25 @@
 import * as React from 'react';
 import Button from '../button';
 
-function noop() {
-}
-
 export interface TransferOperationProps {
   className?: string;
   leftArrowText?: string;
   rightArrowText?: string;
-  upArrowText?: string;
-  downArrowText?: string;
-  moveToLeft?: React.FormEventHandler<any>;
-  moveToRight?: React.FormEventHandler<any>;
-  moveUp?: React.FormEventHandler<any>;
-  moveDown?: React.FormEventHandler<any>;
+  moveToLeft?: React.FormEventHandler<HTMLButtonElement>;
+  moveToRight?: React.FormEventHandler<HTMLButtonElement>;
   leftActive?: boolean;
   rightActive?: boolean;
-  upActive?: boolean;
-  downActive?: boolean;
 }
 
 export default class Operation extends React.Component<TransferOperationProps, any> {
   render() {
     const {
-      moveToLeft = noop,
-      moveToRight = noop,
-      moveUp = noop,
-      moveDown = noop,
+      moveToLeft,
+      moveToRight,
       leftArrowText = '',
       rightArrowText = '',
-      upArrowText = '',
-      downArrowText = '',
       leftActive,
       rightActive,
-      upActive,
-      downActive,
       className,
     } = this.props;
     return (
@@ -56,24 +41,6 @@ export default class Operation extends React.Component<TransferOperationProps, a
           icon="right"
         >
           {rightArrowText}
-        </Button>
-        <Button
-          type="primary"
-          size="small"
-          disabled={!upActive}
-          onClick={moveUp}
-          icon="up"
-        >
-          {upArrowText}
-        </Button>
-        <Button
-          type="primary"
-          size="small"
-          disabled={!downActive}
-          onClick={moveDown}
-          icon="down"
-        >
-          {downArrowText}
         </Button>
       </div>
     );

@@ -21,6 +21,7 @@ export interface BadgeProps {
   status?: 'success' | 'processing' | 'default' | 'error' | 'warning';
   text?: string;
   offset?: [number | string, number | string];
+  title?: string;
 }
 
 export default class Badge extends React.Component<BadgeProps, any> {
@@ -57,6 +58,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
       status,
       text,
       offset,
+      title,
       ...restProps,
     } = this.props;
     let displayCount = (count as number) > (overflowCount as number) ? `${overflowCount}+` : count;
@@ -90,7 +92,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
     // <Badge status="success" />
     if (!children && status) {
       return (
-        <span className={badgeCls} style={styleWithOffset}>
+        <span {...restProps} className={badgeCls} style={styleWithOffset}>
           <span className={statusCls} />
           <span className={`${prefixCls}-status-text`}>{text}</span>
         </span>
@@ -103,8 +105,9 @@ export default class Badge extends React.Component<BadgeProps, any> {
         data-show={!hidden}
         className={scrollNumberCls}
         count={displayCount}
-        title={count}
+        title={title || count}
         style={styleWithOffset}
+        key="scrollNumber"
       />
     );
 

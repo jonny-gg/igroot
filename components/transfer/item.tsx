@@ -5,14 +5,11 @@ import Lazyload from 'react-lazy-load';
 import Checkbox from '../checkbox';
 
 export default class Item extends React.Component<any, any> {
-  dbClickLock = false
-
   shouldComponentUpdate(...args: any[]) {
     return PureRenderMixin.shouldComponentUpdate.apply(this, args);
   }
-
   render() {
-    const { renderedText, renderedEl, item, lazy, checked, prefixCls, onMouseDown, onDoubleClick} = this.props;
+    const { renderedText, renderedEl, item, lazy, checked, prefixCls, onClick } = this.props;
 
     const className = classNames({
       [`${prefixCls}-content-item`]: true,
@@ -23,13 +20,10 @@ export default class Item extends React.Component<any, any> {
       <li
         className={className}
         title={renderedText}
-        onMouseOver={this.onHover}
-        onMouseDown={item.disabled ? undefined : () => onMouseDown(item.key)}
-        onClick={item.disabled ? undefined : e => this.onClick(e, item)}
-        onDoubleClick={() => onDoubleClick(item.key)}
+        onClick={item.disabled ? undefined : () => onClick(item)}
       >
         <Checkbox checked={checked} disabled={item.disabled} />
-        <span style={{userSelect: 'none'}}>{renderedEl}</span>
+        <span>{renderedEl}</span>
       </li>
     );
     let children: JSX.Element | null = null;
@@ -47,17 +41,5 @@ export default class Item extends React.Component<any, any> {
     }
 
     return children;
-  }
-
-  onClick = (e, item) => {
-    if(e.shiftKey) {
-      this.props.onShiftClick(item.key)
-    } else
-      this.props.onClick(item)
-  }
-
-  onHover = () => {
-    if (this.props.hoverSelect)
-      this.props.onHoverSelect(this.props.item.key)
   }
 }
