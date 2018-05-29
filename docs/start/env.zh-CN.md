@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 1
 title: 环境准备
 ---
 

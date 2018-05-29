@@ -1,6 +1,6 @@
 ---
 order: 0
-title: 业务组件说明
+title: 业务组件使用
 ---
 
 这里是 iGroot 的 React 实现，针对业务比较频繁使用的组件封装。
@@ -131,7 +131,7 @@ title: 业务组件说明
 
 * 组件  `适用于公司` or `适用于团队` 都可以往这里放
 * 快速发布npm包,按需引入您需要的组件
-* [业务组件开发文档](http://jr.baishancloud.com:8090/pages/viewpage.action?pageId=11930429) (~官方唯一指定文档~)
+* [业务组件开发文档](http://localhost:8001/docs/business/bcdevelop-cn) (~官方唯一指定文档~)
 
 ## 目录结构
 
