@@ -1,7 +1,7 @@
 ---
 category: BComponents
 type: General
-title: Igroot-Edit-Table
+title: IgrootEditTable
 subtitle: 动态增加行
 cols: 1
 ---

@@ -1,7 +1,7 @@
 ---
 category: BComponents
 type: General
-title: FormFilter
+title: IgrootFormFilter
 subtitle: 表单过滤
 cols: 1
 ---

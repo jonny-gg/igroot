@@ -11,6 +11,12 @@ title: 业务组件开发流程
 - 针对业务比较频繁使用的组件封装
 - 为``白山``贡献一份自己的力量
 
+## 约定共识
+
+- 命名: igroot-xxx / igroot-xxx-xxx **统一小写** **统一小写** **统一小写**(重要的事情说三遍)
+- 开发/维护: 直接发布到npm 代码中尽量不要包含敏感的业务数据
+- 安装: npm i igroot-xxx-xxx -save
+
 ## 环境准备
 sl-core (如未安装,[请参考](http://igroot.i.qingcdn.com:8001/docs/start/env-cn)) 
 
@@ -19,6 +25,9 @@ sl-core (如未安装,[请参考](http://igroot.i.qingcdn.com:8001/docs/start/en
 sl init
 ```
 选择`iGroot Business Component`并输入组件名：
+- 
+> 组件的命名: igroot-xxx / igroot-xxx-xxx
+- 
 ![iGroot Business Component](http://jr.baishancloud.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193318.png?version=1&modificationDate=1512041599483&api=v2)
 
 然后进入项目中安装项目依赖：
