@@ -125,7 +125,7 @@
     "fetch-jsonp": "^1.0.3",
     "glob": "^7.1.1",
     "igroot-edit-table": "0.0.2",
-    "igroot-form-modal": "0.0.3",
+    "igroot-form-modal": "0.0.4",
     "igroot-tags": "0.0.1",
     "immutability-helper": "^2.5.0",
     "intersection-observer": "^0.5.0",

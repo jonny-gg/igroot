@@ -16,6 +16,7 @@ Modal for Form
 ````jsx
 import { Input, InputNumber, Radio, Button } from 'igroot'
 import FormModal from 'igroot-form-modal/src/index'
+//演示使用 正式环境请使用 import FormModal from 'igroot-form-modal'
 
 const { Item } = FormModal
 const { Group: RadioGroup, Button: RadioButton } = Radio

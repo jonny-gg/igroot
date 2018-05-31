@@ -1,7 +1,7 @@
 ---
 category: BComponents
 type: General
-title: IgrootTags
+title: Tags
 subtitle: 自定义标签
 cols: 1
 ---
