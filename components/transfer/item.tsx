@@ -49,7 +49,7 @@ export default class Item extends React.Component<any, any> {
     return children;
   }
 
-  onClick = (e, item) => {
+  onClick = (e:any, item:any) => {
     if(e.shiftKey) {
       this.props.onShiftClick(item.key)
     } else

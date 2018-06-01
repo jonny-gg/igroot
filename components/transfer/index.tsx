@@ -211,7 +211,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
     const { sourceSelectedKeys } = this.state;
     const dataSource = [...this.props.dataSource];
-    console.log(dataSource.map(item=>item.key), sourceSelectedKeys)
+    // console.log(dataSource.map(item => item.key), sourceSelectedKeys)
     const itemIndex = dataSource.findIndex(data => data.key === sourceSelectedKeys[0]);
     const elem = dataSource.splice(itemIndex, 1);
     // console.log(elem,'ele')
@@ -220,7 +220,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
     else
       dataSource.splice(itemIndex - 1, 0, elem[0]);
-    console.log(dataSource.map(item=>item.key), 'result')
+    // console.log(dataSource.map(item => item.key), 'result')
     onSort(dataSource);
   }
 
@@ -251,7 +251,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
         return { min: a, max: b }
     })(finalValueIndex, itemIndex)
 
-    const obj = {}
+    const obj:any = {}
     const keys = Array.prototype
       .concat(this.state[key], dataSource.slice(min, max + 1).map(data => data.key))
       .filter(key => {
@@ -282,7 +282,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
         return { min: a, max: b }
     })(finalValueIndex, itemIndex)
 
-    const obj = {}
+    const obj: any = {}
     const keys = Array.prototype
       .concat(stateKeys, dataSource.slice(min, max + 1).map(data => data.key))
       .filter(key => {
