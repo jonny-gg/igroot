@@ -13,6 +13,9 @@ router 配置渲染组件
 ## 何时使用
 标签可以动态添加并且可以调整顺序的情况
 
+## 效果演示
+![](http://jr.baishancloud.com:8090/download/attachments/32059938/igroot-input-tags.gif?version=1&modificationDate=1528976878717&api=v2)
+
 ## 安装方法
 ```jsx
 sl add -c igroot-input-tag
