@@ -53,6 +53,7 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 > 注意：
 > - 设置 `allowSyntheticDefaultImports` 避免 `error TS1192: Module 'react' has no default export` 的错误。
 > - 本UI组件是基于ant-design做的二次改造
+> - 空格
 
 
 ## 链接
