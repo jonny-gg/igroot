@@ -1,10 +1,13 @@
 /* tslint:disable jsx-no-multiline-js */
 import * as React from 'react';
 import * as moment from 'moment';
+import { polyfill } from 'react-lifecycles-compat';
 import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import RcDatePicker from 'rc-calendar/lib/Picker';
 import classNames from 'classnames';
+import shallowequal from 'shallowequal';
 import Icon from '../icon';
+import Tag from '../tag';
 import warning from '../_util/warning';
 import interopDefault from '../_util/interopDefault';
 import { RangePickerValue, RangePickerPresetRange } from './interface';
@@ -62,12 +65,36 @@ function fixLocale(value: RangePickerValue | undefined, localeCode: string) {
   }
 }
 
-export default class RangePicker extends React.Component<any, RangePickerState> {
+class RangePicker extends React.Component<any, RangePickerState> {
   static defaultProps = {
     prefixCls: 'ant-calendar',
+    tagPrefixCls: 'ant-tag',
     allowClear: true,
     showToday: false,
   };
+
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    let state = null;
+    if ('value' in nextProps) {
+      const value = nextProps.value || [];
+      state = {
+        value,
+      };
+      if (!shallowequal(nextProps.value, prevState.value)) {
+        state = {
+          ...state,
+          showDate: getShowDateFromValue(value) || prevState.showDate,
+        };
+      }
+    }
+    if (('open' in nextProps) && prevState.open !== nextProps.open) {
+      state = {
+        ...state,
+        open: nextProps.open,
+      };
+    }
+    return state;
+  }
 
   private picker: HTMLSpanElement;
 
@@ -90,22 +117,6 @@ export default class RangePicker extends React.Component<any, RangePickerState> 
       open: props.open,
       hoverValue: [],
     };
-  }
-
-  componentWillReceiveProps(nextProps: any) {
-    if ('value' in nextProps) {
-      const state = this.state;
-      const value = nextProps.value || [];
-      this.setState({
-        value,
-        showDate: getShowDateFromValue(value) || state.showDate,
-      });
-    }
-    if ('open' in nextProps) {
-      this.setState({
-        open: nextProps.open,
-      });
-    }
   }
 
   clearSelection = (e: React.MouseEvent<HTMLElement>) => {
@@ -199,7 +210,7 @@ export default class RangePicker extends React.Component<any, RangePickerState> 
   }
 
   renderFooter = (...args: any[]) => {
-    const { prefixCls, ranges, renderExtraFooter } = this.props;
+    const { prefixCls, ranges, renderExtraFooter, tagPrefixCls } = this.props;
     if (!ranges && !renderExtraFooter) {
       return null;
     }
@@ -211,14 +222,16 @@ export default class RangePicker extends React.Component<any, RangePickerState> 
     const operations = Object.keys(ranges || {}).map((range) => {
       const value = ranges[range];
       return (
-        <a
+        <Tag
           key={range}
+          prefixCls={tagPrefixCls}
+          color="blue"
           onClick={() => this.handleRangeClick(value)}
           onMouseEnter={() => this.setState({ hoverValue: value })}
           onMouseLeave={this.handleRangeMouseLeave}
         >
           {range}
-        </a>
+        </Tag>
       );
     });
     const rangeNode = (
@@ -347,6 +360,8 @@ export default class RangePicker extends React.Component<any, RangePickerState> 
         tabIndex={props.disabled ? -1 : 0}
         onFocus={props.onFocus}
         onBlur={props.onBlur}
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
       >
         <RcDatePicker
           {...props}
@@ -364,3 +379,7 @@ export default class RangePicker extends React.Component<any, RangePickerState> 
     );
   }
 }
+
+polyfill(RangePicker);
+
+export default RangePicker;

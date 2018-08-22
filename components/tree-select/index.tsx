@@ -6,7 +6,7 @@ import { SelectLocale } from '../select';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import warning from '../_util/warning';
 
-export { TreeData, TreeSelectProps } from './interface';
+export { TreeNode, TreeSelectProps } from './interface';
 
 export default class TreeSelect extends React.Component<TreeSelectProps, any> {
   static TreeNode = TreeNode;
@@ -52,7 +52,7 @@ export default class TreeSelect extends React.Component<TreeSelectProps, any> {
       notFoundContent,
       dropdownStyle,
       dropdownClassName,
-      ...restProps,
+      ...restProps
     } = this.props;
 
     const cls = classNames({

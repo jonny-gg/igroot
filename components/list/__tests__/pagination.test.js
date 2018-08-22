@@ -19,7 +19,7 @@ describe('List.pagination', () => {
         pagination={pagination}
         dataSource={data}
         renderItem={item => (
-          <List.Item key={item.key} >
+          <List.Item key={item.key}>
             {item.name}
           </List.Item>
         )}
@@ -125,5 +125,16 @@ describe('List.pagination', () => {
         .find('.ant-pagination-item-1')
         .hasClass('ant-pagination-item-active')
     ).toBe(true);
+  });
+
+  it('specify the position of pagination', () => {
+    const wrapper = mount(createList({ pagination: { position: 'top' } }));
+    expect(wrapper.find('.ant-list').childAt(0).find('.ant-pagination')).toHaveLength(1);
+    wrapper.setProps({ pagination: { position: 'bottom' } });
+    expect(wrapper.find('.ant-list').children().last().find('.ant-pagination')).toHaveLength(1);
+    wrapper.setProps({ pagination: { position: 'both' } });
+    expect(wrapper.find('.ant-pagination')).toHaveLength(2);
+    expect(wrapper.find('.ant-list').childAt(0).find('.ant-pagination')).toHaveLength(1);
+    expect(wrapper.find('.ant-list').children().last().find('.ant-pagination')).toHaveLength(1);
   });
 });

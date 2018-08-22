@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import classNames from 'classnames';
 import shallowequal from 'shallowequal';
@@ -163,6 +163,9 @@ export default class Affix extends React.Component<AffixProps, AffixState> {
     if (typeof offsetTop !== 'number' && typeof offsetBottom !== 'number') {
       offsetMode.top = true;
       offsetTop = 0;
+    } else {
+      offsetMode.top = typeof offsetTop === 'number';
+      offsetMode.bottom = typeof offsetBottom === 'number';
     }
 
     const targetRect = getTargetRect(targetNode);
@@ -228,6 +231,12 @@ export default class Affix extends React.Component<AffixProps, AffixState> {
       this.setTargetEventListeners(nextProps.target!);
 
       // Mock Event object.
+      this.updatePosition({});
+    }
+    if (
+      this.props.offsetTop !== nextProps.offsetTop ||
+      this.props.offsetBottom !== nextProps.offsetBottom
+    ) {
       this.updatePosition({});
     }
   }

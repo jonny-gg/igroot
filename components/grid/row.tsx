@@ -19,7 +19,7 @@ if (typeof window !== 'undefined') {
 import * as React from 'react';
 import { Children, cloneElement } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 export type Breakpoint = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 export type BreakpointMap = Partial<Record<Breakpoint, string>>;
@@ -115,7 +115,7 @@ export default class Row extends React.Component<RowProps, RowState> {
   render() {
     const {
       type, justify, align, className, style, children,
-      prefixCls = 'ant-row', ...others,
+      prefixCls = 'ant-row', ...others
     } = this.props;
     const gutter = this.getGutter();
     const classes = classNames({

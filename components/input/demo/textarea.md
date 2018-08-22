@@ -15,6 +15,7 @@ For multi-line input.
 
 ````jsx
 import { Input } from 'igroot';
+
 const { TextArea } = Input;
 
 ReactDOM.render(<TextArea rows={4} />, mountNode);

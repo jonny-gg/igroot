@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Data Display
-title: List 
+title: List
 cols: 1
 ---
 
@@ -23,10 +23,20 @@ A list can be used to display content related to a single subject. The content c
 | header | List header renderer | string\|ReactNode | - |
 | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
 | loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://ant.design/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/8659)) | false |
-| locale | i18n text including empty text | object | emptyText: 'No Data' <br> |
 | loadMore | Shows a load more content | string\|ReactNode | - |
+| locale | i18n text including empty text | object | emptyText: 'No Data' <br> |
 | pagination | Pagination [config](https://ant.design/components/pagination/), hide it by setting it to false | boolean \| object | false |
 | split | Toggles rendering of the split under the list item | boolean | true |
+
+### pagination
+
+Properties for pagination.
+
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
+
+More about pagination, please check [`Pagination`](/components/pagination/).
 
 ### List grid props
 

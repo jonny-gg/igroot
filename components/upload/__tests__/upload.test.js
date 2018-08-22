@@ -3,8 +3,12 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Upload from '..';
 import { fileToObject } from '../utils';
+import { setup, teardown } from './mock';
 
 describe('Upload', () => {
+  beforeEach(() => setup());
+  afterEach(() => teardown());
+
   // https://github.com/react-component/upload/issues/36
   it('should get refs inside Upload in componentDidMount', () => {
     let ref;
@@ -12,6 +16,7 @@ describe('Upload', () => {
       componentDidMount() {
         ref = this.refs.input;
       }
+
       render() {
         return (
           <Upload supportServerRender={false}>
@@ -28,9 +33,9 @@ describe('Upload', () => {
     const data = jest.fn();
     const props = {
       action: 'http://upload.com',
-      beforeUpload: () => new Promise(resolve =>
+      beforeUpload: () => new Promise(resolve => (
         setTimeout(() => resolve('success'), 100)
-      ),
+      )),
       data,
       onChange: ({ file }) => {
         if (file.status !== 'uploading') {
@@ -42,7 +47,7 @@ describe('Upload', () => {
 
     const wrapper = mount(
       <Upload {...props}>
-        <button>upload</button>
+        <button type="button">upload</button>
       </Upload>
     );
 
@@ -56,16 +61,22 @@ describe('Upload', () => {
   });
 
   it('should not stop upload when return value of beforeUpload is false', (done) => {
+    const fileList = [{
+      uid: 'bar',
+      name: 'bar.png',
+    }];
     const mockFile = new File(['foo'], 'foo.png', {
       type: 'image/png',
     });
     const data = jest.fn();
     const props = {
       action: 'http://upload.com',
+      fileList,
       beforeUpload: () => false,
       data,
-      onChange: ({ file }) => {
+      onChange: ({ file, fileList: updatedFileList }) => {
         expect(file instanceof File).toBe(true);
+        expect(updatedFileList.map(f => f.name)).toEqual(['bar.png', 'foo.png']);
         expect(data).not.toBeCalled();
         done();
       },
@@ -73,7 +84,7 @@ describe('Upload', () => {
 
     const wrapper = mount(
       <Upload {...props}>
-        <button>upload</button>
+        <button type="button">upload</button>
       </Upload>
     );
 
@@ -90,7 +101,7 @@ describe('Upload', () => {
     let uploadInstance;
     let lastPercent = -1;
     const props = {
-      action: 'http://jsonplaceholder.typicode.com/posts/',
+      action: 'http://upload.com',
       onChange: ({ file }) => {
         if (file.percent === 0 && file.status === 'uploading') {
           // manually call it
@@ -108,7 +119,7 @@ describe('Upload', () => {
 
     const wrapper = mount(
       <Upload {...props}>
-        <button>upload</button>
+        <button type="button">upload</button>
       </Upload>
     );
 
@@ -137,7 +148,7 @@ describe('Upload', () => {
 
     const wrapper = mount(
       <Upload {...props}>
-        <button>upload</button>
+        <button type="button">upload</button>
       </Upload>
     );
 
@@ -148,6 +159,21 @@ describe('Upload', () => {
         ],
       },
     });
+  });
+
+  it('should be controlled by fileList', () => {
+    const fileList = [{
+      uid: '-1',
+      name: 'foo.png',
+      status: 'done',
+      url: 'http://www.baidu.com/xxx.png',
+    }];
+    const wrapper = mount(
+      <Upload />
+    );
+    expect(wrapper.instance().state.fileList).toEqual([]);
+    wrapper.setProps({ fileList });
+    expect(wrapper.instance().state.fileList).toEqual(fileList);
   });
 
   describe('util', () => {

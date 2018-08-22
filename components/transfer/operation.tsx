@@ -10,12 +10,13 @@ export interface TransferOperationProps {
   rightArrowText?: string;
   upArrowText?: string;
   downArrowText?: string;
-  moveToLeft?: React.FormEventHandler<any>;
-  moveToRight?: React.FormEventHandler<any>;
+  moveToLeft?: React.MouseEventHandler<HTMLButtonElement>;
+  moveToRight?: React.MouseEventHandler<HTMLButtonElement>;
   moveUp?: React.FormEventHandler<any>;
   moveDown?: React.FormEventHandler<any>;
   leftActive?: boolean;
   rightActive?: boolean;
+  style?: React.CSSProperties;
   upActive?: boolean;
   downActive?: boolean;
 }
@@ -36,9 +37,10 @@ export default class Operation extends React.Component<TransferOperationProps, a
       upActive,
       downActive,
       className,
+      style,
     } = this.props;
     return (
-      <div className={className}>
+      <div className={className} style={style}>
         <Button
           type="primary"
           size="small"

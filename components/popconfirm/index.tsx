@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { polyfill } from 'react-lifecycles-compat';
 import Tooltip, { AbstractTooltipProps }  from '../tooltip';
 import Icon from '../icon';
 import Button from '../button';
@@ -13,6 +14,7 @@ export interface PopconfirmProps extends AbstractTooltipProps {
   okText?: React.ReactNode;
   okType?: ButtonType;
   cancelText?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 export interface PopconfirmState {
@@ -24,14 +26,22 @@ export interface PopconfirmLocale {
   cancelText: string;
 }
 
-export default class Popconfirm extends React.Component<PopconfirmProps, PopconfirmState> {
+class Popconfirm extends React.Component<PopconfirmProps, PopconfirmState> {
   static defaultProps = {
     prefixCls: 'ant-popover',
     transitionName: 'zoom-big',
     placement: 'top',
     trigger: 'click',
     okType: 'primary',
+    icon: <Icon type="exclamation-circle" />,
   };
+
+  static getDerivedStateFromProps(nextProps: PopconfirmProps) {
+    if ('visible' in nextProps) {
+      return { visible: nextProps.visible };
+    }
+    return null;
+  }
 
   private tooltip: any;
 
@@ -41,12 +51,6 @@ export default class Popconfirm extends React.Component<PopconfirmProps, Popconf
     this.state = {
       visible: props.visible,
     };
-  }
-
-  componentWillReceiveProps(nextProps: PopconfirmProps) {
-    if ('visible' in nextProps) {
-      this.setState({ visible: nextProps.visible });
-    }
   }
 
   getPopupDomNode() {
@@ -92,12 +96,12 @@ export default class Popconfirm extends React.Component<PopconfirmProps, Popconf
   }
 
   renderOverlay = (popconfirmLocale: PopconfirmLocale) => {
-    const { prefixCls, title, cancelText, okText, okType } = this.props;
+    const { prefixCls, title, cancelText, okText, okType, icon } = this.props;
     return (
       <div>
         <div className={`${prefixCls}-inner-content`}>
           <div className={`${prefixCls}-message`}>
-            <Icon type="exclamation-circle" />
+            {icon}
             <div className={`${prefixCls}-message-title`}>{title}</div>
           </div>
           <div className={`${prefixCls}-buttons`}>
@@ -138,3 +142,7 @@ export default class Popconfirm extends React.Component<PopconfirmProps, Popconf
     );
   }
 }
+
+polyfill(Popconfirm);
+
+export default Popconfirm;

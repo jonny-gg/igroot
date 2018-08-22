@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import RcCheckbox from 'rc-checkbox';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
@@ -47,7 +47,7 @@ export default class Radio extends React.Component<RadioProps, {}> {
       className,
       children,
       style,
-      ...restProps,
+      ...restProps
     } = props;
     const { radioGroup } = context;
     let radioProps: RadioProps = { ...restProps };

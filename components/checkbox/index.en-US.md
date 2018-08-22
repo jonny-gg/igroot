@@ -4,7 +4,7 @@ type: Data Entry
 title: Checkbox
 ---
 
-Checkbox.
+Checkbox component.
 
 ## When To Use
 
@@ -13,7 +13,9 @@ Checkbox.
 
 ## API
 
-### Checkbox
+### Props
+
+#### Checkbox
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -21,9 +23,10 @@ Checkbox.
 | checked | Specifies whether the checkbox is selected. | boolean | false |
 | defaultChecked | Specifies the initial state: whether or not the checkbox is selected. | boolean | false |
 | disabled | Disable checkbox | boolean | false |
+| indeterminate | indeterminate checked state of checkbox | boolean | false |
 | onChange | The callback function that is triggered when the state changes. | Function(e:Event) | - |
 
-### Checkbox Group
+#### Checkbox Group
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
@@ -33,9 +36,9 @@ Checkbox.
 | value | Used for setting the currently selected value. | string\[] | \[] |
 | onChange | The callback function that is triggered when the state changes. | Function(checkedValue) | - |
 
-## Methods
+### Methods
 
-### Checkbox
+#### Checkbox
 
 | Name | Description |
 | ---- | ----------- |

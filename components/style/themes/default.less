@@ -34,9 +34,9 @@
 @body-background        : #fff;
 // Base background color for most components
 @component-background   : #fff;
-@font-family-no-number  : "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-@font-family            : "Monospaced Number", @font-family-no-number;
-@code-family            : Consolas, Menlo, Courier, monospace;
+@font-family  : "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif,
+"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+@code-family            : "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 @heading-color          : fade(#000, 85%);
 @text-color             : fade(#000, 65%);
 @text-color-secondary   : fade(#000, 45%);
@@ -77,6 +77,8 @@
 @link-hover-decoration  : none;
 
 // Animation
+@ease-base-out       : cubic-bezier(0.7, 0.3, 0.1, 1);
+@ease-base-in        : cubic-bezier(0.9, 0, 0.3, 0.7);
 @ease-out            : cubic-bezier(0.215, 0.61, 0.355, 1);
 @ease-in             : cubic-bezier(0.55, 0.055, 0.675, 0.19);
 @ease-in-out         : cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -157,6 +159,7 @@
 // Checkbox
 @checkbox-size          : 14px;
 @checkbox-color         : @primary-color;
+@checkbox-check-color   : #fff;
 
 // Radio
 @radio-size             : 14px;
@@ -205,18 +208,22 @@
 @grid-gutter-width      : 0;
 
 // Layout
-@layout-body-background      : #f0f2f5;
-@layout-header-background    : #001529;
-@layout-footer-background    : @layout-body-background;
-@layout-header-height        : 64px;
-@layout-header-padding       : 0 50px;
-@layout-footer-padding       : 24px 50px;
-@layout-sider-background     : @layout-header-background;
-@layout-trigger-height       : 48px;
-@layout-trigger-background   : #002140;
-@layout-trigger-color        : #fff;
-@layout-zero-trigger-width   : 36px;
-@layout-zero-trigger-height  : 42px;
+@layout-body-background         : #f0f2f5;
+@layout-header-background       : #001529;
+@layout-footer-background       : @layout-body-background;
+@layout-header-height           : 64px;
+@layout-header-padding          : 0 50px;
+@layout-footer-padding          : 24px 50px;
+@layout-sider-background        : @layout-header-background;
+@layout-trigger-height          : 48px;
+@layout-trigger-background      : #002140;
+@layout-trigger-color           : #fff;
+@layout-zero-trigger-width      : 36px;
+@layout-zero-trigger-height     : 42px;
+// Layout light theme
+@layout-sider-background-light  : #fff;
+@layout-trigger-background-light: #fff;
+@layout-trigger-color-light     : @text-color;
 
 // z-index list
 @zindex-affix           : 10;
@@ -263,6 +270,7 @@
 @input-addon-bg              : @background-color-light;
 @input-hover-border-color    : @primary-color;
 @input-disabled-bg           : @disabled-bg;
+@input-outline-offset        : 0 0;
 
 // Tooltip
 // ---
@@ -374,7 +382,7 @@
 // Card
 // ---
 @card-head-color: @heading-color;
-@card-head-background: @component-background;
+@card-head-background: transparent;
 @card-head-padding: 16px;
 @card-inner-head-padding: 12px;
 @card-padding-base: 24px;
@@ -462,11 +470,26 @@
 @slider-disabled-color:               @disabled-color;
 @slider-disabled-background-color:    @component-background;
 
+// Tree
+// ---
+@tree-title-height:                   24px;
+@tree-child-padding:                  18px;
+@tree-directory-selected-color:       #fff;
+@tree-directory-selected-bg:          @primary-color;
+
 // Collapse
 // ---
 @collapse-header-padding:             12px 0 12px 40px;
 @collapse-header-bg:                  @background-color-light;
 @collapse-content-padding:            @padding-md;
 @collapse-content-bg:                 @component-background;
+
+// Message
+// ---
+@message-notice-content-padding:      10px 16px;
+
+// Motion
+// ---
+@wave-animation-width: 6px;
 
 @import "./default.deperated.less";

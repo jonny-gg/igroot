@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 import List, { TransferListProps } from './list';
 import Operation from './operation';
@@ -35,6 +35,7 @@ export interface TransferProps {
   onSort?: (dataSources: TransferItem[]) => void;
   style?: React.CSSProperties;
   listStyle?: React.CSSProperties;
+  operationStyle?: React.CSSProperties;
   titles?: string[];
   operations?: string[];
   showSearch?: boolean;
@@ -76,7 +77,9 @@ export default class Transfer extends React.Component<TransferProps, any> {
     targetKeys: PropTypes.array,
     onChange: PropTypes.func,
     height: PropTypes.number,
+    style: PropTypes.object,
     listStyle: PropTypes.object,
+    operationStyle: PropTypes.object,
     className: PropTypes.string,
     titles: PropTypes.array,
     operations: PropTypes.array,
@@ -90,10 +93,10 @@ export default class Transfer extends React.Component<TransferProps, any> {
     lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   };
 
-  splitedDataSource: {
+  separatedDataSource: {
     leftDataSource: TransferItem[],
     rightDataSource: TransferItem[],
-  } | null;
+  } | null = null;
 
   constructor(props: TransferProps) {
     super(props);
@@ -113,8 +116,8 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
     if (nextProps.targetKeys !== this.props.targetKeys ||
       nextProps.dataSource !== this.props.dataSource) {
-      // clear cached splited dataSource
-      this.splitedDataSource = null;
+      // clear cached separated dataSource
+      this.separatedDataSource = null;
 
       if (!nextProps.selectedKeys) {
         // clear key nolonger existed
@@ -147,9 +150,9 @@ export default class Transfer extends React.Component<TransferProps, any> {
     }
   }
 
-  splitDataSource(props: TransferProps) {
-    if (this.splitedDataSource) {
-      return this.splitedDataSource;
+  separateDataSource(props: TransferProps) {
+    if (this.separatedDataSource) {
+      return this.separatedDataSource;
     }
 
     const { dataSource, rowKey, targetKeys = [] } = props;
@@ -171,12 +174,12 @@ export default class Transfer extends React.Component<TransferProps, any> {
       }
     });
 
-    this.splitedDataSource = {
+    this.separatedDataSource = {
       leftDataSource,
       rightDataSource,
     };
 
-    return this.splitedDataSource;
+    return this.separatedDataSource;
   }
 
   moveTo = (direction: TransferDirection) => {
@@ -428,15 +431,16 @@ export default class Transfer extends React.Component<TransferProps, any> {
       searchPlaceholder,
       body,
       footer,
+      style,
       listStyle,
+      operationStyle,
       filterOption,
       render,
       lazy,
-      onSort,
     } = this.props;
     const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys } = this.state;
 
-    const { leftDataSource, rightDataSource } = this.splitDataSource(this.props);
+    const { leftDataSource, rightDataSource } = this.separateDataSource(this.props);
     const leftActive = targetSelectedKeys.length > 0;
     const rightActive = sourceSelectedKeys.length > 0;
     const upActive = onSort && targetSelectedKeys.length == 1 || onSort && sourceSelectedKeys.length == 1
@@ -446,7 +450,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
     const titles = this.getTitles(locale);
     return (
-      <div className={cls}>
+      <div className={cls} style={style}>
         <List
           prefixCls={`${prefixCls}-list`}
           titleText={titles[0]}
@@ -482,6 +486,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
           leftActive={leftActive}
           leftArrowText={operations[1]}
           moveToLeft={this.moveToLeft}
+	  style={operationStyle}
           moveUp={this.moveUp}
           upActive={upActive}
           moveDown={this.moveDown}

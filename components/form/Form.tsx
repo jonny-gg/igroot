@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 import createDOMForm from 'rc-form/lib/createDOMForm';
 import createFormField from 'rc-form/lib/createFormField';
@@ -9,10 +9,20 @@ import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { Omit } from '../_util/type';
 
+type FormCreateOptionMessagesCallback = (...args: any[]) => string;
+
+interface FormCreateOptionMessages {
+  [messageId: string]:
+    | string
+    | FormCreateOptionMessagesCallback
+    | FormCreateOptionMessages;
+}
+
 export interface FormCreateOption<T> {
-  onFieldsChange?: (props: T, fields: Array<any>) => void;
+  onFieldsChange?: (props: T, fields: Array<any>, allFields: any, add: string) => void;
   onValuesChange?: (props: T, changedValues: any, allValues: any) => void;
   mapPropsToFields?: (props: T) => void;
+  validateMessages?: FormCreateOptionMessages;
   withRef?: boolean;
 }
 
@@ -30,7 +40,7 @@ export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 
 export type ValidationRule = {
   /** validation error message */
-  message?: string;
+  message?: React.ReactNode;
   /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
   type?: string;
   /** indicates whether field is required */

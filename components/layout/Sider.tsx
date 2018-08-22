@@ -15,10 +15,12 @@ if (typeof window !== 'undefined') {
 }
 
 import * as React from 'react';
+import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import Icon from '../icon';
+import isNumeric from '../_util/isNumeric';
 
 const dimensionMap = {
   xs: '480px',
@@ -31,6 +33,8 @@ const dimensionMap = {
 
 export type CollapseType = 'clickTrigger' | 'responsive';
 
+export type SiderTheme = 'light' | 'dark';
+
 export interface SiderProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   collapsible?: boolean;
@@ -42,6 +46,8 @@ export interface SiderProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: number | string;
   collapsedWidth?: number | string;
   breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  theme?: SiderTheme;
+  onBreakpoint?: (broken: boolean) => void;
 }
 
 export interface SiderState {
@@ -62,7 +68,7 @@ const generateId = (() => {
   };
 })();
 
-export default class Sider extends React.Component<SiderProps, SiderState> {
+class Sider extends React.Component<SiderProps, SiderState> {
   static __ANT_LAYOUT_SIDER: any = true;
 
   static defaultProps = {
@@ -73,6 +79,7 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
     width: 200,
     collapsedWidth: 80,
     style: {},
+    theme: 'dark' as SiderTheme,
   };
 
   static childContextTypes = {
@@ -83,6 +90,15 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
   static contextTypes = {
     siderHook: PropTypes.object,
   };
+
+  static getDerivedStateFromProps(nextProps: SiderProps) {
+    if ('collapsed' in nextProps) {
+      return {
+        collapsed: nextProps.collapsed,
+      };
+    }
+    return null;
+  }
 
   private mql: MediaQueryList;
   private uniqueId: string;
@@ -116,14 +132,6 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
     };
   }
 
-  componentWillReceiveProps(nextProps: SiderProps) {
-    if ('collapsed' in nextProps) {
-      this.setState({
-        collapsed: nextProps.collapsed,
-      });
-    }
-  }
-
   componentDidMount() {
     if (this.mql) {
       this.mql.addListener(this.responsiveHandler);
@@ -147,6 +155,10 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
 
   responsiveHandler = (mql: MediaQueryList) => {
     this.setState({ below: mql.matches });
+    const { onBreakpoint } = this.props;
+    if (onBreakpoint) {
+      onBreakpoint(mql.matches);
+    }
     if (this.state.collapsed !== mql.matches) {
       this.setCollapsed(mql.matches, 'responsive');
     }
@@ -174,15 +186,15 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
   }
 
   render() {
-    const { prefixCls, className,
+    const { prefixCls, className, theme,
       collapsible, reverseArrow, trigger, style, width, collapsedWidth,
-      ...others,
+      ...others
     } = this.props;
     const divProps = omit(others, ['collapsed',
-      'defaultCollapsed', 'onCollapse', 'breakpoint']);
+      'defaultCollapsed', 'onCollapse', 'breakpoint', 'onBreakpoint']);
     const rawWidth = this.state.collapsed ? collapsedWidth : width;
     // use "px" as fallback unit for width
-    const siderWidth = typeof rawWidth === 'number' ? `${rawWidth}px` : String(rawWidth || 0);
+    const siderWidth = isNumeric(rawWidth) ? `${rawWidth}px` : String(rawWidth);
     // special trigger when collapsedWidth == 0
     const zeroWidthTrigger = parseFloat(String(collapsedWidth || 0)) === 0 ? (
       <span onClick={this.toggle} className={`${prefixCls}-zero-width-trigger`}>
@@ -210,7 +222,7 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
       minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
       width: siderWidth,
     };
-    const siderCls = classNames(className, prefixCls, {
+    const siderCls = classNames(className, prefixCls, `${prefixCls}-${theme}`, {
       [`${prefixCls}-collapsed`]: !!this.state.collapsed,
       [`${prefixCls}-has-trigger`]: collapsible && trigger !== null && !zeroWidthTrigger,
       [`${prefixCls}-below`]: !!this.state.below,
@@ -224,3 +236,7 @@ export default class Sider extends React.Component<SiderProps, SiderState> {
     );
   }
 }
+
+polyfill(Sider);
+
+export default Sider;

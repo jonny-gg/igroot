@@ -15,6 +15,7 @@ You can customize icons for different nodes.
 
 ````jsx
 import { Tree, Icon } from 'igroot';
+
 const TreeNode = Tree.TreeNode;
 
 class Demo extends React.Component {

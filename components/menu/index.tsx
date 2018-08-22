@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import RcMenu, { Divider, ItemGroup } from 'rc-menu';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 import animation from '../_util/openAnimation';
 import warning from '../_util/warning';
@@ -52,6 +52,7 @@ export interface MenuProps {
   subMenuCloseDelay?: number;
   subMenuOpenDelay?: number;
   getPopupContainer?: (triggerNode: Element) => HTMLElement;
+  focusable?: boolean;
 }
 
 export interface MenuState {
@@ -63,10 +64,10 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   static Item = Item;
   static SubMenu = SubMenu;
   static ItemGroup = ItemGroup;
-  static defaultProps = {
+  static defaultProps: Partial<MenuProps> = {
     prefixCls: 'ant-menu',
     className: '',
-    theme: 'light' as MenuTheme,  // or dark
+    theme: 'light', // or dark
     focusable: false,
   };
   static childContextTypes = {

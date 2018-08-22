@@ -17,6 +17,6 @@ Simple mode.
 import { Pagination } from 'igroot';
 
 ReactDOM.render(
-  <Pagination simple defaultCurrent={2} total={50} />
-, mountNode);
+  <Pagination simple defaultCurrent={2} total={50} />,
+  mountNode);
 ````

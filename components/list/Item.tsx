@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Col } from '../grid';
 import { ListGridType, ColumnType } from './index';
@@ -31,7 +31,7 @@ export const Meta = (props: ListItemMetaProps) => {
     avatar,
     title,
     description,
-    ...others,
+    ...others
   } = props;
 
   const classString = classNames(`${prefixCls}-item-meta`, className);

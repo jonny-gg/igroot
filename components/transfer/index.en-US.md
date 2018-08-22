@@ -11,7 +11,7 @@ Double column transfer choice box.
 
 Transfer the elements between two columns in an intuitive and efficient way.
 
-One or more elements can be selected from either column, one click on the proper 'direction' button, and the transfer is done. The left column is considered the 'source' and the right column is considered the 'target'. As you can see in the API description, these names are reflected in.
+One or more elements can be selected from either column, one click on the proper `direction` button, and the transfer is done. The left column is considered the `source` and the right column is considered the `target`. As you can see in the API description, these names are reflected in.
 
 ## API
 
@@ -25,10 +25,12 @@ One or more elements can be selected from either column, one click on the proper
 | listStyle | A custom CSS style used for rendering the transfer columns. | object |  |
 | notFoundContent | Text to display when a column is empty. | string\|ReactNode | 'The list is empty' |
 | operations | A set of operations that are sorted from bottom to top. | string\[] | ['>', '<'] |
+| operationStyle | A custom CSS style used for rendering the operations column. | object |  |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a React element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a React element and `value` is for title | Function(record) |  |
 | searchPlaceholder | The hint text of the search box. | string | 'Search here' |
 | selectedKeys | A set of keys of selected items. | string\[] | \[] |
 | showSearch | If included, a search box is shown on each column. | boolean | false |
+| style | A custom CSS style used for rendering wrapper element. | object |  |
 | targetKeys | A set of keys of elements that are listed on the right column. | string\[] | \[] |
 | titles | A set of titles that are sorted from left to right. | string\[] | - |
 | onChange | A callback function that is executed when the transfer between columns is complete. | (targetKeys, direction, moveKeys): void |  |

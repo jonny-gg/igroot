@@ -9,6 +9,10 @@ import Search from './search';
 import Item from './item';
 import triggerEvent from '../_util/triggerEvent';
 
+function isIEorEDGE() {
+  return (document as any).documentMode || /Edge/.test(navigator.userAgent);
+}
+
 function noop() {
 }
 
@@ -56,6 +60,8 @@ export default class TransferList extends React.Component<TransferListProps, any
 
   timer: number;
   triggerScrollTimer: number;
+  fixIERepaintTimer: number;
+  notFoundNode: HTMLDivElement;
 
   constructor(props: TransferListProps) {
     super(props);
@@ -78,6 +84,7 @@ export default class TransferList extends React.Component<TransferListProps, any
   componentWillUnmount() {
     clearTimeout(this.timer);
     clearTimeout(this.triggerScrollTimer);
+    clearTimeout(this.fixIERepaintTimer);
   }
 
   shouldComponentUpdate(...args: any[]) {
@@ -115,15 +122,18 @@ export default class TransferList extends React.Component<TransferListProps, any
     // Manually trigger scroll event for lazy search bug
     // https://github.com/ant-design/ant-design/issues/5631
     this.triggerScrollTimer = window.setTimeout(() => {
-      const listNode = ReactDOM.findDOMNode(this).querySelectorAll('.ant-transfer-list-content')[0];
+      const transferNode = ReactDOM.findDOMNode(this) as Element;
+      const listNode = transferNode.querySelectorAll('.ant-transfer-list-content')[0];
       if (listNode) {
         triggerEvent(listNode, 'scroll');
       }
     }, 0);
+    this.fixIERepaint();
   }
 
   handleClear = () => {
     this.props.handleClear();
+    this.fixIERepaint();
   }
 
   matchFilter = (text: string, item: TransferItem) => {
@@ -144,23 +154,29 @@ export default class TransferList extends React.Component<TransferListProps, any
     };
   }
 
+  saveNotFoundRef = (node: HTMLDivElement) => {
+    this.notFoundNode = node;
+  }
+
+  // Fix IE/Edge repaint
+  // https://github.com/ant-design/ant-design/issues/9697
+  // https://stackoverflow.com/q/27947912/3040605
+  fixIERepaint() {
+    if (!isIEorEDGE()) {
+      return;
+    }
+    this.fixIERepaintTimer = window.setTimeout(() => {
+      if (this.notFoundNode) {
+        this.notFoundNode.className = this.notFoundNode.className;
+      }
+    }, 0);
+  }
+
   render() {
     const {
-      prefixCls,
-      dataSource,
-      titleText,
-      checkedKeys,
-      lazy,
-      body = noop,
-      footer = noop,
-      showSearch,
-      style,
-      filter,
-      searchPlaceholder,
-      notFoundContent,
-      itemUnit,
-      itemsUnit,
-      onScroll,
+      prefixCls, dataSource, titleText, checkedKeys, lazy,
+      body = noop, footer = noop, showSearch, style, filter,
+      searchPlaceholder, notFoundContent, itemUnit, itemsUnit, onScroll,
       handleShiftClick,
       handleDownItem,
       handleDoubleClick,
@@ -237,7 +253,7 @@ export default class TransferList extends React.Component<TransferListProps, any
         >
           {showItems}
         </Animate>
-        <div className={`${prefixCls}-body-not-found`}>
+        <div className={`${prefixCls}-body-not-found`} ref={this.saveNotFoundRef}>
           {notFoundContent}
         </div>
       </div>

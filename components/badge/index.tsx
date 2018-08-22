@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import Animate from 'rc-animate';
 import ScrollNumber from './ScrollNumber';
 import classNames from 'classnames';
@@ -8,7 +8,7 @@ export { ScrollNumberProps } from './ScrollNumber';
 
 export interface BadgeProps {
   /** Number to show in badge */
-  count?: number | string;
+  count?: number | string | null;
   showZero?: boolean;
   /** Max count to show */
   overflowCount?: number;
@@ -59,7 +59,7 @@ export default class Badge extends React.Component<BadgeProps, any> {
       text,
       offset,
       title,
-      ...restProps,
+      ...restProps
     } = this.props;
     let displayCount = (count as number) > (overflowCount as number) ? `${overflowCount}+` : count;
     const isZero = displayCount === '0' || displayCount === 0;
@@ -85,8 +85,8 @@ export default class Badge extends React.Component<BadgeProps, any> {
       [`${prefixCls}-not-a-wrapper`]: !children,
     });
     const styleWithOffset = offset ? {
-      marginTop: offset[0],
-      marginLeft: offset[1],
+      marginLeft: offset[0],
+      marginTop: offset[1],
       ...style,
     } : style;
     // <Badge status="success" />

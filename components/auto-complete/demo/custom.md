@@ -15,6 +15,7 @@ Customize Input Component
 
 ````jsx
 import { AutoComplete, Input } from 'igroot';
+
 const { TextArea } = Input;
 
 function onSelect(value) {

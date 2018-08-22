@@ -6,7 +6,11 @@ import Input from '../input';
 import InputElement from './InputElement';
 
 export interface DataSourceItemObject { value: string; text: string; }
-export type DataSourceItemType = string | DataSourceItemObject;
+export type DataSourceItemType =
+  string |
+  DataSourceItemObject |
+  React.ReactElement<OptionProps> |
+  React.ReactElement<OptGroupProps>;
 
 export interface AutoCompleteInputProps {
   onChange?: React.FormEventHandler<any>;
@@ -22,6 +26,8 @@ export interface AutoCompleteProps extends AbstractSelectProps {
   value?: SelectValue;
   defaultValue?: SelectValue;
   dataSource?: DataSourceItemType[];
+  autoFocus?: boolean;
+  backfill?: boolean;
   optionLabelProp?: string;
   onChange?: (value: SelectValue) => void;
   onSelect?: (value: SelectValue, option: Object) => any;
@@ -116,7 +122,7 @@ export default class AutoComplete extends React.Component<AutoCompleteProps, {}>
       <Select
         {...this.props}
         className={cls}
-        mode="combobox"
+        mode={Select.SECRET_COMBOBOX_MODE_DO_NOT_USE}
         optionLabelProp={optionLabelProp}
         getInputElement={this.getInputElement}
         notFoundContent={notFoundContent}

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
 import Checkbox from './Checkbox';
 
-export type CheckboxValueType = string | number;
+export type CheckboxValueType = string | number | boolean;
 
 export interface CheckboxOptionType {
   label: string;
@@ -38,7 +39,7 @@ export interface CheckboxGroupContext {
   };
 }
 
-export default class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxGroupState> {
+class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxGroupState> {
   static defaultProps = {
     options: [],
     prefixCls: 'ant-checkbox',
@@ -54,6 +55,15 @@ export default class CheckboxGroup extends React.Component<CheckboxGroupProps, C
   static childContextTypes = {
     checkboxGroup: PropTypes.any,
   };
+
+  static getDerivedStateFromProps(nextProps: CheckboxGroupProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value || [],
+      };
+    }
+    return null;
+  }
 
   constructor(props: CheckboxGroupProps) {
     super(props);
@@ -72,13 +82,6 @@ export default class CheckboxGroup extends React.Component<CheckboxGroupProps, C
     };
   }
 
-  componentWillReceiveProps(nextProps: CheckboxGroupProps) {
-    if ('value' in nextProps) {
-      this.setState({
-        value: nextProps.value || [],
-      });
-    }
-  }
   shouldComponentUpdate(nextProps: CheckboxGroupProps, nextState: CheckboxGroupState) {
     return !shallowEqual(this.props, nextProps) ||
       !shallowEqual(this.state, nextState);
@@ -121,7 +124,7 @@ export default class CheckboxGroup extends React.Component<CheckboxGroupProps, C
       children = this.getOptions().map(option => (
         <Checkbox
           prefixCls={prefixCls}
-          key={option.value}
+          key={option.value.toString()}
           disabled={'disabled' in option ? option.disabled : props.disabled}
           value={option.value}
           checked={state.value.indexOf(option.value) !== -1}
@@ -141,3 +144,7 @@ export default class CheckboxGroup extends React.Component<CheckboxGroupProps, C
     );
   }
 }
+
+polyfill(CheckboxGroup);
+
+export default CheckboxGroup;
