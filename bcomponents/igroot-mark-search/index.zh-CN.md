@@ -8,7 +8,7 @@ cols: 1
 
 ## 效果演示
 
-![](http://jr.baishancloud.com:8090/download/attachments/29325737/%E6%88%AA%E5%B1%8F.gif?version=1&modificationDate=1526895156000&api=v2)
+![](http://jr.xxx.com:8090/download/attachments/29325737/%E6%88%AA%E5%B1%8F.gif?version=1&modificationDate=1526895156000&api=v2)
 
 ## API
 

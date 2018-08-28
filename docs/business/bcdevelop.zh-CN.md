@@ -32,7 +32,7 @@ sl-core (如未安装,[请参考](http://igroot.i.coder.com:8001/docs/start/env-
 > 组件的命名: igroot-xxx / igroot-xxx-xxx
 - 
 
-![iGroot Business Component](http://jr.baishancloud.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193318.png?version=1&modificationDate=1512041599483&api=v2)
+![iGroot Business Component](http://jr.xxx.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193318.png?version=1&modificationDate=1512041599483&api=v2)
 
 然后进入项目中安装项目依赖:
 
@@ -80,8 +80,8 @@ sl-core (如未安装,[请参考](http://igroot.i.coder.com:8001/docs/start/env-
 在确认开发完成之后，请至`bsy.json`与`package.json`中，核对项目名称与版本号
 >**注意**：业务组件的项目名称必须以`igroot-`开头
 
-![bsy.json](http://jr.baishancloud.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193422.png?version=1&modificationDate=1512041675815&api=v2)
-![package.json](http://jr.baishancloud.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193427.png?version=1&modificationDate=1512041675874&api=v2)
+![bsy.json](http://jr.xxx.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193422.png?version=1&modificationDate=1512041675815&api=v2)
+![package.json](http://jr.xxx.com:8090/download/attachments/11930429/TIM%E5%9B%BE%E7%89%8720171130193427.png?version=1&modificationDate=1512041675874&api=v2)
 
 确认完毕之后，执行以下命令将其发布至`npm`：
 
