@@ -116,7 +116,7 @@ export class Banner extends React.Component {
 
           <QueueAnim className="banner-text-wrapper" type={typeFunc} delay={300} key="banner">
             {/*<span className="line" key="line" />*/}
-            {/*<img src="http://igroot.i.qingcdn.com/owncloud/remote.php/webdav/Photos/iGroot/logo-home.png" alt=""/>*/}
+            {/*<img src="http://igroot.i.coder.com/owncloud/remote.php/webdav/Photos/iGroot/logo-home.png" alt=""/>*/}
             <div key="button1" className="start-button clearfix">
               <Link to={utils.getLocalizedPathname('/docs/start/introduce', this.isZhCN)}>
                 <FormattedMessage id="app.home.start" />

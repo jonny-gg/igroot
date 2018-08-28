@@ -119,7 +119,7 @@ import 'igroot/dist/igroot.css';  // or 'igroot/dist/igroot.less'
 
 ## 链接
 
-- [首页](http://igroot.i.qingcdn.com:8001/)
+- [首页](http://igroot.i.coder.com:8001/)
 - [UI 组件库](/docs/react/introduce)
 - [定制主题](/docs/theme/introduce)
 - [React 底层基础组件](http://react-component.github.io/)

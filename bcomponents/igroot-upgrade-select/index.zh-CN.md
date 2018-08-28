@@ -6,7 +6,7 @@ subtitle: 升级版下拉框
 cols: 1
 ---
 
-继承于 [Select](http://igroot.i.qingcdn.com:8001/components/select-cn/) 的升级版下拉框。
+继承于 [Select](http://igroot.i.coder.com:8001/components/select-cn/) 的升级版下拉框。
 
 ## 何时使用
 
@@ -19,7 +19,7 @@ cols: 1
 ```
 
 ### UpgradeSelect
-除了 [Select](http://igroot.i.qingcdn.com:8001/components/select-cn/#Select-props) 的属性可以使用，还添加了下面两个属性
+除了 [Select](http://igroot.i.coder.com:8001/components/select-cn/#Select-props) 的属性可以使用，还添加了下面两个属性
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |

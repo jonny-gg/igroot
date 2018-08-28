@@ -18,7 +18,7 @@ title: 业务组件开发流程
 - 安装: npm i igroot-xxx-xxx -save
 
 ## 环境准备
-sl-core (如未安装,[请参考](http://igroot.i.qingcdn.com:8001/docs/start/env-cn)) 
+sl-core (如未安装,[请参考](http://igroot.i.coder.com:8001/docs/start/env-cn)) 
 
 开发依赖安装完成后，请到工作目录下，执行以下命令:
 
@@ -89,11 +89,11 @@ sl-core (如未安装,[请参考](http://igroot.i.qingcdn.com:8001/docs/start/en
   npm publish
 ```
 
-发布完成后，请通知`@宇韬`与`@郭老`将其整合至`sl`中，并发布至 [iGroot 官网](http://igroot.i.qingcdn.com:8001)
+发布完成后，请通知`@宇韬`与`@郭老`将其整合至`sl`中，并发布至 [iGroot 官网](http://igroot.i.coder.com:8001)
 
 ## 文档编写
 
-组件相关的使用说明文档请编写为`.md`文件存放至`/demo`文件夹中，`@郭老`会将其作为 [iGroot 官网](http://igroot.i.qingcdn.com:8001) 的文档与示例
+组件相关的使用说明文档请编写为`.md`文件存放至`/demo`文件夹中，`@郭老`会将其作为 [iGroot 官网](http://igroot.i.coder.com:8001) 的文档与示例
 
 ## 使用
 
