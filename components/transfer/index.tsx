@@ -240,7 +240,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
 
   handleDownItem = (startKey: any) => this.setState({ startKey })
   handleHoverSelect = (listType: string, itemKey: any) => {
-    const { leftDataSource, rightDataSource } = this.splitDataSource(this.props)
+    const { leftDataSource, rightDataSource } = this.separateDataSource(this.props)
     const dataSource = listType === 'source' ? leftDataSource : rightDataSource
     const key = `${listType}SelectedKeys`
     const finalValueIndex = dataSource.findIndex(data => data.key === this.state.startKey)
@@ -270,7 +270,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
   }
 
   handleShiftClick = (listType: string, itemKey: any) => {
-    const { leftDataSource, rightDataSource } = this.splitDataSource(this.props)
+    const { leftDataSource, rightDataSource } = this.separateDataSource(this.props)
     const dataSource = listType === 'source' ? leftDataSource : rightDataSource
     const key = `${listType}SelectedKeys`
     const stateKeys = this.state[key]
@@ -437,6 +437,7 @@ export default class Transfer extends React.Component<TransferProps, any> {
       filterOption,
       render,
       lazy,
+      onSort
     } = this.props;
     const { leftFilter, rightFilter, sourceSelectedKeys, targetSelectedKeys } = this.state;
 
