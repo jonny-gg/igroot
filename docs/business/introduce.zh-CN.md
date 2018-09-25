@@ -6,9 +6,9 @@ title: 业务组件使用
 这里是 iGroot 的 React 实现，针对业务比较频繁使用的组件封装。
 
 <div class="pic-plus">
-  <img width="150" src="http://fe.xxx.com/images/page-logo.png">
+  <img width="150" src="http://fe.baishancloud.com/images/page-logo.png">
   <span>+</span>
-  <img width="160" src="http://fe.xxx.com/images/react.png">
+  <img width="160" src="http://fe.baishancloud.com/images/react.png">
 </div>
 
 <style>
