@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://igroot.i.coder.com:8001">
-    <img width="320" src="http://fe.xxx.com/images/page-logo.png">
+    <img width="320" src="http://fe.xxx.com/image/page-logo.png">
   </a>
 </p>
 

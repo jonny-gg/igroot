@@ -8,7 +8,7 @@ cols: 1
 
 ## 演示示例
 
-![](http://fe.xxx.com/Lychee/uploads/big/40fdd494a860cb3719039b9e7c6eb537.jpg)
+![](http://fe.xxx.com/image/text-diff.jpg)
 
 ## API
 

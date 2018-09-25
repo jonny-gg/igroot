@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'development';
 const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 const antd = require('..');
 
-describe('antd', () => {
+describe('igroot', () => {
   afterAll(() => {
     process.env.NODE_ENV = OLD_NODE_ENV;
   });

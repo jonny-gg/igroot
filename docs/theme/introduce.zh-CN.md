@@ -24,7 +24,7 @@ iGroot 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，并�
 
 配置在 `bsy.json` 中 `options` 下的 `theme` 字段。theme 需要配置为一个对象 例如:。
 
-![](http://fe.xxx.com/images/themeTemplate.png)
+![](http://fe.xxx.com/image/themeTemplate.png)
 
 定义 `theme` 属性时，如果你使用的是其他脚手架，可以参考 [atool-build 中 less-loader 的 webpack 相关配置 ](https://github.com/ant-tool/atool-build/blob/a4b3e3eec4ffc09b0e2352d7f9d279c4c28fdb99/src/getWebpackCommonConfig.js#L131-L138)，利用 [less-loader](https://github.com/webpack/less-loader#less-options) 的 `modifyVars` 配置来覆盖原来的样式变量。
 

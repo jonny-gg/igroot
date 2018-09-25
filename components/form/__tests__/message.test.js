@@ -41,7 +41,7 @@ describe('Form', () => {
       return (
         <Form>
           <Form.Item label="Account">
-            {form.getFieldDecorator('account', { initialValue: 'antd', rules })(<input />)}
+            {form.getFieldDecorator('account', { initialValue: 'igroot', rules })(<input />)}
           </Form.Item>
         </Form>
       );
