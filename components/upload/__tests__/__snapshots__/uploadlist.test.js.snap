@@ -264,7 +264,7 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/aaa.zip"
+            href="https://cdn.baishancloud.com/aaa.zip"
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -274,7 +274,7 @@ exports[`Upload List should non-image format file preview 1`] = `
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/aaa.zip"
+            href="https://cdn.baishancloud.com/aaa.zip"
             rel="noopener noreferrer"
             target="_blank"
             title="not-image"
@@ -297,18 +297,18 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/aaa"
+            href="https://cdn.baishancloud.com/aaa"
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
               alt="image"
-              src="https://cdn.xxx.com/aaa"
+              src="https://cdn.baishancloud.com/aaa"
             />
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/aaa"
+            href="https://cdn.baishancloud.com/aaa"
             rel="noopener noreferrer"
             target="_blank"
             title="image"
@@ -331,7 +331,7 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/aaa.xx"
+            href="https://cdn.baishancloud.com/aaa.xx"
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -341,7 +341,7 @@ exports[`Upload List should non-image format file preview 1`] = `
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/aaa.xx"
+            href="https://cdn.baishancloud.com/aaa.xx"
             rel="noopener noreferrer"
             target="_blank"
             title="not-image"
@@ -364,7 +364,7 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/aaa.png/xx.xx"
+            href="https://cdn.baishancloud.com/aaa.png/xx.xx"
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -374,7 +374,7 @@ exports[`Upload List should non-image format file preview 1`] = `
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/aaa.png/xx.xx"
+            href="https://cdn.baishancloud.com/aaa.png/xx.xx"
             rel="noopener noreferrer"
             target="_blank"
             title="not-image"
@@ -397,18 +397,18 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/xx.xx/aaa.png"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png"
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
               alt="image"
-              src="https://cdn.xxx.com/xx.xx/aaa.png"
+              src="https://cdn.baishancloud.com/xx.xx/aaa.png"
             />
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/xx.xx/aaa.png"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png"
             rel="noopener noreferrer"
             target="_blank"
             title="image"
@@ -431,7 +431,7 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/xx.xx/aaa.png"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png"
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -442,7 +442,7 @@ exports[`Upload List should non-image format file preview 1`] = `
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/xx.xx/aaa.png"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png"
             rel="noopener noreferrer"
             target="_blank"
             title="image"
@@ -465,18 +465,18 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/xx.xx/aaa.png?query=123"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png?query=123"
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
               alt="image"
-              src="https://cdn.xxx.com/xx.xx/aaa.png?query=123"
+              src="https://cdn.baishancloud.com/xx.xx/aaa.png?query=123"
             />
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/xx.xx/aaa.png?query=123"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png?query=123"
             rel="noopener noreferrer"
             target="_blank"
             title="image"
@@ -499,18 +499,18 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/xx.xx/aaa.png#anchor"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png#anchor"
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
               alt="image"
-              src="https://cdn.xxx.com/xx.xx/aaa.png#anchor"
+              src="https://cdn.baishancloud.com/xx.xx/aaa.png#anchor"
             />
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/xx.xx/aaa.png#anchor"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png#anchor"
             rel="noopener noreferrer"
             target="_blank"
             title="image"
@@ -533,18 +533,18 @@ exports[`Upload List should non-image format file preview 1`] = `
         <span>
           <a
             class="ant-upload-list-item-thumbnail"
-            href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png?query=some.query.with.dot"
             rel="noopener noreferrer"
             target="_blank"
           >
             <img
               alt="image"
-              src="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot"
+              src="https://cdn.baishancloud.com/xx.xx/aaa.png?query=some.query.with.dot"
             />
           </a>
           <a
             class="ant-upload-list-item-name"
-            href="https://cdn.xxx.com/xx.xx/aaa.png?query=some.query.with.dot"
+            href="https://cdn.baishancloud.com/xx.xx/aaa.png?query=some.query.with.dot"
             rel="noopener noreferrer"
             target="_blank"
             title="image"

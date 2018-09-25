@@ -11,7 +11,7 @@ cols: 1
 标签可以动态添加并且可以调整顺序的情况
 
 ## 效果演示
-![](http://jr.xxx.com:8090/download/attachments/32059938/igroot-input-tags.gif?version=1&modificationDate=1528976878717&api=v2)
+![](http://fe.baishancloud.com/image/igroot-input-tags.gif)
 
 router 配置渲染组件
 
