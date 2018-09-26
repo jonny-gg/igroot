@@ -5,7 +5,7 @@ igroot.locales = {};
 
 req.keys().forEach((mod) => {
   const match = mod.match(/\/([^/]+).tsx$/);
-  igroot.locales[match[1]] = req(mod);
+  igroot.locales[match[1]] = req(mod).default;
 });
 
 module.exports = igroot;

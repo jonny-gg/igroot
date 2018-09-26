@@ -19,9 +19,9 @@ import { Affix, Button } from 'igroot';
 class Demo extends React.Component {
   render() {
     return (
-      <div className="scrollable-container" ref={(node) => { this.container = node; }}>
+      <div className="scrollable-container" ref={(node1) => { this.container = node1; }}>
         <div className="background">
-          <Affix target={() => this.container}>
+          <Affix target={() => this.container}>ß
             <Button type="primary">
               Fixed at the top of container
             </Button>
