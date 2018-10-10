@@ -1,0 +1,58 @@
+{
+  "_args": [
+    [
+      "bisheng-plugin-toc@0.4.4",
+      "/Users/guoqn/workspace/igroot"
+    ]
+  ],
+  "_development": true,
+  "_from": "bisheng-plugin-toc@0.4.4",
+  "_id": "bisheng-plugin-toc@0.4.4",
+  "_inBundle": false,
+  "_integrity": "sha1-O0RQHQef4TK2ql9fgrtqOkge5MY=",
+  "_location": "/bisheng-plugin-toc",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "bisheng-plugin-toc@0.4.4",
+    "name": "bisheng-plugin-toc",
+    "escapedName": "bisheng-plugin-toc",
+    "rawSpec": "0.4.4",
+    "saveSpec": null,
+    "fetchSpec": "0.4.4"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/bisheng-plugin-toc/download/bisheng-plugin-toc-0.4.4.tgz",
+  "_spec": "0.4.4",
+  "_where": "/Users/guoqn/workspace/igroot",
+  "author": {
+    "name": "Benjy Cui"
+  },
+  "bugs": {
+    "url": "https://github.com/benjycui/bisheng-plugin-toc/issues"
+  },
+  "dependencies": {
+    "jsonml.js": "^0.1.0"
+  },
+  "description": "Generate a Table of Contents (TOC) for Markdown files.",
+  "devDependencies": {
+    "mark-twain": "^1.1.4"
+  },
+  "homepage": "https://github.com/benjycui/bisheng-plugin-toc#readme",
+  "keywords": [
+    "bisheng",
+    "plugin",
+    "toc",
+    "markdown"
+  ],
+  "license": "MIT",
+  "name": "bisheng-plugin-toc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjycui/bisheng-plugin-toc.git"
+  },
+  "version": "0.4.4"
+}

@@ -1,0 +1,78 @@
+{
+  "_args": [
+    [
+      "bisheng-plugin-react@0.5.8",
+      "/Users/guoqn/workspace/igroot"
+    ]
+  ],
+  "_development": true,
+  "_from": "bisheng-plugin-react@0.5.8",
+  "_id": "bisheng-plugin-react@0.5.8",
+  "_inBundle": false,
+  "_integrity": "sha1-nEi1jh6GY6ebA0eTkgGnaCR/Qeo=",
+  "_location": "/bisheng-plugin-react",
+  "_phantomChildren": {
+    "babel-code-frame": "6.26.0",
+    "babel-messages": "6.23.0",
+    "babel-runtime": "6.26.0",
+    "babylon": "6.18.0",
+    "debug": "2.6.9",
+    "esutils": "2.0.2",
+    "get-stdin": "4.0.1",
+    "invariant": "2.2.2",
+    "is-finite": "1.0.2",
+    "lodash": "4.17.5",
+    "minimist": "1.2.0",
+    "source-map": "0.5.7",
+    "to-fast-properties": "1.0.3"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "bisheng-plugin-react@0.5.8",
+    "name": "bisheng-plugin-react",
+    "escapedName": "bisheng-plugin-react",
+    "rawSpec": "0.5.8",
+    "saveSpec": null,
+    "fetchSpec": "0.5.8"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/bisheng-plugin-react/download/bisheng-plugin-react-0.5.8.tgz",
+  "_spec": "0.5.8",
+  "_where": "/Users/guoqn/workspace/igroot",
+  "author": {
+    "name": "Benjy Cui"
+  },
+  "bugs": {
+    "url": "https://github.com/benjycui/bisheng-plugin-react/issues"
+  },
+  "dependencies": {
+    "babel-core": "^6.21.0",
+    "babel-generator": "~6.11.0",
+    "babel-traverse": "~6.10.4",
+    "babel-types": "~6.11.1"
+  },
+  "description": "To convert JSX which is written in Markdown to React.Element.",
+  "homepage": "https://github.com/benjycui/bisheng-plugin-react#readme",
+  "keywords": [
+    "bisheng",
+    "plugin",
+    "markdown",
+    "react"
+  ],
+  "license": "MIT",
+  "name": "bisheng-plugin-react",
+  "peerDependencies": {
+    "babel-preset-es2015-ie": "^6.6.2",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjycui/bisheng-plugin-react.git"
+  },
+  "version": "0.5.8"
+}
