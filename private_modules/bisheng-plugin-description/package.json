@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      "bisheng-plugin-description@0.1.4",
+      "/Users/guoqn/workspace/igroot"
+    ]
+  ],
+  "_development": true,
+  "_from": "bisheng-plugin-description@0.1.4",
+  "_id": "bisheng-plugin-description@0.1.4",
+  "_inBundle": false,
+  "_integrity": "sha1-fsyQtNf8JE7iOSrX4Qx2448kn38=",
+  "_location": "/bisheng-plugin-description",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "bisheng-plugin-description@0.1.4",
+    "name": "bisheng-plugin-description",
+    "escapedName": "bisheng-plugin-description",
+    "rawSpec": "0.1.4",
+    "saveSpec": null,
+    "fetchSpec": "0.1.4"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/bisheng-plugin-description/download/bisheng-plugin-description-0.1.4.tgz",
+  "_spec": "0.1.4",
+  "_where": "/Users/guoqn/workspace/igroot",
+  "author": {
+    "name": "Benjy Cui"
+  },
+  "bugs": {
+    "url": "https://github.com/benjycui/bisheng-plugin-description/issues"
+  },
+  "dependencies": {
+    "jsonml.js": "^0.1.0"
+  },
+  "description": "To extract description from Markdown.",
+  "homepage": "https://github.com/benjycui/bisheng-plugin-description#readme",
+  "keywords": [
+    "bisheng",
+    "plugin",
+    "description"
+  ],
+  "license": "MIT",
+  "name": "bisheng-plugin-description",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjycui/bisheng-plugin-description.git"
+  },
+  "version": "0.1.4"
+}
