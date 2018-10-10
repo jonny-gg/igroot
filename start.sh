@@ -1,5 +1,5 @@
 #!/bin/bash
-
+git checkout -b fe origin/fe || true &&
 git pull &&
 npm install &&
 yes | cp -rf private_modules/. node_modules &&
