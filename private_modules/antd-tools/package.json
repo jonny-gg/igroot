@@ -1,0 +1,114 @@
+{
+  "_args": [
+    [
+      "antd-tools@2.1.5",
+      "/Users/guoqn/workspace/igroot"
+    ]
+  ],
+  "_development": true,
+  "_from": "antd-tools@2.1.5",
+  "_id": "antd-tools@2.1.5",
+  "_inBundle": false,
+  "_integrity": "sha1-C8y64eWZjxDoSE01tdu+X9S3Ue0=",
+  "_location": "/antd-tools",
+  "_phantomChildren": {
+    "babel-code-frame": "6.26.0",
+    "babel-traverse": "6.26.0",
+    "babel-types": "6.26.0",
+    "babylon": "6.18.0"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "antd-tools@2.1.5",
+    "name": "antd-tools",
+    "escapedName": "antd-tools",
+    "rawSpec": "2.1.5",
+    "saveSpec": null,
+    "fetchSpec": "2.1.5"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/antd-tools/download/antd-tools-2.1.5.tgz",
+  "_spec": "2.1.5",
+  "_where": "/Users/guoqn/workspace/igroot",
+  "author": {
+    "name": "yiminghe@gmail.com"
+  },
+  "bin": {
+    "antd-tools": "./bin/antd-tools.js",
+    "antd-tools-run": "./bin/antd-tools-run.js"
+  },
+  "bugs": {
+    "url": "http://github.com/ant-design/antd-tools/issues"
+  },
+  "dependencies": {
+    "atool-build": "^0.11.0",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.1.0",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-import": "^1.1.1",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
+    "babel-plugin-transform-es3-property-literals": "^6.22.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-runtime": "~6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chalk": "~1.1.3",
+    "colorful": "^2.1.0",
+    "commander": "^2.9.0",
+    "deep-assign": "^2.0.0",
+    "gh-pages": "^0.12.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-strip-code": "^0.1.4",
+    "gulp-typescript": "^3.1.6",
+    "gulp-watch": "^4.3.10",
+    "jsonml.js": "^0.1.0",
+    "mark-twain": "^2.0.2",
+    "merge2": "~1.0.2",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "object-assign": "~4.1.0",
+    "rimraf": "^2.6.1",
+    "through2": "^2.0.1",
+    "ts-jest": "^21.0.1",
+    "tslint": "^5.3.2",
+    "tslint-eslint-rules": "^4.1.0",
+    "tslint-react": "^3.0.0"
+  },
+  "description": "tools for ant design",
+  "devDependencies": {
+    "babel-eslint": "^7.1.0",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.4.1",
+    "pre-commit": "1.x"
+  },
+  "homepage": "http://github.com/ant-design/antd-tools",
+  "keywords": [
+    "react",
+    "tools"
+  ],
+  "license": "MIT",
+  "name": "antd-tools",
+  "peerDependencies": {
+    "typescript": "^2.2.1"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ant-design/antd-tools.git"
+  },
+  "scripts": {
+    "lint": "eslint lib",
+    "postinstall": "node lib/init.js",
+    "pub": "git push origin && npm publish"
+  },
+  "version": "2.1.5"
+}
