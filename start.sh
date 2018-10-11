@@ -1,4 +1,6 @@
 #!/bin/bash
+
+killall bisheng &&
 git checkout -b fe origin/fe || true &&
 git pull &&
 npm install &&
